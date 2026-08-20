@@ -3,12 +3,14 @@
    Type sizes, tracking, spacing and colour are taken directly from the source
    design files. Loaded after base.css so it overrides Dawn.
 
-   Font substitutes for the fonts used in the design files:
-     Garet Book / Garet Heavy -> Outfit 300 / Outfit 700
-     Barlow Condensed         -> Barlow Condensed (exact match)
-     Brittany Signature       -> Ms Madi (monoline signature script)
-   To use the licensed originals, replace the .woff2 files in /assets and the
-   src lines in snippets/oasis-fonts.liquid — nothing below needs to change.
+   Fonts are the real ones from the design files, self-hosted in /assets:
+     Garet Book / Garet Heavy   (Book covers weights 100-500, Heavy 600-900)
+     Barlow Condensed 400-700
+     Brittany Signature
+   Declared in snippets/oasis-fonts.liquid. Every display size below is the
+   PSD's own value, verified by measuring the real fonts against the rendered
+   artwork — except where a PSD layer was scaled after the type was set, which
+   is noted inline.
    ========================================================================== */
 
 :root {
@@ -20,9 +22,14 @@
   --oasis-dark: #351d07;
   --oasis-line: #e3d8cf;
 
-  --oasis-font-body: 'Outfit', 'Questrial', ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --oasis-font-cond: 'Barlow Condensed', 'Oswald', 'Arial Narrow', sans-serif;
-  --oasis-font-script: 'Ms Madi', 'Sacramento', cursive;
+  --oasis-font-body: 'Garet', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --oasis-font-cond: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --oasis-font-script: 'Brittany Signature', cursive;
+
+  /* Override Dawn's own font vars too, so every stock Dawn selector picks up
+     Garet without needing its own rule here (and Lato is never requested). */
+  --font-body-family: 'Garet', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-heading-family: 'Garet', ui-sans-serif, system-ui, -apple-system, sans-serif;
 
   --oasis-content: 1264px;
   --oasis-gutter: 24px;
@@ -500,8 +507,8 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
 /* Script title — Brittany Signature 60 */
 .oasis-tile__title {
   font-family: var(--oasis-font-script);
-  font-size: 6.6rem;
-  line-height: 1.05;
+  font-size: 6rem;               /* PSD: Brittany Signature 60 */
+  line-height: 1.35;
   letter-spacing: 0.02em;
   margin: 0;
   color: #fff;
@@ -576,15 +583,15 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
 /* Script — Brittany Signature 100 */
 .oasis-story__script {
   font-family: var(--oasis-font-script);
-  font-size: 11rem;
-  line-height: 1.1;
+  font-size: 10rem;              /* PSD: Brittany Signature 100 */
+  line-height: 1.75;   /* PSD ink height is 174px for 100px type */
   color: var(--oasis-dark);
-  margin: 0.6rem 0 0;
+  margin: 0;
 }
 
 /* Body — Garet Book 22 */
 .oasis-story__text {
-  margin: 2.2rem 0 0;
+  margin: 1.2rem 0 0;
   font-size: 2.2rem;
   line-height: 1.2;
   font-weight: 300;
@@ -697,7 +704,7 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
   line-height: 1;
   padding-top: 34px;
   color: var(--oasis-dark);
-  font-weight: 200;
+  font-weight: 300;
 }
 
 /* Body — Garet Book 20 / 28.8 leading */
@@ -708,7 +715,7 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
   margin: 0;
   color: var(--oasis-dark);
 }
-.oasis-purpose__text strong { font-weight: 500; }
+.oasis-purpose__text strong { font-weight: 700; }   /* Garet Heavy */
 
 /* ---------- footer ------------------------------------------------------- */
 
@@ -1096,9 +1103,9 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
 .oasis-cols__script {
   font-family: var(--oasis-font-script);
   font-size: 4rem;
-  line-height: 1;
+  line-height: 1.6;
   color: var(--oasis-dark);
-  margin: 0.2rem 0 0;
+  margin: 0;
 }
 
 .oasis-cols__ornament { margin: 1.6rem auto 0; width: 148px; height: auto; }
@@ -1323,11 +1330,11 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
 .oasis-story--tracked .oasis-story__kicker {
   font-family: var(--oasis-font-body);
   font-weight: 300;
-  font-size: 4.4rem;
+  font-size: 4.2rem;             /* PSD: Garet Book 42 */
   line-height: 1.1;
   letter-spacing: 0.02em;
 }
-.oasis-story--tracked .oasis-story__script { font-size: 7.5rem; }
+.oasis-story--tracked .oasis-story__script { font-size: 7rem; line-height: 1.75; }  /* PSD: Brittany 70 */
 .oasis-story--tracked .oasis-story__text { font-size: 2rem; line-height: 1.4; }
 
 /* ---------- inner-page responsive ---------------------------------------- */

@@ -1,31 +1,48 @@
 {%- comment -%}
-  THE OASIS — self-hosted brand webfonts.
-  Substitutes for the fonts used in the source design files:
-    Garet              -> Outfit (variable 200–600)
-    Barlow Condensed   -> Barlow Condensed (exact match)
-    Brittany Signature -> Ms Madi (monoline signature script)
-  Swap the .woff2 files in /assets and the src lines below to use licensed
-  copies of the original fonts.
+  THE OASIS — brand webfonts, self-hosted.
+
+  These are the actual fonts from the design files:
+    Garet Book / Garet Heavy  — body copy and tracked headings
+    Barlow Condensed 400–700  — condensed headings, product titles, footer headings
+    Brittany Signature        — script lines
+
+  Garet only ships Book and Heavy, so each is declared over a weight *range*.
+  Anything 100–500 resolves to Book and 600–900 to Heavy, which means the
+  browser never synthesises a fake bold or light.
 {%- endcomment -%}
 
-<link rel="preload" as="font" type="font/woff2" href="{{ 'oasis-outfit-var.woff2' | asset_url }}" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="{{ 'oasis-barlowcond-700.woff2' | asset_url }}" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="{{ 'oasis-garet-book.woff2' | asset_url }}" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="{{ 'oasis-barlowcond-500.woff2' | asset_url }}" crossorigin>
 
 <style>
   @font-face {
-    font-family: 'Outfit';
+    font-family: 'Garet';
     font-style: normal;
-    font-weight: 200 600;
+    font-weight: 100 500;
     font-display: swap;
-    src: url({{ 'oasis-outfit-var.woff2' | asset_url }}) format('woff2-variations'),
-      url({{ 'oasis-outfit-var.woff2' | asset_url }}) format('woff2');
+    src: url({{ 'oasis-garet-book.woff2' | asset_url }}) format('woff2');
   }
+  @font-face {
+    font-family: 'Garet';
+    font-style: normal;
+    font-weight: 600 900;
+    font-display: swap;
+    src: url({{ 'oasis-garet-heavy.woff2' | asset_url }}) format('woff2');
+  }
+
   @font-face {
     font-family: 'Barlow Condensed';
     font-style: normal;
     font-weight: 400;
     font-display: swap;
     src: url({{ 'oasis-barlowcond-400.woff2' | asset_url }}) format('woff2');
+  }
+  @font-face {
+    font-family: 'Barlow Condensed';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url({{ 'oasis-barlowcond-500.woff2' | asset_url }}) format('woff2');
   }
   @font-face {
     font-family: 'Barlow Condensed';
@@ -41,11 +58,12 @@
     font-display: swap;
     src: url({{ 'oasis-barlowcond-700.woff2' | asset_url }}) format('woff2');
   }
+
   @font-face {
-    font-family: 'Ms Madi';
+    font-family: 'Brittany Signature';
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url({{ 'oasis-msmadi-400.woff2' | asset_url }}) format('woff2');
+    src: url({{ 'oasis-brittany.woff2' | asset_url }}) format('woff2');
   }
 </style>
