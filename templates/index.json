@@ -61,9 +61,9 @@
           "settings": {
             "title": "Journals",
             "cta_label": "Explore",
-            "link": "/collections/all",
+            "link": "/collections/journals-only",
             "fallback_asset": "oasis-tile-journals.jpg",
-            "collection": "all-products"
+            "collection": "journals-only"
           }
         },
         "t2": {
@@ -71,9 +71,9 @@
           "settings": {
             "title": "Cards",
             "cta_label": "Explore",
-            "link": "/collections/all",
+            "link": "/collections/cards",
             "fallback_asset": "oasis-tile-cards.jpg",
-            "collection": "all-products"
+            "collection": "cards"
           }
         }
       },
