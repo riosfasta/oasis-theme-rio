@@ -1612,3 +1612,24 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
 @media screen and (max-width: 989px) {
   .product__media-gallery .thumbnail-list__item { max-width: 76px; flex: 0 0 76px; }
 }
+
+
+/* --------------------------------------------------------------------------
+   Product page corrections measured against the PSD
+   -------------------------------------------------------------------------- */
+
+/* Dawn's thumbnail gallery is a slider; the PSD is a plain row, so drop
+   the arrows (5 thumbs at 102px fit the column without scrolling). */
+.thumbnail-slider .slider-button,
+.product__media-gallery .slider-button,
+.thumbnail-slider__button { display: none !important; }
+.thumbnail-slider .thumbnail-list.slider--mobile { flex-wrap: wrap; }
+
+/* "You may also like" is title + price only in the PSD — no variant row */
+.related-products .variant-thumbnails { display: none; }
+
+/* Collection-grid variant row: match the Oasis card's swatch styling */
+.variant-thumbnails { justify-content: center; gap: 9px; margin-top: 1.6rem; flex-wrap: wrap; }
+.variant-thumb { width: 39px; height: 39px; border: 1px solid var(--oasis-line); overflow: hidden; }
+.variant-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.variant-thumb:hover { border-color: var(--oasis-tan); }

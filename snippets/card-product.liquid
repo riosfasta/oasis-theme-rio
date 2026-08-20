@@ -208,11 +208,13 @@
 {% if card_product and card_product.variants.size > 1 %}
   <div class="variant-thumbnails">
     {% assign shown_images = '' %}
+    {% assign shown_count = 0 %}
 
     {% for v in card_product.variants %}
-      {% if v.featured_image %}
+      {% if v.featured_image and shown_count < 6 %}
         {% unless shown_images contains v.featured_image.id %}
           {% assign shown_images = shown_images | append: v.featured_image.id | append: ',' %}
+          {% assign shown_count = shown_count | plus: 1 %}
 
           <a
             href="{{ card_product.url }}?variant={{ v.id }}"
