@@ -1,0 +1,90 @@
+{%- comment -%}
+  THE OASIS — category tabs
+  The flat row of category links used on the Journals and Cards pages
+  ("ALL JOURNALS · FLORAL · NATURE · …"), with the current one underlined.
+
+  Tabs come from a navigation menu so they're managed in Settings > Navigation
+  rather than in code. The active tab is matched on the link's path, so it works
+  whether the tabs point at collections or at filtered URLs.
+{%- endcomment -%}
+
+{%- if section.settings.menu != blank -%}
+  <div
+    class="oasis-tabs"
+    id="OasisTabs-{{ section.id }}"
+    style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;"
+  >
+    <div class="oasis-container">
+      <nav class="oasis-tabs__nav" aria-label="{{ section.settings.aria_label | escape }}">
+        <ul class="oasis-tabs__list">
+          {%- for link in section.settings.menu.links -%}
+            {%- liquid
+              assign is_active = false
+              if link.active or link.child_active
+                assign is_active = true
+              endif
+              # link.active only covers exact matches, so also compare the path
+              assign link_path = link.url | split: '?' | first
+              if link_path == request.path
+                assign is_active = true
+              endif
+            -%}
+            <li class="oasis-tabs__item">
+              <a
+                class="oasis-tabs__link{% if is_active %} oasis-tabs__link--active{% endif %}"
+                href="{{ link.url }}"
+                {% if is_active %}aria-current="page"{% endif %}
+              >
+                {{- link.title | escape -}}
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Oasis category tabs",
+  "class": "oasis-section-tabs",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "info": "Each menu item becomes a tab. Create the menu in Settings > Navigation."
+    },
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "Accessible label",
+      "default": "Product categories"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 8
+    }
+  ],
+  "presets": [
+    { "name": "Oasis category tabs" }
+  ]
+}
+{% endschema %}

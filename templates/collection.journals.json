@@ -15,20 +15,20 @@
         "title": "Shop Journals"
       }
     },
-    "promo": {
-      "type": "oasis-promo-strip",
+    "tabs": {
+      "type": "oasis-category-tabs",
       "settings": {
-        "text": "Free shipping with purchase of $35 or more",
-        "background": "#a2846f",
-        "text_color": "#ffffff",
-        "height": 80
+        "menu": "journal-categories",
+        "aria_label": "Journal categories",
+        "padding_top": 40,
+        "padding_bottom": 8
       }
     },
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
         "products_per_page": 24,
-        "columns_desktop": 3,
+        "columns_desktop": 4,
         "columns_mobile": "2",
         "color_scheme": "scheme-1",
         "image_ratio": "square",
@@ -37,28 +37,28 @@
         "show_vendor": false,
         "show_rating": false,
         "quick_add": "none",
-        "enable_filtering": true,
-        "filter_type": "vertical",
+        "enable_filtering": false,
+        "filter_type": "horizontal",
         "enable_sorting": true,
-        "padding_top": 36,
+        "padding_top": 0,
         "padding_bottom": 72
       }
     },
     "story": {
       "type": "oasis-story-banner",
       "settings": {
-        "fallback_asset": "oasis-story-restore-hope.jpg",
+        "fallback_asset": "oasis-story-just-a-journal.jpg",
         "content_position": "right",
         "kicker_style": "tracked",
         "text_align": "center",
         "height": 585,
         "content_width": 620,
         "scrim_color": "#fbf7f4",
-        "show_leaf": true,
+        "show_leaf": false,
         "show_rule": true,
-        "kicker": "Every purchase helps restore hope",
-        "script": "and rewrite a story.",
-        "text": "<p>Your purchase helps provide women rebuilding their lives after trafficking with dignified work, skills training, healing, and hope for a new future—while creating greater opportunities for their children to thrive.</p>",
+        "kicker": "More than a",
+        "script": "just a journal",
+        "text": "<p>Each journal is hand-stitched by a woman rebuilding her life after trafficking. Your purchase creates an opportunity for dignified work—and helps carry her story forward.</p>",
         "button_label": "Learn more about The Oasis",
         "button_link": "/pages/about-us"
       }
@@ -66,7 +66,7 @@
   },
   "order": [
     "banner",
-    "promo",
+    "tabs",
     "product-grid",
     "story"
   ]

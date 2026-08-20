@@ -1640,3 +1640,54 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
 .variant-thumb { width: 39px; height: 39px; border: 1px solid var(--oasis-line); overflow: hidden; }
 .variant-thumb img { width: 100%; height: 100%; object-fit: cover; }
 .variant-thumb:hover { border-color: var(--oasis-tan); }
+
+
+/* ==========================================================================
+   CATEGORY TABS — the Journals / Cards listing layout
+   Those PSDs use a flat row of category links plus a 4-up full-width grid,
+   where Shop All uses the sidebar filters and a 3-up grid.
+   ========================================================================== */
+
+.oasis-tabs__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem 3.4rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.oasis-tabs__link {
+  display: inline-block;
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  font-size: 1.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--oasis-dark);
+  padding-bottom: 6px;
+  border-bottom: 1px solid transparent;
+}
+.oasis-tabs__link:hover { border-bottom-color: rgba(53, 29, 7, 0.35); }
+.oasis-tabs__link--active { border-bottom-color: var(--oasis-dark); }
+
+/* With filtering off, Dawn still renders the count + sort row — keep it tight
+   and push sorting to the right, as in the design. */
+.oasis-section-tabs + .shopify-section .facets-container {
+  padding-top: 0;
+  margin-bottom: 2.6rem;
+}
+.facets-container .product-count,
+.facets-container .product-count__text {
+  font-size: 1.3rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+.facet-filters.sorting { margin-left: auto; }
+
+@media screen and (max-width: 989px) {
+  .oasis-tabs__list { gap: 0.6rem 2rem; }
+  .oasis-tabs__link { font-size: 1.4rem; }
+}
