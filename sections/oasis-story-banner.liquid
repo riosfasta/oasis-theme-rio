@@ -1,0 +1,216 @@
+{%- comment -%}
+  THE OASIS — story banner
+  Full-bleed photograph with a soft sand scrim and a condensed kicker + script line.
+  Used for "BE A PART OF HER / freedom story".
+{%- endcomment -%}
+
+<div
+  class="oasis-story oasis-story--{{ section.settings.content_position }} oasis-story--{{ section.settings.kicker_style }}"
+  id="OasisStory-{{ section.id }}"
+>
+  {%- if section.settings.image != blank -%}
+    {{
+      section.settings.image
+      | image_url: width: 2880
+      | image_tag:
+        class: 'oasis-story__bg',
+        widths: '750, 1100, 1440, 1900, 2880',
+        sizes: '100vw',
+        loading: 'lazy',
+        alt: section.settings.image.alt
+    }}
+  {%- elsif section.settings.fallback_asset != blank -%}
+    <img
+      class="oasis-story__bg"
+      src="{{ section.settings.fallback_asset | asset_url }}"
+      alt="{{ section.settings.kicker | escape }}"
+      width="1440"
+      height="668"
+      loading="lazy"
+    >
+  {%- endif -%}
+
+  <div class="oasis-story__scrim" aria-hidden="true"></div>
+
+  <div class="oasis-story__inner">
+    <div class="oasis-story__content">
+      {%- if section.settings.show_leaf -%}
+        <img
+          class="oasis-leaf"
+          src="{{ 'oasis-ornament-leaf.png' | asset_url }}"
+          alt=""
+          width="107"
+          height="71"
+          loading="lazy"
+        >
+      {%- endif -%}
+      {%- if section.settings.kicker != blank -%}
+        <h2 class="oasis-story__kicker">{{ section.settings.kicker | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.script != blank -%}
+        <p class="oasis-story__script">{{ section.settings.script | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.show_rule -%}
+        <hr class="oasis-rule">
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="oasis-story__text rte">{{ section.settings.text }}</div>
+      {%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <div class="oasis-story__button">
+          <a class="oasis-btn oasis-btn--tan" href="{{ section.settings.button_link | default: '#' }}">
+            {{- section.settings.button_label | escape -}}
+          </a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<style>
+  #OasisStory-{{ section.id }} { min-height: {{ section.settings.height }}px; }
+  #OasisStory-{{ section.id }} .oasis-story__content { max-width: {{ section.settings.content_width }}px; }
+  {%- if section.settings.text_align == 'center' -%}
+  #OasisStory-{{ section.id }} .oasis-story__content { text-align: center; }
+  #OasisStory-{{ section.id }} .oasis-rule,
+  #OasisStory-{{ section.id }} .oasis-leaf { margin-inline: auto; }
+  {%- endif -%}
+  #OasisStory-{{ section.id }} .oasis-story__scrim {
+    background: linear-gradient({% if section.settings.content_position == 'right' %}270deg{% else %}90deg{% endif %},
+      {{ section.settings.scrim_color }} 0%,
+      {{ section.settings.scrim_color | color_modify: 'alpha', 0.72 }} 34%,
+      {{ section.settings.scrim_color | color_modify: 'alpha', 0 }} 58%);
+  }
+  @media screen and (max-width: 989px) {
+    #OasisStory-{{ section.id }} { min-height: 0; }
+    #OasisStory-{{ section.id }} .oasis-story__scrim { background: none; }
+    #OasisStory-{{ section.id }} .oasis-story__inner { background: {{ section.settings.scrim_color }}; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Oasis story banner",
+  "class": "oasis-section-story",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image",
+      "info": "Recommended 2880 × 1336px. Leave empty to use the packaged design image."
+    },
+    {
+      "type": "text",
+      "id": "fallback_asset",
+      "label": "Packaged design image",
+      "info": "Theme asset filename used when no image is chosen, e.g. oasis-story-restore-hope.jpg"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Text side",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "kicker_style",
+      "label": "Heading style",
+      "info": "Condensed bold is the homepage look; tracked light is the wider style used on the inner pages.",
+      "options": [
+        { "value": "condensed", "label": "Condensed bold" },
+        { "value": "tracked", "label": "Tracked light" }
+      ],
+      "default": "condensed"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centre" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "min": 400,
+      "max": 900,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop height",
+      "default": 670
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "min": 380,
+      "max": 780,
+      "step": 10,
+      "unit": "px",
+      "label": "Text column width",
+      "default": 560
+    },
+    {
+      "type": "color",
+      "id": "scrim_color",
+      "label": "Overlay colour",
+      "default": "#E9DACB"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_leaf",
+      "label": "Show leaf ornament",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Heading (condensed caps)",
+      "default": "Be a part of her"
+    },
+    {
+      "type": "text",
+      "id": "script",
+      "label": "Script line",
+      "default": "freedom story"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rule",
+      "label": "Show short rule",
+      "default": false
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>At The Oasis, women who have survived trafficking are rebuilding their lives through healing, new skills, and the dignity of meaningful work. God is rewriting their stories. And their courage is being woven into something beautiful.</p><p>Now their hand-stitched journals and cards are making their way to you. When you purchase one, you don't just take home something beautiful—you carry her story forward.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Oasis story banner"
+    }
+  ]
+}
+{% endschema %}

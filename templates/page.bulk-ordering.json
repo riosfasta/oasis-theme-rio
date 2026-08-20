@@ -1,0 +1,144 @@
+{
+  "sections": {
+    "banner": {
+      "type": "oasis-page-banner",
+      "settings": {
+        "fallback_asset": "oasis-banner-bulk.jpg",
+        "content_position": "left",
+        "height": 365,
+        "content_width": 600,
+        "scrim_color": "#f1e4d4",
+        "use_collection": false,
+        "use_page": false,
+        "show_ornament": true,
+        "title": "Bulk ordering",
+        "text": "<p>Ordering more than one? Whether it's for a group, event, shop, or just because you love them, we make it easy.</p>"
+      }
+    },
+    "highlights": {
+      "type": "oasis-script-columns",
+      "blocks": {
+        "c1": {
+          "type": "column",
+          "settings": {
+            "kicker": "Support a",
+            "script": "meaningful cause",
+            "text": "<p>Your order helps create dignified work.</p>"
+          }
+        },
+        "c2": {
+          "type": "column",
+          "settings": {
+            "kicker": "Share something",
+            "script": "beautiful",
+            "text": "<p>Give a meaningful gift to the people around you.</p>"
+          }
+        },
+        "c3": {
+          "type": "column",
+          "settings": {
+            "kicker": "Save when you",
+            "script": "order more",
+            "text": "<p>Special pricing is available for larger orders.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
+      "settings": {
+        "show_ornament": true,
+        "padding_top": 70,
+        "padding_bottom": 60,
+        "intro": "<p>Whether you're purchasing gifts for an event, ordering for your organization, stocking your shop, or sharing with your community, we offer special pricing for larger quantities.</p><p>And the more you order, the more you save.</p>"
+      }
+    },
+    "pricing": {
+      "type": "oasis-pricing-tables",
+      "blocks": {
+        "t1": {
+          "type": "table",
+          "settings": {
+            "title": "Journals",
+            "subtitle": "Hand-stitched with purpose",
+            "accent_color": "#878d71",
+            "accent_text_color": "#ffffff",
+            "col_1": "Quantity",
+            "col_2": "Price per journal",
+            "rows": "1 - 9 | $20\n10 - 49 | $18\n50 - 99 | $15\n100+ | $12",
+            "footnote": "Every journal helps provide women in our program with training, meaningful work, and a new future."
+          }
+        },
+        "t2": {
+          "type": "table",
+          "settings": {
+            "title": "Cards",
+            "subtitle": "Hand-stitched with purpose",
+            "accent_color": "#5f7589",
+            "accent_text_color": "#ffffff",
+            "col_1": "Quantity",
+            "col_2": "Price per card",
+            "rows": "1 - 4 | $5\n5 - 99 | $4\n100 - 299 | $3.75\n300+ | $3.25",
+            "footnote": "Perfect for events, gifts, encouragement, and sharing hope with your community."
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2"
+      ],
+      "settings": {
+        "show_ornament": true,
+        "heading": "Bulk pricing",
+        "card_color": "#a1836f",
+        "card_text_color": "#ffffff",
+        "padding_top": 60,
+        "padding_bottom": 70
+      }
+    },
+    "wholesale": {
+      "type": "oasis-cta-block",
+      "settings": {
+        "show_leaf": false,
+        "heading": "Wholesale & tax exempt orders",
+        "tagline": "Selling in your shop or ordering tax-exempt?",
+        "text": "<p>Whether you're a boutique, retailer, church, nonprofit, or other tax-exempt organization, we're happy to help with your order.</p><p>For wholesale partnerships and tax-exempt purchases, please complete our wholesale form below. This gives us the details we need to set up your order and make sure everything is processed smoothly.</p>",
+        "content_width": 840,
+        "button_label_1": "Download wholesale form",
+        "button_link_1": "",
+        "button_label_2": "Contact us",
+        "button_link_2": "/pages/contact",
+        "padding_top": 40,
+        "padding_bottom": 70
+      }
+    },
+    "story": {
+      "type": "oasis-story-banner",
+      "settings": {
+        "fallback_asset": "oasis-story-change-a-story.jpg",
+        "content_position": "right",
+        "kicker_style": "tracked",
+        "text_align": "center",
+        "height": 435,
+        "content_width": 620,
+        "scrim_color": "#fbf7f4",
+        "show_leaf": true,
+        "show_rule": true,
+        "kicker": "Shop. Share.",
+        "script": "Change a story.",
+        "text": "<p>When you choose to purchase The Oasis in bulk, you're doing more than sharing beautiful, handcrafted products. You're creating opportunities for women rebuilding their lives after trafficking to find dignified work, develop new skills, and build a hopeful future—while helping their children thrive.</p>",
+        "button_label": "Learn more about The Oasis",
+        "button_link": "/pages/about-us"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "highlights",
+    "pricing",
+    "wholesale",
+    "story"
+  ]
+}

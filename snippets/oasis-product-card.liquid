@@ -1,0 +1,99 @@
+{%- comment -%}
+  THE OASIS — product card
+  Hovering (or focusing) a variant thumbnail swaps the card's main image to that
+  variant. Behaviour lives in assets/oasis-card.js.
+
+  Accepts:
+    - card_product: {Object} product
+    - show_swatches: {Boolean} render variant image thumbnails under the price
+    - image_ratio: {String} css aspect-ratio value, e.g. "1 / 1"
+    - swatch_limit: {Number} how many thumbnails to show (default 6)
+{%- endcomment -%}
+
+{%- liquid
+  assign ratio = image_ratio | default: '1 / 1'
+  assign max_swatches = swatch_limit | default: 6
+-%}
+
+{%- if card_product and card_product != empty -%}
+  <oasis-card class="oasis-card">
+    <a class="oasis-card__media" href="{{ card_product.url }}" style="aspect-ratio: {{ ratio }};">
+      {%- if card_product.featured_media -%}
+        {{
+          card_product.featured_media
+          | image_url: width: 800
+          | image_tag:
+            widths: '200, 300, 400, 600, 800',
+            sizes: '(min-width: 990px) 300px, 45vw',
+            loading: 'lazy',
+            class: 'oasis-card__image',
+            data-main-image: '',
+            alt: card_product.featured_media.alt
+        }}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </a>
+
+    <a class="oasis-card__title" href="{{ card_product.url }}">{{ card_product.title | escape }}</a>
+
+    <p class="oasis-card__price">
+      {%- if card_product.compare_at_price > card_product.price -%}
+        <s>{{ card_product.compare_at_price | money }}</s>
+      {%- endif -%}
+      {{ card_product.price | money }}
+    </p>
+
+    {%- if show_swatches and card_product.variants.size > 1 -%}
+      {%- liquid
+        assign seen_media = ''
+        assign swatch_count = 0
+      -%}
+      {%- capture swatch_markup -%}
+        {%- for variant in card_product.variants -%}
+          {%- if variant.image != blank and swatch_count < max_swatches -%}
+            {%- assign media_key = variant.image.id | append: ',' -%}
+            {%- unless seen_media contains media_key -%}
+              {%- liquid
+                assign seen_media = seen_media | append: media_key
+                assign swatch_count = swatch_count | plus: 1
+              -%}
+              {%- capture v_srcset -%}
+                {{ variant.image | image_url: width: 200 }} 200w,
+                {{ variant.image | image_url: width: 300 }} 300w,
+                {{ variant.image | image_url: width: 400 }} 400w,
+                {{ variant.image | image_url: width: 600 }} 600w,
+                {{ variant.image | image_url: width: 800 }} 800w
+              {%- endcapture -%}
+              <a
+                class="oasis-card__swatch"
+                href="{{ variant.url }}"
+                aria-label="{{ variant.title | escape }}"
+                data-variant-src="{{ variant.image | image_url: width: 800 }}"
+                data-variant-srcset="{{ v_srcset | strip_newlines | strip }}"
+              >
+                {{
+                  variant.image
+                  | image_url: width: 120
+                  | image_tag: widths: '40, 80, 120', loading: 'lazy', alt: variant.title | escape
+                }}
+              </a>
+            {%- endunless -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+
+      {%- if swatch_count > 1 -%}
+        <div class="oasis-card__swatches">{{ swatch_markup }}</div>
+      {%- endif -%}
+    {%- endif -%}
+  </oasis-card>
+{%- else -%}
+  <div class="oasis-card">
+    <span class="oasis-card__media" style="aspect-ratio: {{ ratio }};">
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    </span>
+    <span class="oasis-card__title">{{ 'onboarding.product_title' | t }}</span>
+    <p class="oasis-card__price">{{ 2000 | money }}</p>
+  </div>
+{%- endif -%}

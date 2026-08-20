@@ -1,0 +1,120 @@
+{%- comment -%}
+  THE OASIS — script columns
+  Centred intro copy, then columns of condensed-caps line + script line +
+  floral divider + body, separated by hairline rules.
+  Used for the Bulk Ordering highlights.
+{%- endcomment -%}
+
+<div
+  class="oasis-cols"
+  id="OasisCols-{{ section.id }}"
+  style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="oasis-container">
+    {%- if section.settings.intro != blank -%}
+      <div class="oasis-cols__intro rte">{{ section.settings.intro }}</div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="oasis-cols__grid" style="grid-template-columns: repeat({{ section.blocks.size }}, minmax(0, 1fr));">
+        {%- for block in section.blocks -%}
+          <div class="oasis-cols__col" {{ block.shopify_attributes }}>
+            {%- if block.settings.kicker != blank -%}
+              <p class="oasis-cols__kicker">{{ block.settings.kicker | escape }}</p>
+            {%- endif -%}
+            {%- if block.settings.script != blank -%}
+              <p class="oasis-cols__script">{{ block.settings.script | escape }}</p>
+            {%- endif -%}
+            {%- if section.settings.show_ornament -%}
+              <img
+                class="oasis-cols__ornament"
+                src="{{ 'oasis-ornament-divider-sm.png' | asset_url }}"
+                alt=""
+                width="148"
+                height="22"
+                loading="lazy"
+              >
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <div class="oasis-cols__text rte">{{ block.settings.text }}</div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Oasis script columns",
+  "class": "oasis-section-cols",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Intro text",
+      "default": "<p>Whether you're purchasing gifts for an event, ordering for your organization, stocking your shop, or sharing with your community, we offer special pricing for larger quantities.</p><p>And the more you order, the more you save.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_ornament",
+      "label": "Show floral divider in each column",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "kicker",
+          "label": "First line (condensed caps)",
+          "default": "Support a"
+        },
+        {
+          "type": "text",
+          "id": "script",
+          "label": "Second line (script)",
+          "default": "meaningful cause"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Your order helps create dignified work.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Oasis script columns",
+      "blocks": [{ "type": "column" }, { "type": "column" }, { "type": "column" }]
+    }
+  ]
+}
+{% endschema %}

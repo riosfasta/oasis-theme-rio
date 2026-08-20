@@ -1,0 +1,1580 @@
+/* ==========================================================================
+   THE OASIS — design layer
+   Type sizes, tracking, spacing and colour are taken directly from the source
+   design files. Loaded after base.css so it overrides Dawn.
+
+   Font substitutes for the fonts used in the design files:
+     Garet Book / Garet Heavy -> Outfit 300 / Outfit 700
+     Barlow Condensed         -> Barlow Condensed (exact match)
+     Brittany Signature       -> Ms Madi (monoline signature script)
+   To use the licensed originals, replace the .woff2 files in /assets and the
+   src lines in snippets/oasis-fonts.liquid — nothing below needs to change.
+   ========================================================================== */
+
+:root {
+  --oasis-cream: #fbf7f4;
+  --oasis-blush: #f0e5dd;
+  --oasis-sand: #e9dacb;
+  --oasis-tan: #a2846f;
+  --oasis-tan-dark: #8c6f5b;
+  --oasis-dark: #351d07;
+  --oasis-line: #e3d8cf;
+
+  --oasis-font-body: 'Outfit', 'Questrial', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --oasis-font-cond: 'Barlow Condensed', 'Oswald', 'Arial Narrow', sans-serif;
+  --oasis-font-script: 'Ms Madi', 'Sacramento', cursive;
+
+  --oasis-content: 1264px;
+  --oasis-gutter: 24px;
+}
+
+/* ---------- base ---------------------------------------------------------- */
+
+body {
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  background-color: var(--oasis-cream);
+  color: var(--oasis-dark);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h0, .h1, .h2, .h3, .h4, .h5 {
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  /* No colour here on purpose: Dawn sections colour headings from their colour
+     scheme, and forcing brand brown here turned white-on-tan text unreadable.
+     Every Oasis section sets its own heading colour explicitly. */
+}
+
+a { color: inherit; }
+
+.oasis-container {
+  max-width: calc(var(--oasis-content) + var(--oasis-gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--oasis-gutter);
+}
+
+/* Centred section heading — Garet Book 36 / +50 tracking / uppercase */
+.oasis-section-title {
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  font-size: 3.6rem;
+  line-height: 1.15;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--oasis-dark);
+  margin: 0;
+  text-align: center;
+}
+
+/* "VIEW ALL →" — Garet Book 20 / +50 tracking */
+.oasis-section-link {
+  display: inline-block;
+  margin-top: 2.2rem;
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 3px;
+  color: var(--oasis-dark);
+}
+.oasis-section-link:hover { opacity: 0.65; }
+
+.oasis-script {
+  font-family: var(--oasis-font-script);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.oasis-cond {
+  font-family: var(--oasis-font-cond);
+  font-weight: 600;
+}
+
+.oasis-rule {
+  width: 110px;
+  height: 2px;
+  background: var(--oasis-tan);
+  border: 0;
+  margin: 2.4rem 0;
+}
+.oasis-rule--center { margin-inline: auto; }
+
+.oasis-leaf { display: block; width: 107px; height: auto; }
+
+/* ---------- buttons — Garet Book 20 / +75 tracking / 62px tall ------------ */
+
+.oasis-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 62px;
+  padding: 0 3.8rem;
+  font-family: var(--oasis-font-body);
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 0;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.oasis-btn--dark { background: var(--oasis-dark); color: #fff; }
+.oasis-btn--dark:hover { background: #4a2c11; color: #fff; }
+
+.oasis-btn--light { background: var(--oasis-blush); color: var(--oasis-dark); }
+.oasis-btn--light:hover { background: #e6d7cc; }
+
+.oasis-btn--tan { background: var(--oasis-tan); color: #fff; }
+.oasis-btn--tan:hover { background: var(--oasis-tan-dark); }
+
+.oasis-btn--outline { background: transparent; color: var(--oasis-dark); border-color: var(--oasis-dark); }
+.oasis-btn--outline:hover { background: var(--oasis-dark); color: #fff; }
+
+/* Dawn buttons inherit the look */
+.button,
+.shopify-challenge__button,
+.customer button,
+button.shopify-payment-button__button--unbranded {
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  font-size: 2rem;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+  border-radius: 0;
+  min-height: 6.2rem;
+}
+
+/* ---------- top bar (Dawn's announcement-bar / utility-bar, restyled) -----
+   Colour comes from the section's colour scheme, so the country dropdown
+   inherits it automatically — same behaviour as the stock announcement bar. */
+
+.utility-bar {
+  min-height: 63px;
+  display: flex;
+  align-items: center;
+}
+
+.utility-bar .utility-bar__grid.page-width {
+  max-width: calc(var(--oasis-content) + var(--oasis-gutter) * 2);
+  padding-inline: var(--oasis-gutter);
+  width: 100%;
+  align-items: center;
+  padding-block: 0.6rem;
+}
+
+/* Message — Garet Heavy 22 */
+.utility-bar .announcement-bar__message {
+  font-family: var(--oasis-font-body);
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 1.25;
+  letter-spacing: 0;
+  text-transform: none;
+  padding: 0.4rem 1rem;
+  color: inherit;
+}
+
+.utility-bar .list-social__link { padding: 0.9rem 1.2rem; }
+.utility-bar .list-social__item .icon { scale: 1; width: 24px; height: 24px; }
+
+/* Country / currency picker */
+.utility-bar .localization-wrapper .disclosure .localization-form__select,
+.utility-bar .localization-wrapper .disclosure__link {
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  font-size: 1.8rem;
+  letter-spacing: 0.01em;
+}
+.utility-bar .localization-wrapper .disclosure__link { font-size: 1.6rem; }
+
+/* Show each row's currency instead of revealing it only on hover */
+.utility-bar .localization-wrapper .localization-form__currency {
+  opacity: 1;
+  display: inline-block;
+}
+
+/* Keep the open panel above the header that follows it */
+.shopify-section-group-header-group:has(.utility-bar) { position: relative; z-index: 40; }
+
+@media screen and (max-width: 989px) {
+  .utility-bar { min-height: 0; }
+  .utility-bar .announcement-bar__message { font-size: 1.8rem; }
+}
+
+/* ---------- header — white bar, 184px tall on desktop -------------------- */
+
+.section-header { margin-bottom: 0 !important; }
+
+.header-wrapper { background: #fff; border-bottom: 0; }
+
+.header {
+  max-width: calc(var(--oasis-content) + var(--oasis-gutter) * 2);
+  padding: 2.6rem var(--oasis-gutter) !important;
+  align-items: center;
+}
+
+.header__heading-logo { max-width: 145px; }
+.header__inline-menu { margin-left: 0; }
+
+/* Nav — Garet Book 22 */
+.header__menu-item,
+.header__menu-item.list-menu__item {
+  font-family: var(--oasis-font-body);
+  font-size: 2.2rem;
+  font-weight: 300;
+  letter-spacing: 0;
+  color: var(--oasis-dark);
+  padding: 1.2rem 2rem;
+}
+.header__menu-item:hover span { text-decoration-thickness: 1px; text-underline-offset: 0.4rem; }
+.header__active-menu-item { text-decoration: none; }
+
+.header__icons { padding-right: 0; gap: 0.6rem; }
+.header__icon .icon { width: 26px; height: 26px; }
+.header__icon, .header__icon--cart { color: var(--oasis-dark); }
+
+@media screen and (min-width: 990px) {
+  .header { padding: 4.3rem var(--oasis-gutter) !important; }
+  .header--middle-left {
+    grid-template-columns: 1fr auto 1fr !important;
+    column-gap: 2rem;
+  }
+  .header--middle-left .header__inline-menu { justify-self: center; }
+  .header--middle-left .header__icons { justify-self: end; }
+  .header__inline-menu .list-menu--inline { justify-content: center; }
+}
+
+.shopify-section-header-sticky { box-shadow: 0 1px 0 rgba(53, 29, 7, 0.06); }
+
+/* ---------- product cards ------------------------------------------------ */
+
+.oasis-products {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.oasis-card { text-align: center; }
+
+.oasis-card__media {
+  display: block;
+  background: #fff;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  position: relative;
+}
+.oasis-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 7%;
+  transition: transform 0.5s ease, opacity 0.2s ease;
+}
+.oasis-card:hover .oasis-card__media img { transform: scale(1.04); }
+oasis-card { display: block; }
+/* Don't zoom while a variant is being previewed — the swap reads better flat */
+oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: none; }
+
+.oasis-card__swatch[aria-current='true'] {
+  border-color: var(--oasis-dark);
+  box-shadow: inset 0 0 0 1px var(--oasis-dark);
+}
+
+/* Card title — Barlow Condensed 24 / +50 tracking */
+.oasis-card__title {
+  display: block;
+  margin: 3rem 0 0;
+  font-family: var(--oasis-font-cond);
+  font-size: 2.4rem;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+  color: var(--oasis-dark);
+  text-decoration: none;
+}
+.oasis-card__title:hover { text-decoration: underline; text-underline-offset: 0.3rem; }
+
+/* Price — Garet Book 24 / +50 tracking */
+.oasis-card__price {
+  margin: 1.6rem 0 0;
+  font-size: 2.4rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: var(--oasis-dark);
+}
+.oasis-card__price s { opacity: 0.5; margin-right: 0.6rem; }
+
+.oasis-card__swatches {
+  display: flex;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 2.1rem;
+  flex-wrap: wrap;
+}
+.oasis-card__swatch {
+  width: 39px;
+  height: 39px;
+  border: 1px solid var(--oasis-line);
+  background: #fff;
+  overflow: hidden;
+  display: block;
+}
+.oasis-card__swatch img { width: 100%; height: 100%; object-fit: cover; }
+.oasis-card__swatch:hover { border-color: var(--oasis-tan); }
+
+/* ---------- hero slider -------------------------------------------------- */
+
+.oasis-hero { position: relative; overflow: hidden; }
+.oasis-hero__viewport { position: relative; }
+
+.oasis-hero__track {
+  display: flex;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.oasis-hero__slide {
+  position: relative;
+  flex: 0 0 100%;
+  min-height: 675px;
+  display: flex;
+  align-items: center;
+}
+
+.oasis-hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.oasis-hero__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(251, 247, 244, 0.82) 0%, rgba(251, 247, 244, 0.5) 30%, rgba(251, 247, 244, 0) 56%);
+}
+.oasis-hero__slide--right .oasis-hero__scrim {
+  background: linear-gradient(270deg, rgba(251, 247, 244, 0.82) 0%, rgba(251, 247, 244, 0.5) 30%, rgba(251, 247, 244, 0) 56%);
+}
+.oasis-hero__slide--center .oasis-hero__scrim { background: rgba(251, 247, 244, 0.4); }
+
+.oasis-hero__inner {
+  position: relative;
+  z-index: 2;
+  max-width: calc(var(--oasis-content) + var(--oasis-gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--oasis-gutter);
+  width: 100%;
+  display: flex;
+}
+.oasis-hero__slide--right .oasis-hero__inner { justify-content: flex-end; }
+.oasis-hero__slide--center .oasis-hero__inner { justify-content: center; }
+
+/* Design centres the hero copy inside a narrow column */
+.oasis-hero__content {
+  width: 318px;
+  max-width: 100%;
+  text-align: center;
+}
+
+/* Heading — Barlow Condensed Regular 56 */
+.oasis-hero__heading {
+  font-family: var(--oasis-font-cond);
+  font-weight: 400;
+  font-size: 5.6rem;
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--oasis-dark);
+  margin: 0;
+}
+
+/* Body — Garet Book 20 */
+.oasis-hero__text {
+  margin: 2.4rem 0 0;
+  font-size: 2rem;
+  line-height: 1.35;
+  font-weight: 300;
+  color: var(--oasis-dark);
+}
+.oasis-hero__text p { margin: 0 0 2.4rem; }
+.oasis-hero__text p:last-child { margin-bottom: 0; }
+
+.oasis-hero__buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-top: 3.4rem;
+}
+
+.oasis-hero__dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 24px;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.oasis-hero__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid var(--oasis-dark);
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+.oasis-hero__dot[aria-current='true'] { background: var(--oasis-dark); }
+
+.oasis-hero__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.55);
+  border: 0;
+  cursor: pointer;
+  color: var(--oasis-dark);
+  transition: background 0.2s ease;
+}
+.oasis-hero__arrow:hover { background: #fff; }
+.oasis-hero__arrow--prev { left: 16px; }
+.oasis-hero__arrow--next { right: 16px; }
+.oasis-hero__arrow svg { width: 18px; height: 18px; }
+
+/* ---------- shop tiles --------------------------------------------------- */
+
+.oasis-tiles__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 50px;
+  margin-top: 5rem;
+}
+
+.oasis-tile {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 605 / 398;
+  color: #fff;
+  text-decoration: none;
+}
+.oasis-tile img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.oasis-tile:hover img { transform: scale(1.05); }
+
+.oasis-tile__inner {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 3rem 4.6rem;
+}
+
+/* Script title — Brittany Signature 60 */
+.oasis-tile__title {
+  font-family: var(--oasis-font-script);
+  font-size: 6.6rem;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  margin: 0;
+  color: #fff;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* EXPLORE — Garet Book 20 / +50 tracking */
+.oasis-tile__cta {
+  margin-top: 1.2rem;
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-bottom: 1px solid #fff;
+  align-self: flex-start;
+  padding-bottom: 3px;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* ---------- product row -------------------------------------------------- */
+
+.oasis-row__head { text-align: center; margin-bottom: 4rem; }
+
+/* ---------- story banner ------------------------------------------------- */
+
+.oasis-story {
+  position: relative;
+  min-height: 670px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.oasis-story__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.oasis-story__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(233, 218, 203, 0.94) 0%, rgba(233, 218, 203, 0.72) 34%, rgba(233, 218, 203, 0) 58%);
+}
+.oasis-story--right .oasis-story__scrim {
+  background: linear-gradient(270deg, rgba(233, 218, 203, 0.94) 0%, rgba(233, 218, 203, 0.72) 34%, rgba(233, 218, 203, 0) 58%);
+}
+.oasis-story__inner {
+  position: relative;
+  z-index: 2;
+  max-width: calc(var(--oasis-content) + var(--oasis-gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--oasis-gutter);
+  width: 100%;
+  display: flex;
+}
+.oasis-story--right .oasis-story__inner { justify-content: flex-end; }
+.oasis-story__content { max-width: 560px; }
+
+/* Kicker — Barlow Condensed SemiBold 90 */
+.oasis-story__kicker {
+  font-family: var(--oasis-font-cond);
+  font-weight: 600;
+  font-size: 9rem;
+  line-height: 0.98;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--oasis-dark);
+  margin: 0;
+}
+
+/* Script — Brittany Signature 100 */
+.oasis-story__script {
+  font-family: var(--oasis-font-script);
+  font-size: 11rem;
+  line-height: 1.1;
+  color: var(--oasis-dark);
+  margin: 0.6rem 0 0;
+}
+
+/* Body — Garet Book 22 */
+.oasis-story__text {
+  margin: 2.2rem 0 0;
+  font-size: 2.2rem;
+  line-height: 1.2;
+  font-weight: 300;
+  color: var(--oasis-dark);
+}
+.oasis-story__text p { margin: 0 0 2.6rem; }
+.oasis-story__text p:last-child { margin-bottom: 0; }
+
+.oasis-story__button { margin-top: 3rem; }
+
+/* ---------- purpose band ------------------------------------------------- */
+
+.oasis-purpose {
+  position: relative;
+  min-height: 845px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.oasis-purpose__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.oasis-purpose__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(270deg, rgba(251, 247, 244, 0.96) 0%, rgba(251, 247, 244, 0.8) 30%, rgba(251, 247, 244, 0) 54%);
+}
+.oasis-purpose__inner {
+  position: relative;
+  z-index: 2;
+  max-width: calc(var(--oasis-content) + var(--oasis-gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--oasis-gutter);
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.oasis-purpose__content {
+  max-width: 660px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Heading — Garet Book 42 */
+.oasis-purpose__title {
+  font-size: 4.2rem;
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  margin: 2.6rem 0 0;
+  color: var(--oasis-dark);
+}
+
+/* Tagline — Barlow Condensed Bold 36 */
+.oasis-purpose__tagline {
+  font-family: var(--oasis-font-cond);
+  font-weight: 700;
+  font-size: 3.6rem;
+  line-height: 1.2;
+  margin: 0;
+  color: var(--oasis-dark);
+}
+
+/* "EVERY PURCHASE =" — Garet Book 20 */
+.oasis-purpose__eyebrow {
+  margin: 2rem 0 1.6rem;
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--oasis-dark);
+}
+
+.oasis-purpose__icons {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+  flex-wrap: nowrap;
+}
+.oasis-purpose__icon {
+  width: 128px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+.oasis-purpose__icon img { width: 108px; height: auto; }
+
+/* Icon labels — Garet Book 16 / +50 tracking */
+.oasis-purpose__icon span {
+  font-size: 1.6rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  color: var(--oasis-dark);
+}
+
+/* "+" — Garet Book 46 */
+.oasis-purpose__plus {
+  font-size: 4.6rem;
+  line-height: 1;
+  padding-top: 34px;
+  color: var(--oasis-dark);
+  font-weight: 200;
+}
+
+/* Body — Garet Book 20 / 28.8 leading */
+.oasis-purpose__text {
+  font-size: 2rem;
+  line-height: 1.44;
+  font-weight: 300;
+  margin: 0;
+  color: var(--oasis-dark);
+}
+.oasis-purpose__text strong { font-weight: 500; }
+
+/* ---------- footer ------------------------------------------------------- */
+
+.oasis-footer {
+  background: var(--oasis-cream);
+  padding: 7.5rem 0 6.6rem;
+  color: var(--oasis-dark);
+}
+
+.oasis-footer__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 456px) auto auto auto;
+  justify-content: space-between;
+  column-gap: 40px;
+  row-gap: 40px;
+}
+
+/* Column headings — Barlow Condensed Medium 40 / +50 tracking */
+.oasis-footer__heading {
+  font-family: var(--oasis-font-cond);
+  font-weight: 500;
+  font-size: 4rem;
+  line-height: 1;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin: 0 0 2.6rem;
+  color: var(--oasis-dark);
+  white-space: nowrap;
+}
+
+/* Brand heading — Barlow Condensed Medium 34 / +50 tracking */
+.oasis-footer__brand .oasis-footer__heading { font-size: 3.4rem; }
+
+/* Brand blurb — Garet Book 18 */
+.oasis-footer__blurb {
+  font-size: 1.8rem;
+  line-height: 1.3;
+  font-weight: 300;
+  margin: 0 0 2.8rem;
+  max-width: 456px;
+}
+.oasis-footer__blurb p { margin: 0; }
+
+/* Links — Garet Book 22, 36px rhythm */
+.oasis-footer__links { list-style: none; margin: 0; padding: 0; }
+.oasis-footer__links li { line-height: 1.3; }
+.oasis-footer__links li + li { margin-top: 0.7rem; }
+.oasis-footer__links a {
+  font-size: 2.2rem;
+  font-weight: 300;
+  text-decoration: none;
+  color: var(--oasis-dark);
+}
+.oasis-footer__links a:hover { text-decoration: underline; text-underline-offset: 0.3rem; }
+
+.oasis-newsletter { max-width: 456px; }
+.oasis-newsletter__field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--oasis-dark);
+  height: 73px;
+}
+.oasis-newsletter__field input[type='email'] {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  height: 100%;
+  padding: 0 3.2rem;
+  font-family: var(--oasis-font-body);
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: var(--oasis-dark);
+}
+.oasis-newsletter__field input[type='email']:focus { outline: 0; }
+.oasis-newsletter__field input::placeholder { color: var(--oasis-dark); opacity: 1; }
+.oasis-newsletter__submit {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 0 3.2rem;
+  height: 100%;
+  color: var(--oasis-dark);
+  display: grid;
+  place-items: center;
+}
+.oasis-newsletter__submit svg { width: 26px; height: 26px; }
+.oasis-newsletter__note { margin: 1rem 0 0; font-size: 1.5rem; }
+
+.oasis-footer__divider {
+  border: 0;
+  border-top: 1px solid var(--oasis-line);
+  margin: 4.8rem 0 3.4rem;
+}
+
+.oasis-footer__badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.4rem;
+}
+.oasis-footer__badge img { width: 98px; height: 98px; }
+.oasis-footer__badge-text { line-height: 1.25; }
+
+/* "MEMBER OF THE" — Garet Book 20 ; "FREEDOM BUSINESS ALLIANCE" — Garet Heavy 20 */
+.oasis-footer__badge-text span {
+  display: block;
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.oasis-footer__badge-text strong {
+  display: block;
+  font-weight: 700;
+  font-size: 2rem;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.oasis-footer__legal {
+  margin-top: 3rem;
+  text-align: center;
+  font-size: 1.4rem;
+  opacity: 0.7;
+}
+.oasis-footer__legal a { text-decoration: none; }
+
+/* ---------- Dawn surface harmonisation ---------------------------------- */
+
+.card__heading,
+.card__information .card__heading a,
+.full-unstyled-link {
+  font-family: var(--oasis-font-cond);
+  font-weight: 400;
+  font-size: 2.4rem;
+  letter-spacing: 0.05em;
+}
+
+.price,
+.price__container,
+.price-item {
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+
+.card--standard .card__inner,
+.card__inner { background: #fff; }
+.card--standard > .card__content .card__information { padding-top: 1.6rem; }
+
+.field__input,
+.select__select,
+.customer .field input,
+.customer select {
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  border-radius: 0;
+}
+
+.rte a { text-underline-offset: 0.3rem; }
+
+.title,
+.title-wrapper-with-link .title,
+.collection-hero__title,
+.main-page-title,
+.article-template__title {
+  font-family: var(--oasis-font-body) !important;
+  font-weight: 300;
+  font-size: 3.6rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.product__title h1,
+.product__title h2 {
+  font-family: var(--oasis-font-cond);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.slider-counter__link--dots .dot { border-color: var(--oasis-dark); }
+.slider-counter__link--active.slider-counter__link--dots .dot { background: var(--oasis-dark); }
+
+.placeholder-svg { background: var(--oasis-blush); fill: rgba(53, 29, 7, 0.28); }
+
+/* ---------- responsive --------------------------------------------------- */
+
+@media screen and (max-width: 1200px) {
+  .oasis-story__kicker { font-size: 7rem; }
+  .oasis-story__script { font-size: 8rem; }
+  .oasis-purpose__icon { width: 104px; }
+  .oasis-purpose__icon img { width: 88px; }
+  .oasis-purpose__plus { padding-top: 26px; font-size: 3.6rem; }
+  .oasis-footer__heading { font-size: 3.4rem; }
+  .oasis-footer__links a { font-size: 2rem; }
+}
+
+@media screen and (max-width: 989px) {
+
+  .oasis-hero__slide { min-height: 0; flex-direction: column; }
+  .oasis-hero__bg { position: relative; height: 340px; }
+  .oasis-hero__scrim,
+  .oasis-hero__slide--right .oasis-hero__scrim,
+  .oasis-hero__slide--center .oasis-hero__scrim { background: none; }
+  .oasis-hero__inner { justify-content: center !important; padding-block: 4rem; }
+  .oasis-hero__content { width: 100%; max-width: 480px; }
+  .oasis-hero__heading { font-size: 4rem; }
+  .oasis-hero__dots { position: static; margin: 0 0 2.4rem; }
+  .oasis-hero__arrow { display: none; }
+
+  .oasis-tiles__grid { grid-template-columns: 1fr !important; gap: 24px; }
+  .oasis-products { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .oasis-section-title { font-size: 2.8rem; }
+  .oasis-section-link { font-size: 1.7rem; }
+  .oasis-card__title, .oasis-card__price { font-size: 2rem; }
+  .oasis-tile__title { font-size: 5rem; }
+
+  .oasis-story { flex-direction: column; min-height: 0 !important; }
+  .oasis-story__bg { position: relative; height: 320px; }
+  .oasis-story__scrim { background: none !important; }
+  .oasis-story__inner { justify-content: center !important; padding-block: 4.4rem; }
+  .oasis-story__content { text-align: center; max-width: 520px; }
+  .oasis-story__kicker { font-size: 4.6rem; }
+  .oasis-story__script { font-size: 5.6rem; }
+  .oasis-story__text { font-size: 1.8rem; line-height: 1.4; }
+
+  .oasis-purpose { flex-direction: column; min-height: 0 !important; }
+  .oasis-purpose__bg { position: relative; height: 340px; }
+  .oasis-purpose__scrim { background: none !important; }
+  .oasis-purpose__inner { justify-content: center !important; padding-block: 4.6rem; }
+  .oasis-purpose__title { font-size: 2.8rem; }
+  .oasis-purpose__tagline { font-size: 2.6rem; }
+  .oasis-purpose__icons { gap: 2px; }
+  .oasis-purpose__icon { width: 74px; }
+  .oasis-purpose__icon img { width: 64px; }
+  .oasis-purpose__icon span { font-size: 1.1rem; }
+  .oasis-purpose__plus { font-size: 2.4rem; padding-top: 20px; }
+  .oasis-purpose__text { font-size: 1.7rem; }
+
+  .oasis-footer__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); justify-content: stretch; }
+  .oasis-footer__heading { white-space: normal; }
+  .oasis-footer__brand { grid-column: 1 / -1; }
+  .oasis-footer__badge { flex-direction: column; text-align: center; gap: 1.6rem; }
+  .oasis-btn { font-size: 1.7rem; min-height: 5.4rem; padding: 0 3rem; }
+}
+
+@media screen and (max-width: 600px) {
+  .oasis-tile__inner { padding: 2.4rem 2.6rem; }
+  .oasis-tile__title { font-size: 4.4rem; }
+  .oasis-purpose__icon { width: 58px; }
+  .oasis-purpose__icon img { width: 48px; }
+  .oasis-purpose__icon span { font-size: 0.95rem; letter-spacing: 0.03em; }
+  .oasis-purpose__plus { font-size: 1.8rem; padding-top: 14px; }
+  .oasis-story__kicker { font-size: 3.6rem; }
+  .oasis-story__script { font-size: 4.6rem; }
+  .oasis-footer__grid { grid-template-columns: 1fr; }
+  .oasis-footer__heading { font-size: 3rem; }
+}
+
+/* ==========================================================================
+   INNER PAGES
+   ========================================================================== */
+
+/* ---------- page banner --------------------------------------------------- */
+
+.oasis-banner {
+  position: relative;
+  min-height: 365px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: #f1e4d4;
+}
+.oasis-banner__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.oasis-banner__scrim { position: absolute; inset: 0; }
+.oasis-banner__inner {
+  position: relative;
+  z-index: 2;
+  max-width: calc(var(--oasis-content) + var(--oasis-gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--oasis-gutter);
+  width: 100%;
+  display: flex;
+}
+.oasis-banner--right .oasis-banner__inner { justify-content: flex-end; }
+.oasis-banner--center .oasis-banner__inner { justify-content: center; }
+.oasis-banner__content { max-width: 600px; text-align: center; }
+
+/* Title — Barlow Condensed Regular 62 / +75 tracking */
+.oasis-banner__title {
+  font-family: var(--oasis-font-cond);
+  font-weight: 400;
+  font-size: 6.2rem;
+  line-height: 1.05;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+  color: var(--oasis-dark);
+  margin: 0;
+}
+
+.oasis-banner__ornament { margin: 2.4rem auto 0; width: 278px; height: auto; }
+
+/* Intro — Garet Book 24 */
+.oasis-banner__text {
+  margin: 2rem 0 0;
+  font-size: 2.4rem;
+  font-weight: 300;
+  line-height: 1.25;
+  color: var(--oasis-dark);
+}
+.oasis-banner__text p { margin: 0 0 1.2rem; }
+.oasis-banner__text p:last-child { margin-bottom: 0; }
+
+/* ---------- promo strip -------------------------------------------------- */
+
+.oasis-promo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.6rem var(--oasis-gutter);
+  text-align: center;
+}
+.oasis-promo__text {
+  margin: 0;
+  font-family: var(--oasis-font-body);
+  font-weight: 700;
+  font-size: 2.4rem;
+  line-height: 1.25;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ---------- script columns ----------------------------------------------- */
+
+.oasis-cols__intro {
+  max-width: 740px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 2.4rem;
+  font-weight: 300;
+  line-height: 1.3;
+  color: var(--oasis-dark);
+}
+.oasis-cols__intro p { margin: 0 0 2.2rem; }
+.oasis-cols__intro p:last-child { margin-bottom: 0; }
+
+.oasis-cols__grid {
+  display: grid;
+  gap: 0;
+  margin-top: 5.4rem;
+}
+.oasis-cols__col {
+  text-align: center;
+  padding: 0 3.2rem;
+}
+.oasis-cols__col > * { max-width: 320px; margin-inline: auto; }
+.oasis-cols__col {
+  border-left: 1px solid rgba(53, 29, 7, 0.18);
+}
+.oasis-cols__col:first-child { border-left: 0; }
+
+/* First line — Barlow Condensed, +75 tracking.
+   The PSD layer is scaled down, so its nominal 62px renders at ~37px. */
+.oasis-cols__kicker {
+  font-family: var(--oasis-font-cond);
+  font-weight: 400;
+  font-size: 3.7rem;
+  line-height: 1;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+  color: var(--oasis-dark);
+  margin: 0;
+}
+
+/* Second line — script, measured to match the rendered design width */
+.oasis-cols__script {
+  font-family: var(--oasis-font-script);
+  font-size: 4rem;
+  line-height: 1;
+  color: var(--oasis-dark);
+  margin: 0.2rem 0 0;
+}
+
+.oasis-cols__ornament { margin: 1.6rem auto 0; width: 148px; height: auto; }
+
+.oasis-cols__text {
+  margin: 1.8rem 0 0;
+  font-size: 2.4rem;
+  font-weight: 300;
+  line-height: 1.25;
+  color: var(--oasis-dark);
+}
+.oasis-cols__text p { margin: 0; }
+
+/* ---------- pricing tables ----------------------------------------------- */
+
+.oasis-pricing__ornament { margin: 0 auto 2.4rem; width: 456px; height: auto; }
+
+.oasis-pricing__grid {
+  display: grid;
+  gap: 64px;
+  margin-top: 5rem;
+}
+
+.oasis-pricing__card { overflow: hidden; }
+
+.oasis-pricing__head { text-align: center; padding: 3.2rem 2rem 2rem; }
+
+/* Title — Barlow Condensed SemiBold 36 / +75 tracking */
+.oasis-pricing__title {
+  font-family: var(--oasis-font-cond);
+  font-weight: 600;
+  font-size: 3.6rem;
+  line-height: 1;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+  margin: 0;
+}
+.oasis-pricing__subtitle {
+  margin: 1.2rem 0 0;
+  font-size: 1.8rem;
+  font-weight: 300;
+}
+
+/* Column heads — Garet Book 18 */
+.oasis-pricing__cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 46px;
+  align-items: center;
+}
+.oasis-pricing__cols span {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+}
+
+.oasis-pricing__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  min-height: 60px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  position: relative;
+}
+.oasis-pricing__row::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.22);
+}
+.oasis-pricing__row:last-child { border-bottom: 1px solid rgba(255, 255, 255, 0.22); }
+
+/* Quantity — Garet Book 20 ; Price — Garet Heavy 20 */
+.oasis-pricing__qty,
+.oasis-pricing__price {
+  text-align: center;
+  font-size: 2rem;
+  line-height: 1.3;
+}
+.oasis-pricing__qty { font-weight: 300; }
+.oasis-pricing__price { font-weight: 700; }
+
+/* Footnote — Garet Book 16 */
+.oasis-pricing__footnote {
+  margin: 0;
+  padding: 2.2rem 3rem 2.6rem;
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 300;
+  line-height: 1.35;
+  opacity: 0.92;
+}
+
+/* ---------- CTA block ---------------------------------------------------- */
+
+.oasis-cta__inner {
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Heading — Garet Book 36 */
+.oasis-cta__heading {
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  font-size: 3.6rem;
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--oasis-dark);
+  margin: 0;
+}
+
+/* Tagline — Barlow Condensed Bold 32 */
+.oasis-cta__tagline {
+  font-family: var(--oasis-font-cond);
+  font-weight: 700;
+  font-size: 3.2rem;
+  line-height: 1.2;
+  margin: 1.6rem 0 0;
+  color: var(--oasis-dark);
+}
+
+.oasis-cta__text {
+  margin: 2.2rem 0 0;
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1.4;
+  color: var(--oasis-dark);
+}
+.oasis-cta__text p { margin: 0 0 2rem; }
+.oasis-cta__text p:last-child { margin-bottom: 0; }
+
+.oasis-cta__buttons {
+  margin-top: 3.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.oasis-cta__buttons .oasis-btn { min-width: 244px; }
+
+/* ---------- contact form ------------------------------------------------- */
+
+.oasis-contact__inner { margin: 0 auto; text-align: center; }
+.oasis-contact__ornament { margin: 1.8rem auto 0; width: 148px; height: auto; }
+
+.oasis-contact__tagline {
+  font-family: var(--oasis-font-cond);
+  font-weight: 700;
+  font-size: 3.2rem;
+  line-height: 1.2;
+  margin: 1.6rem 0 0;
+  color: var(--oasis-dark);
+}
+.oasis-contact__text {
+  margin: 1.8rem 0 0;
+  font-size: 2.4rem;
+  font-weight: 300;
+  line-height: 1.3;
+  color: var(--oasis-dark);
+}
+.oasis-contact__text p { margin: 0; }
+
+.oasis-contact__form { margin: 4rem auto 0; text-align: left; }
+
+.oasis-contact__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.oasis-field { margin-bottom: 16px; }
+.oasis-field input,
+.oasis-field textarea {
+  width: 100%;
+  border: 1px solid var(--oasis-tan);
+  background: transparent;
+  border-radius: 0;
+  padding: 1.8rem 2rem;
+  font-family: var(--oasis-font-body);
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: var(--oasis-dark);
+  min-height: 58px;
+}
+.oasis-field textarea { resize: vertical; min-height: 210px; line-height: 1.5; }
+.oasis-field input:focus,
+.oasis-field textarea:focus { outline: 0; border-color: var(--oasis-dark); }
+.oasis-field input::placeholder,
+.oasis-field textarea::placeholder {
+  color: var(--oasis-tan);
+  opacity: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 1.8rem;
+}
+
+.oasis-contact__submit {
+  width: 100%;
+  margin-top: 0.6rem;
+  letter-spacing: 0.04em;
+}
+
+.oasis-contact__note {
+  margin: 0 0 2rem;
+  padding: 1.4rem 1.8rem;
+  font-size: 1.6rem;
+  border: 1px solid var(--oasis-tan);
+}
+.oasis-contact__note--success { background: var(--oasis-blush); }
+.oasis-contact__note--error { background: #fdecea; border-color: #b3261e; color: #7a1a15; }
+
+/* ---------- story banner: tracked heading variant ------------------------ */
+
+.oasis-story--tracked .oasis-story__kicker {
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  font-size: 4.4rem;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+}
+.oasis-story--tracked .oasis-story__script { font-size: 7.5rem; }
+.oasis-story--tracked .oasis-story__text { font-size: 2rem; line-height: 1.4; }
+
+/* ---------- inner-page responsive ---------------------------------------- */
+
+@media screen and (max-width: 1200px) {
+  .oasis-cols__kicker { font-size: 3.2rem; }
+  .oasis-cols__script { font-size: 3.4rem; }
+  .oasis-cols__text, .oasis-cols__intro { font-size: 2rem; }
+  .oasis-pricing__grid { gap: 32px; }
+}
+
+@media screen and (max-width: 989px) {
+  .oasis-banner { min-height: 0 !important; flex-direction: column; }
+  .oasis-banner__bg { position: relative; height: 220px; }
+  .oasis-banner__scrim { background: none !important; }
+  .oasis-banner__inner { justify-content: center !important; padding-block: 3.6rem; }
+  .oasis-banner__content { max-width: 100% !important; }
+  .oasis-banner__title { font-size: 4rem; }
+  .oasis-banner__text { font-size: 1.8rem; }
+  .oasis-banner__ornament { width: 200px; }
+
+  .oasis-promo__text { font-size: 1.8rem; }
+
+  .oasis-cols__grid { grid-template-columns: 1fr !important; gap: 40px; }
+  .oasis-cols__col { border-left: 0; padding: 0; }
+  .oasis-cols__col + .oasis-cols__col { border-top: 1px solid rgba(53, 29, 7, 0.15); padding-top: 34px; }
+
+  .oasis-pricing__grid { grid-template-columns: 1fr !important; gap: 28px; }
+  .oasis-pricing__ornament { width: 300px; }
+
+  .oasis-cta__heading { font-size: 2.6rem; }
+  .oasis-cta__tagline, .oasis-contact__tagline { font-size: 2.4rem; }
+  .oasis-cta__text { font-size: 1.7rem; }
+  .oasis-contact__text { font-size: 1.8rem; }
+  .oasis-contact__row { grid-template-columns: 1fr; }
+
+  .oasis-story--tracked .oasis-story__kicker { font-size: 2.8rem; }
+  .oasis-story--tracked .oasis-story__script { font-size: 5rem; }
+}
+
+/* ==========================================================================
+   COLLECTION PAGES — Dawn's grid + vertical facets, restyled
+   ========================================================================== */
+
+.collection { padding-top: 4.6rem; }
+
+/* Sidebar headings — "FILTER BY", "PRODUCT TYPE", "CATEGORY", "PRICE" */
+.facets__heading,
+.facets__summary span:first-of-type,
+.facets__disclosure-vertical .facets__summary {
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  font-size: 1.6rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--oasis-dark);
+}
+.facets__heading { margin-bottom: 2rem; }
+
+.facets__disclosure-vertical { border-bottom: 1px solid var(--oasis-line); }
+.facets__disclosure-vertical .facets__summary { padding-block: 1.8rem; }
+
+/* Filter options — Garet Book 17 */
+.facet-checkbox,
+.facets-layout-list .facet-checkbox__text-label,
+.facet-checkbox__text {
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  font-size: 1.7rem;
+  letter-spacing: 0.01em;
+  color: var(--oasis-dark);
+}
+.facet-checkbox > input[type='checkbox'] { accent-color: var(--oasis-dark); }
+
+/* Product count and sort row */
+.facets__form .product-count,
+.product-count__text,
+.facet-filters__label,
+.facets-container .product-count {
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  font-size: 1.5rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--oasis-dark);
+}
+
+.facet-filters__sort,
+.facet-filters__sort:hover {
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  font-size: 1.6rem;
+  color: var(--oasis-dark);
+  border: 1px solid var(--oasis-line);
+  border-radius: 0;
+  background: #fff;
+  padding: 1.1rem 3.4rem 1.1rem 1.4rem;
+}
+
+/* Product cards in the grid — white tile, centred meta, brand type */
+.collection .card__inner,
+.collection .card--standard .card__inner { background: #fff; }
+
+.collection .card-information,
+.collection .card__content { text-align: center; }
+
+.collection .card__heading,
+.collection .card__heading a {
+  font-family: var(--oasis-font-cond);
+  font-weight: 400;
+  font-size: 2.4rem;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+  color: var(--oasis-dark);
+}
+
+.collection .price,
+.collection .price-item {
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  font-size: 2.4rem;
+  letter-spacing: 0.05em;
+  color: var(--oasis-dark);
+}
+
+.collection .card__media img,
+.collection .card--standard .card__media img { object-fit: contain; padding: 7%; }
+
+/* Dawn's own pagination */
+.pagination__item {
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  font-size: 1.7rem;
+}
+
+/* ==========================================================================
+   PRODUCT PAGE — Dawn's main-product, restyled
+   ========================================================================== */
+
+.product__title h1,
+.product__title h2 {
+  font-family: var(--oasis-font-cond);
+  font-weight: 700;
+  font-size: 4.6rem;
+  line-height: 1.08;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: var(--oasis-dark);
+}
+
+.product__text.caption-with-letter-spacing,
+.product__accordion .summary__title,
+.product-form__input .form__label {
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  color: var(--oasis-dark);
+}
+
+.product .price,
+.product .price__container .price-item {
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  font-size: 2.4rem;
+  letter-spacing: 0.03em;
+  color: var(--oasis-dark);
+}
+
+.product-form__input .form__label { margin-bottom: 0.8rem; }
+
+/* Variant pills / swatches */
+.product-form__input input[type='radio'] + label {
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  font-size: 1.6rem;
+  border-radius: 0;
+  border-color: var(--oasis-line);
+  color: var(--oasis-dark);
+}
+.product-form__input input[type='radio']:checked + label {
+  background: var(--oasis-dark);
+  color: #fff;
+  border-color: var(--oasis-dark);
+}
+
+.quantity {
+  border: 1px solid var(--oasis-line);
+  border-radius: 0;
+  background: #fff;
+}
+.quantity__input {
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  font-size: 1.7rem;
+  color: var(--oasis-dark);
+}
+
+.product-form__submit,
+.shopify-payment-button__button--unbranded {
+  border-radius: 0;
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  font-size: 1.8rem;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+  min-height: 5.8rem;
+}
+
+.product__media-wrapper .product__media-item .product__media img { object-fit: contain; }
+.thumbnail { border-radius: 0; border: 1px solid var(--oasis-line); }
+.thumbnail-list__item .thumbnail[aria-current] { border-color: var(--oasis-dark); box-shadow: none; }
+
+.product .product__description,
+.product__accordion .accordion__content {
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  font-size: 1.7rem;
+  line-height: 1.55;
+  color: var(--oasis-dark);
+}
+
+/* Related products row inherits the section-title look */
+.related-products .related-products__heading,
+.related-products h2 {
+  font-family: var(--oasis-font-body) !important;
+  font-weight: 300;
+  font-size: 3.6rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--oasis-dark);
+}
+.related-products .card__inner { background: #fff; }
+.related-products .card__content, .related-products .card-information { text-align: center; }
+.related-products .card__heading, .related-products .card__heading a {
+  font-family: var(--oasis-font-cond);
+  font-weight: 400;
+  font-size: 2.4rem;
+  letter-spacing: 0.05em;
+}
+.related-products .card__media img { object-fit: contain; padding: 7%; }
+
+@media screen and (max-width: 989px) {
+  .product__title h1, .product__title h2 { font-size: 3.4rem; }
+  .collection .card__heading, .collection .card__heading a,
+  .collection .price, .collection .price-item { font-size: 2rem; }
+  .related-products h2 { font-size: 2.8rem; }
+}

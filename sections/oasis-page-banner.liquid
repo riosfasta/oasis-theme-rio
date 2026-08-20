@@ -1,0 +1,192 @@
+{%- comment -%}
+  THE OASIS — page banner
+  Condensed title, floral divider, intro line, over a soft full-bleed photo.
+  Used by the Shop pages, Bulk Ordering and Contact Us.
+  On a collection page it falls back to the collection's own title / description /
+  image, so one template can serve Shop All, Journals and Cards.
+{%- endcomment -%}
+
+{%- liquid
+  assign b_title = section.settings.title
+  assign b_text = section.settings.text
+  assign b_image = section.settings.image
+
+  if section.settings.use_collection and collection != blank
+    if b_title == blank
+      assign b_title = collection.title
+    endif
+    if b_text == blank
+      assign b_text = collection.description
+    endif
+    if b_image == blank and section.settings.fallback_asset == blank
+      assign b_image = collection.image
+    endif
+  endif
+
+  if section.settings.use_page and page != blank and b_title == blank
+    assign b_title = page.title
+  endif
+-%}
+
+<div class="oasis-banner oasis-banner--{{ section.settings.content_position }}" id="OasisBanner-{{ section.id }}">
+  {%- if b_image != blank -%}
+    {{
+      b_image
+      | image_url: width: 2880
+      | image_tag:
+        class: 'oasis-banner__bg',
+        widths: '750, 1100, 1440, 1900, 2880',
+        sizes: '100vw',
+        fetchpriority: 'high',
+        alt: b_image.alt
+    }}
+  {%- elsif section.settings.fallback_asset != blank -%}
+    <img
+      class="oasis-banner__bg"
+      src="{{ section.settings.fallback_asset | asset_url }}"
+      alt=""
+      width="1440"
+      height="363"
+      fetchpriority="high"
+    >
+  {%- endif -%}
+
+  <div class="oasis-banner__scrim" aria-hidden="true"></div>
+
+  <div class="oasis-banner__inner">
+    <div class="oasis-banner__content">
+      {%- if b_title != blank -%}
+        <h1 class="oasis-banner__title">{{ b_title }}</h1>
+      {%- endif -%}
+
+      {%- if section.settings.show_ornament -%}
+        <img
+          class="oasis-banner__ornament"
+          src="{{ 'oasis-ornament-divider-banner.png' | asset_url }}"
+          alt=""
+          width="278"
+          height="37"
+          loading="lazy"
+        >
+      {%- endif -%}
+
+      {%- if b_text != blank -%}
+        <div class="oasis-banner__text rte">{{ b_text }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<style>
+  #OasisBanner-{{ section.id }} { min-height: {{ section.settings.height }}px; }
+  #OasisBanner-{{ section.id }} .oasis-banner__content { max-width: {{ section.settings.content_width }}px; }
+  #OasisBanner-{{ section.id }} .oasis-banner__scrim {
+    background: linear-gradient({% if section.settings.content_position == 'right' %}270deg{% else %}90deg{% endif %},
+      {{ section.settings.scrim_color }} 0%,
+      {{ section.settings.scrim_color | color_modify: 'alpha', 0.7 }} 38%,
+      {{ section.settings.scrim_color | color_modify: 'alpha', 0 }} 62%);
+  }
+  {%- if section.settings.content_position == 'center' -%}
+  #OasisBanner-{{ section.id }} .oasis-banner__scrim { background: {{ section.settings.scrim_color | color_modify: 'alpha', 0.5 }}; }
+  {%- endif -%}
+  @media screen and (max-width: 989px) {
+    #OasisBanner-{{ section.id }} { min-height: 0; }
+    #OasisBanner-{{ section.id }} .oasis-banner__scrim { background: none; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Oasis page banner",
+  "class": "oasis-section-banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image",
+      "info": "Recommended 2880 × 726px."
+    },
+    {
+      "type": "text",
+      "id": "fallback_asset",
+      "label": "Packaged design image",
+      "info": "Theme asset filename used when no image is chosen, e.g. oasis-banner-journals.jpg"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Text position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centre" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "min": 240,
+      "max": 640,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop height",
+      "default": 365
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "min": 400,
+      "max": 780,
+      "step": 10,
+      "unit": "px",
+      "label": "Text column width",
+      "default": 600
+    },
+    {
+      "type": "color",
+      "id": "scrim_color",
+      "label": "Overlay colour",
+      "default": "#F1E4D4"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_collection",
+      "label": "Use the collection's title, text and image",
+      "info": "On collection pages. Anything you type below overrides it.",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "use_page",
+      "label": "Use the page title",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_ornament",
+      "label": "Show floral divider",
+      "default": true
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Oasis page banner"
+    }
+  ]
+}
+{% endschema %}

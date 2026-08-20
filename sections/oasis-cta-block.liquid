@@ -1,0 +1,147 @@
+{%- comment -%}
+  THE OASIS — centred CTA block
+  Tracked heading, condensed-bold tagline, body copy and up to two stacked
+  buttons. Used for "Wholesale & tax exempt orders".
+{%- endcomment -%}
+
+<div
+  class="oasis-cta"
+  id="OasisCta-{{ section.id }}"
+  style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="oasis-container">
+    <div class="oasis-cta__inner">
+      {%- if section.settings.show_leaf -%}
+        <img
+          class="oasis-leaf"
+          src="{{ 'oasis-ornament-leaf.png' | asset_url }}"
+          alt=""
+          width="107"
+          height="71"
+          loading="lazy"
+        >
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h2 class="oasis-cta__heading">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.tagline != blank -%}
+        <p class="oasis-cta__tagline">{{ section.settings.tagline | escape }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.text != blank -%}
+        <div class="oasis-cta__text rte">{{ section.settings.text }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.button_label_1 != blank or section.settings.button_label_2 != blank -%}
+        <div class="oasis-cta__buttons">
+          {%- if section.settings.button_label_1 != blank -%}
+            <a class="oasis-btn oasis-btn--tan" href="{{ section.settings.button_link_1 | default: '#' }}">
+              {{- section.settings.button_label_1 | escape -}}
+            </a>
+          {%- endif -%}
+          {%- if section.settings.button_label_2 != blank -%}
+            <a class="oasis-btn oasis-btn--light" href="{{ section.settings.button_link_2 | default: '#' }}">
+              {{- section.settings.button_label_2 | escape -}}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<style>
+  #OasisCta-{{ section.id }} .oasis-cta__inner { max-width: {{ section.settings.content_width }}px; }
+</style>
+
+{% schema %}
+{
+  "name": "Oasis CTA block",
+  "class": "oasis-section-cta",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_leaf",
+      "label": "Show leaf ornament",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Wholesale & tax exempt orders"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline (condensed bold)",
+      "default": "Selling in your shop or ordering tax-exempt?"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Whether you're a boutique, retailer, church, nonprofit, or other tax-exempt organization, we're happy to help with your order.</p><p>For wholesale partnerships and tax-exempt purchases, please complete our wholesale form below. This gives us the details we need to set up your order and make sure everything is processed smoothly.</p>"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "min": 520,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "label": "Content width",
+      "default": 840
+    },
+    {
+      "type": "text",
+      "id": "button_label_1",
+      "label": "Primary button label",
+      "default": "Download wholesale form"
+    },
+    {
+      "type": "url",
+      "id": "button_link_1",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Secondary button label",
+      "default": "Contact us"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 70
+    }
+  ],
+  "presets": [
+    {
+      "name": "Oasis CTA block"
+    }
+  ]
+}
+{% endschema %}

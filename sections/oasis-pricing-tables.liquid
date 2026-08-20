@@ -1,0 +1,203 @@
+{%- comment -%}
+  THE OASIS — bulk pricing tables
+  A heading with a floral divider, then tan pricing cards. Each card has a
+  coloured header row and quantity/price rows entered one per line as
+  "quantity | price".
+{%- endcomment -%}
+
+<div
+  class="oasis-pricing"
+  id="OasisPricing-{{ section.id }}"
+  style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="oasis-container">
+    {%- if section.settings.show_ornament -%}
+      <img
+        class="oasis-pricing__ornament"
+        src="{{ 'oasis-ornament-divider-lg.png' | asset_url }}"
+        alt=""
+        width="456"
+        height="61"
+        loading="lazy"
+      >
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+      <h2 class="oasis-section-title">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="oasis-pricing__grid" style="grid-template-columns: repeat({{ section.blocks.size }}, minmax(0, 1fr));">
+        {%- for block in section.blocks -%}
+          <div class="oasis-pricing__card" {{ block.shopify_attributes }}>
+            <div class="oasis-pricing__head">
+              {%- if block.settings.title != blank -%}
+                <p class="oasis-pricing__title">{{ block.settings.title | escape }}</p>
+              {%- endif -%}
+              {%- if block.settings.subtitle != blank -%}
+                <p class="oasis-pricing__subtitle">{{ block.settings.subtitle | escape }}</p>
+              {%- endif -%}
+            </div>
+
+            <div
+              class="oasis-pricing__cols"
+              style="background: {{ block.settings.accent_color }}; color: {{ block.settings.accent_text_color }};"
+            >
+              <span>{{ block.settings.col_1 | escape }}</span>
+              <span>{{ block.settings.col_2 | escape }}</span>
+            </div>
+
+            {%- if block.settings.rows != blank -%}
+              <div class="oasis-pricing__rows">
+                {%- assign lines = block.settings.rows | newline_to_br | split: '<br />' -%}
+                {%- for line in lines -%}
+                  {%- assign row = line | strip -%}
+                  {%- if row != blank -%}
+                    {%- assign cells = row | split: '|' -%}
+                    <div class="oasis-pricing__row">
+                      <span class="oasis-pricing__qty">{{ cells[0] | strip }}</span>
+                      <span class="oasis-pricing__price">{{ cells[1] | strip }}</span>
+                    </div>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+
+            {%- if block.settings.footnote != blank -%}
+              <p class="oasis-pricing__footnote">{{ block.settings.footnote | escape }}</p>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+  #OasisPricing-{{ section.id }} .oasis-pricing__card { background: {{ section.settings.card_color }}; }
+  #OasisPricing-{{ section.id }} .oasis-pricing__card,
+  #OasisPricing-{{ section.id }} .oasis-pricing__card .oasis-pricing__qty,
+  #OasisPricing-{{ section.id }} .oasis-pricing__card .oasis-pricing__price,
+  #OasisPricing-{{ section.id }} .oasis-pricing__card .oasis-pricing__title,
+  #OasisPricing-{{ section.id }} .oasis-pricing__card .oasis-pricing__subtitle,
+  #OasisPricing-{{ section.id }} .oasis-pricing__card .oasis-pricing__footnote {
+    color: {{ section.settings.card_text_color }};
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Oasis pricing tables",
+  "class": "oasis-section-pricing",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_ornament",
+      "label": "Show floral divider above heading",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Bulk pricing"
+    },
+    {
+      "type": "color",
+      "id": "card_color",
+      "label": "Card background",
+      "default": "#A1836F"
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Card text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 70
+    }
+  ],
+  "blocks": [
+    {
+      "type": "table",
+      "name": "Pricing table",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Journals"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "Hand-stitched with purpose"
+        },
+        {
+          "type": "color",
+          "id": "accent_color",
+          "label": "Header row colour",
+          "default": "#878D71"
+        },
+        {
+          "type": "color",
+          "id": "accent_text_color",
+          "label": "Header row text",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "text",
+          "id": "col_1",
+          "label": "Left column heading",
+          "default": "Quantity"
+        },
+        {
+          "type": "text",
+          "id": "col_2",
+          "label": "Right column heading",
+          "default": "Price per journal"
+        },
+        {
+          "type": "textarea",
+          "id": "rows",
+          "label": "Rows",
+          "info": "One row per line, as: quantity | price",
+          "default": "1 - 9 | $20\n10 - 49 | $18\n50 - 99 | $15\n100+ | $12"
+        },
+        {
+          "type": "text",
+          "id": "footnote",
+          "label": "Footnote",
+          "default": "Every journal helps provide women in our program with training, meaningful work, and a new future."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Oasis pricing tables",
+      "blocks": [{ "type": "table" }, { "type": "table" }]
+    }
+  ]
+}
+{% endschema %}

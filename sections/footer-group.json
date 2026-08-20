@@ -1,0 +1,69 @@
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "1764175143c6287b5d": {
+      "type": "_blocks",
+      "blocks": {
+        "seoant_trust_badges_star_rating_W7DYrY": {
+          "type": "shopify://apps/seoant-trust-badges/blocks/star_rating/f42f2346-5d14-4b41-a8b9-4b6ee352262e",
+          "settings": {
+            "badge_id": ""
+          }
+        }
+      },
+      "block_order": [
+        "seoant_trust_badges_star_rating_W7DYrY"
+      ],
+      "settings": {}
+    },
+    "oasis_footer": {
+      "type": "oasis-footer",
+      "blocks": {
+        "shop": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Shop",
+            "menu": "footer"
+          }
+        },
+        "care": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Customer care",
+            "menu": "footer"
+          }
+        },
+        "follow": {
+          "type": "social",
+          "settings": {
+            "heading": "Follow us"
+          }
+        }
+      },
+      "block_order": [
+        "shop",
+        "care",
+        "follow"
+      ],
+      "settings": {
+        "background": "#fbf7f4",
+        "text_color": "#351d07",
+        "brand_heading": "The Oasis",
+        "brand_text": "<p>Every purchase helps restore hope and rewrite a story. Join our email community to be the first to discover new products, special offers, seasonal sales, and inspiring stories from The Oasis.</p>",
+        "newsletter_enable": true,
+        "newsletter_placeholder": "Email",
+        "show_badge": true,
+        "badge_line_1": "Member of the",
+        "badge_line_2": "Freedom Business Alliance",
+        "show_policy_links": false,
+        "padding_top": 70,
+        "padding_bottom": 50
+      }
+    }
+  },
+  "order": [
+    "1764175143c6287b5d",
+    "oasis_footer"
+  ]
+}

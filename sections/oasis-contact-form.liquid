@@ -1,0 +1,202 @@
+{%- comment -%}
+  THE OASIS — contact form
+  Heading + floral divider + condensed tagline + intro, then a two-up name/email
+  row, phone, message and a full-width send button.
+{%- endcomment -%}
+
+<div
+  class="oasis-contact"
+  id="OasisContact-{{ section.id }}"
+  style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="oasis-container">
+    <div class="oasis-contact__inner">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="oasis-section-title">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.show_ornament -%}
+        <img
+          class="oasis-contact__ornament"
+          src="{{ 'oasis-ornament-divider-sm.png' | asset_url }}"
+          alt=""
+          width="148"
+          height="22"
+          loading="lazy"
+        >
+      {%- endif -%}
+
+      {%- if section.settings.tagline != blank -%}
+        <p class="oasis-contact__tagline">{{ section.settings.tagline | escape }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.text != blank -%}
+        <div class="oasis-contact__text rte">{{ section.settings.text }}</div>
+      {%- endif -%}
+
+      {%- form 'contact', id: 'OasisContactForm', class: 'oasis-contact__form' -%}
+        {%- if form.posted_successfully? -%}
+          <p class="oasis-contact__note oasis-contact__note--success" tabindex="-1" autofocus>
+            {{ 'templates.contact.form.post_success' | t }}
+          </p>
+        {%- elsif form.errors -%}
+          <p class="oasis-contact__note oasis-contact__note--error" tabindex="-1" autofocus>
+            {{ 'templates.contact.form.error_heading' | t }}
+            {{ form.errors.translated_fields.email | capitalize }}
+            {{ form.errors.messages.email }}
+          </p>
+        {%- endif -%}
+
+        <div class="oasis-contact__row">
+          <div class="oasis-field">
+            <label class="visually-hidden" for="OasisContactName">{{ 'templates.contact.form.name' | t }}</label>
+            <input
+              id="OasisContactName"
+              type="text"
+              name="contact[{{ 'templates.contact.form.name' | t }}]"
+              value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+              placeholder="{{ section.settings.label_name | escape }}"
+              autocomplete="name"
+            >
+          </div>
+          <div class="oasis-field">
+            <label class="visually-hidden" for="OasisContactEmail">{{ 'templates.contact.form.email' | t }}</label>
+            <input
+              id="OasisContactEmail"
+              type="email"
+              name="contact[email]"
+              value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+              placeholder="{{ section.settings.label_email | escape }}"
+              autocomplete="email"
+              autocorrect="off"
+              autocapitalize="off"
+              required
+            >
+          </div>
+        </div>
+
+        <div class="oasis-field">
+          <label class="visually-hidden" for="OasisContactPhone">{{ 'templates.contact.form.phone' | t }}</label>
+          <input
+            id="OasisContactPhone"
+            type="tel"
+            name="contact[{{ 'templates.contact.form.phone' | t }}]"
+            value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+            placeholder="{{ section.settings.label_phone | escape }}"
+            autocomplete="tel"
+          >
+        </div>
+
+        <div class="oasis-field">
+          <label class="visually-hidden" for="OasisContactBody">{{ 'templates.contact.form.comment' | t }}</label>
+          <textarea
+            id="OasisContactBody"
+            rows="9"
+            name="contact[{{ 'templates.contact.form.comment' | t }}]"
+            placeholder="{{ section.settings.label_message | escape }}"
+          >{{ form.body }}</textarea>
+        </div>
+
+        <button type="submit" class="oasis-btn oasis-btn--tan oasis-contact__submit">
+          {{ section.settings.button_label | escape }}
+        </button>
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+
+<style>
+  #OasisContact-{{ section.id }} .oasis-contact__inner { max-width: {{ section.settings.content_width }}px; }
+  #OasisContact-{{ section.id }} .oasis-contact__form { max-width: {{ section.settings.form_width }}px; }
+</style>
+
+{% schema %}
+{
+  "name": "Oasis contact form",
+  "class": "oasis-section-contact",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Contact us"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_ornament",
+      "label": "Show floral divider",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline (condensed bold)",
+      "default": "We'd love to hear from you."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Have a question about our products, an order, or how you can get involved? Fill out the form below and a member of our team will get back to you as soon as possible.</p>"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "min": 600,
+      "max": 1100,
+      "step": 10,
+      "unit": "px",
+      "label": "Content width",
+      "default": 820
+    },
+    {
+      "type": "range",
+      "id": "form_width",
+      "min": 480,
+      "max": 900,
+      "step": 10,
+      "unit": "px",
+      "label": "Form width",
+      "default": 570
+    },
+    {
+      "type": "header",
+      "content": "Field placeholders"
+    },
+    { "type": "text", "id": "label_name", "label": "Name", "default": "Your name" },
+    { "type": "text", "id": "label_email", "label": "Email", "default": "Email address" },
+    { "type": "text", "id": "label_phone", "label": "Phone", "default": "Phone number" },
+    { "type": "text", "id": "label_message", "label": "Message", "default": "Your message" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Send message" },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "Oasis contact form"
+    }
+  ]
+}
+{% endschema %}

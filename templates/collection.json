@@ -1,0 +1,72 @@
+{
+  "sections": {
+    "banner": {
+      "type": "oasis-page-banner",
+      "settings": {
+        "fallback_asset": "oasis-banner-shop-all.jpg",
+        "content_position": "left",
+        "height": 365,
+        "content_width": 600,
+        "scrim_color": "#f1e4d4",
+        "use_collection": true,
+        "use_page": false,
+        "show_ornament": true,
+        "text": "<p>Beautiful, hand-stitched products carrying stories of courage, hope, and new beginnings.</p>"
+      }
+    },
+    "promo": {
+      "type": "oasis-promo-strip",
+      "settings": {
+        "text": "Choose any 5 hand-stitched cards for $20.",
+        "background": "#a2846f",
+        "text_color": "#ffffff",
+        "height": 80
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 24,
+        "columns_desktop": 3,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "enable_filtering": true,
+        "filter_type": "vertical",
+        "enable_sorting": true,
+        "padding_top": 36,
+        "padding_bottom": 72
+      }
+    },
+    "story": {
+      "type": "oasis-story-banner",
+      "settings": {
+        "fallback_asset": "oasis-story-restore-hope.jpg",
+        "content_position": "right",
+        "kicker_style": "tracked",
+        "text_align": "center",
+        "height": 585,
+        "content_width": 620,
+        "scrim_color": "#fbf7f4",
+        "show_leaf": true,
+        "show_rule": true,
+        "kicker": "Every purchase helps restore hope",
+        "script": "and rewrite a story.",
+        "text": "<p>Your purchase helps provide women rebuilding their lives after trafficking with dignified work, skills training, healing, and hope for a new future—while creating greater opportunities for their children to thrive.</p>",
+        "button_label": "Learn more about The Oasis",
+        "button_link": "/pages/about-us"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "promo",
+    "product-grid",
+    "story"
+  ]
+}

@@ -1,0 +1,288 @@
+{%- comment -%}
+  THE OASIS — footer
+  Brand + newsletter column, up to three link columns, divider, and the
+  Freedom Business Alliance membership badge.
+{%- endcomment -%}
+
+<footer
+  class="oasis-footer"
+  style="background: {{ section.settings.background }}; color: {{ section.settings.text_color }}; padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="oasis-container">
+    <div class="oasis-footer__grid">
+      <div class="oasis-footer__brand">
+        {%- if section.settings.brand_heading != blank -%}
+          <h2 class="oasis-footer__heading">{{ section.settings.brand_heading | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.brand_text != blank -%}
+          <div class="oasis-footer__blurb rte">{{ section.settings.brand_text }}</div>
+        {%- endif -%}
+
+        {%- if section.settings.newsletter_enable -%}
+          <div class="oasis-newsletter">
+            {%- form 'customer', id: 'OasisFooterNewsletter', class: 'oasis-newsletter__form' -%}
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              <div class="oasis-newsletter__field">
+                <label class="visually-hidden" for="OasisNewsletterEmail">
+                  {{ 'newsletter.label' | t }}
+                </label>
+                <input
+                  id="OasisNewsletterEmail"
+                  type="email"
+                  name="contact[email]"
+                  value="{{ form.email }}"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  autocomplete="email"
+                  placeholder="{{ section.settings.newsletter_placeholder | escape }}"
+                  required
+                >
+                <button
+                  type="submit"
+                  class="oasis-newsletter__submit"
+                  name="commit"
+                  aria-label="{{ 'newsletter.button_label' | t }}"
+                >
+                  {{- 'icon-arrow.svg' | inline_asset_content -}}
+                </button>
+              </div>
+              {%- if form.errors -%}
+                <p class="oasis-newsletter__note form__message">
+                  {{- form.errors.translated_fields.email | capitalize }}
+                  {{ form.errors.messages.email -}}
+                </p>
+              {%- endif -%}
+              {%- if form.posted_successfully? -%}
+                <p class="oasis-newsletter__note form__message">{{ 'newsletter.success' | t }}</p>
+              {%- endif -%}
+            {%- endform -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'link_list' -%}
+            <div class="oasis-footer__column" {{ block.shopify_attributes }}>
+              {%- if block.settings.heading != blank -%}
+                <h2 class="oasis-footer__heading">{{ block.settings.heading | escape }}</h2>
+              {%- endif -%}
+              {%- if block.settings.menu != blank -%}
+                <ul class="oasis-footer__links">
+                  {%- for link in block.settings.menu.links -%}
+                    <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+            </div>
+          {%- when 'social' -%}
+            <div class="oasis-footer__column" {{ block.shopify_attributes }}>
+              {%- if block.settings.heading != blank -%}
+                <h2 class="oasis-footer__heading">{{ block.settings.heading | escape }}</h2>
+              {%- endif -%}
+              <ul class="oasis-footer__links">
+                {%- if settings.social_facebook_link != blank -%}
+                  <li><a href="{{ settings.social_facebook_link }}">Facebook</a></li>
+                {%- endif -%}
+                {%- if settings.social_instagram_link != blank -%}
+                  <li><a href="{{ settings.social_instagram_link }}">Instagram</a></li>
+                {%- endif -%}
+                {%- if settings.social_pinterest_link != blank -%}
+                  <li><a href="{{ settings.social_pinterest_link }}">Pinterest</a></li>
+                {%- endif -%}
+                {%- if settings.social_tiktok_link != blank -%}
+                  <li><a href="{{ settings.social_tiktok_link }}">TikTok</a></li>
+                {%- endif -%}
+                {%- if settings.social_youtube_link != blank -%}
+                  <li><a href="{{ settings.social_youtube_link }}">YouTube</a></li>
+                {%- endif -%}
+              </ul>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.show_badge -%}
+      <hr class="oasis-footer__divider">
+      <div class="oasis-footer__badge">
+        {%- if section.settings.badge_image != blank -%}
+          {{
+            section.settings.badge_image
+            | image_url: width: 196
+            | image_tag: widths: '98, 196', loading: 'lazy', alt: section.settings.badge_line_2
+          }}
+        {%- else -%}
+          <img
+            src="{{ 'oasis-fba-logo.png' | asset_url }}"
+            alt="{{ section.settings.badge_line_2 | escape }}"
+            width="98"
+            height="98"
+            loading="lazy"
+          >
+        {%- endif -%}
+        <div class="oasis-footer__badge-text">
+          <span>{{ section.settings.badge_line_1 | escape }}</span>
+          <strong>{{ section.settings.badge_line_2 | escape }}</strong>
+        </div>
+      </div>
+    {%- endif -%}
+
+    <div class="oasis-footer__legal">
+      &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}
+      {%- if section.settings.show_policy_links -%}
+        {%- for policy in shop.policies -%}
+          {%- if policy != blank -%}
+            &nbsp;·&nbsp;<a href="{{ policy.url }}">{{ policy.title | escape }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Oasis footer",
+  "class": "oasis-section-footer",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#FBF7F4"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#351D07"
+    },
+    {
+      "type": "header",
+      "content": "Brand column"
+    },
+    {
+      "type": "text",
+      "id": "brand_heading",
+      "label": "Heading",
+      "default": "The Oasis"
+    },
+    {
+      "type": "richtext",
+      "id": "brand_text",
+      "label": "Text",
+      "default": "<p>Every purchase helps restore hope and rewrite a story. Join our email community to be the first to discover new products, special offers, seasonal sales, and inspiring stories from The Oasis.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "newsletter_enable",
+      "label": "Show email sign-up",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "newsletter_placeholder",
+      "label": "Email field placeholder",
+      "default": "Email"
+    },
+    {
+      "type": "header",
+      "content": "Membership badge"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show badge",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "badge_image",
+      "label": "Badge logo",
+      "info": "Leave empty to use the packaged Freedom Business Alliance mark."
+    },
+    {
+      "type": "text",
+      "id": "badge_line_1",
+      "label": "Line 1",
+      "default": "Member of the"
+    },
+    {
+      "type": "text",
+      "id": "badge_line_2",
+      "label": "Line 2",
+      "default": "Freedom Business Alliance"
+    },
+    {
+      "type": "header",
+      "content": "Legal"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_policy_links",
+      "label": "Show policy links",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 50
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link_list",
+      "name": "Menu column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Shop"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        }
+      ]
+    },
+    {
+      "type": "social",
+      "name": "Social column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Follow us"
+        },
+        {
+          "type": "paragraph",
+          "content": "Links come from Theme settings → Social media."
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

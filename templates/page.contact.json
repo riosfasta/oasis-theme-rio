@@ -1,0 +1,61 @@
+{
+  "sections": {
+    "banner": {
+      "type": "oasis-page-banner",
+      "settings": {
+        "fallback_asset": "oasis-banner-contact.jpg",
+        "content_position": "left",
+        "height": 365,
+        "content_width": 600,
+        "scrim_color": "#f7efe7",
+        "use_collection": false,
+        "use_page": false,
+        "show_ornament": true,
+        "title": "Contact us",
+        "text": "<p>Have a question or want to learn more? Don't hesitate to reach out. We would love to hear from you!</p>"
+      }
+    },
+    "form": {
+      "type": "oasis-contact-form",
+      "settings": {
+        "heading": "Contact us",
+        "show_ornament": true,
+        "tagline": "We'd love to hear from you.",
+        "text": "<p>Have a question about our products, an order, or how you can get involved? Fill out the form below and a member of our team will get back to you as soon as possible.</p>",
+        "content_width": 820,
+        "form_width": 570,
+        "label_name": "Your name",
+        "label_email": "Email address",
+        "label_phone": "Phone number",
+        "label_message": "Your message",
+        "button_label": "Send message",
+        "padding_top": 70,
+        "padding_bottom": 80
+      }
+    },
+    "story": {
+      "type": "oasis-story-banner",
+      "settings": {
+        "fallback_asset": "oasis-story-new-chapter.jpg",
+        "content_position": "right",
+        "kicker_style": "tracked",
+        "text_align": "center",
+        "height": 585,
+        "content_width": 620,
+        "scrim_color": "#f7efe7",
+        "show_leaf": true,
+        "show_rule": true,
+        "kicker": "Give her story a",
+        "script": "new chapter.",
+        "text": "<p>Behind every product is a woman rebuilding her life. Your support helps provide the dignity, skills, healing, and opportunity she needs to begin a new chapter.</p>",
+        "button_label": "Learn more about The Oasis",
+        "button_link": "/pages/about-us"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "form",
+    "story"
+  ]
+}

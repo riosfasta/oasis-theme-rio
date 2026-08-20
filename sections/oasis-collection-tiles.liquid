@@ -1,0 +1,166 @@
+{%- comment -%}
+  THE OASIS — "Shop products" tiles
+  Two (or more) large lifestyle tiles with a script title and an EXPLORE link.
+{%- endcomment -%}
+
+<div
+  class="oasis-tiles"
+  style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="oasis-container">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="oasis-section-title">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+
+    <div
+      class="oasis-tiles__grid"
+      style="grid-template-columns: repeat({{ section.settings.columns }}, minmax(0, 1fr));"
+    >
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign tile_image = block.settings.image
+          assign tile_url = block.settings.link
+          assign tile_title = block.settings.title
+
+          if block.settings.collection != blank
+            if tile_image == blank and block.settings.fallback_asset == blank
+              assign tile_image = block.settings.collection.featured_image
+            endif
+            if tile_url == blank
+              assign tile_url = block.settings.collection.url
+            endif
+            if tile_title == blank
+              assign tile_title = block.settings.collection.title
+            endif
+          endif
+        -%}
+        <a class="oasis-tile" href="{{ tile_url | default: '#' }}" {{ block.shopify_attributes }}>
+          {%- if tile_image != blank -%}
+            {{
+              tile_image
+              | image_url: width: 1400
+              | image_tag:
+                widths: '400, 605, 900, 1210, 1400',
+                sizes: '(min-width: 990px) 605px, 100vw',
+                loading: 'lazy',
+                alt: tile_image.alt
+            }}
+          {%- elsif block.settings.fallback_asset != blank -%}
+            <img
+              src="{{ block.settings.fallback_asset | asset_url }}"
+              alt="{{ tile_title | escape }}"
+              width="605"
+              height="397"
+              loading="lazy"
+            >
+          {%- else -%}
+            {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+
+          <span class="oasis-tile__inner">
+            {%- if tile_title != blank -%}
+              <span class="oasis-tile__title">{{ tile_title }}</span>
+            {%- endif -%}
+            {%- if block.settings.cta_label != blank -%}
+              <span class="oasis-tile__cta">{{ block.settings.cta_label | escape }}</span>
+            {%- endif -%}
+          </span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Oasis shop tiles",
+  "class": "oasis-section-tiles",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop products"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Columns on desktop",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Tile",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection",
+          "info": "Used for the image, title and link unless you override them below."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Recommended 1210 × 794px."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title (script)",
+          "default": "Journals"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "cta_label",
+          "label": "Link label",
+          "default": "Explore"
+        },
+        {
+          "type": "text",
+          "id": "fallback_asset",
+          "label": "Packaged design image",
+          "info": "Theme asset filename used when no image is chosen, e.g. oasis-tile-journals.jpg"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Oasis shop tiles",
+      "blocks": [{ "type": "tile" }, { "type": "tile" }]
+    }
+  ]
+}
+{% endschema %}

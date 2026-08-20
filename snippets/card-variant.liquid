@@ -1,0 +1,25 @@
+<div class="variant-card">
+  <a href="{{ product.url }}?variant={{ variant.id }}" class="variant-link">
+    
+    {%- assign variant_image = variant.featured_image | default: product.featured_image -%}
+    <div class="variant-image">
+      <img src="{{ variant_image | img_url: '600x' }}" alt="{{ variant.title }}">
+    </div>
+
+    <div class="variant-info">
+      <h3 class="variant-title">
+        {{ product.title }} – {{ variant.title }}
+      </h3>
+
+      <div class="variant-price">
+        {%- if variant.compare_at_price > variant.price -%}
+          <span class="price-sale">{{ variant.price | money }}</span>
+          <span class="price-compare">{{ variant.compare_at_price | money }}</span>
+        {%- else -%}
+          <span class="price-regular">{{ variant.price | money }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+
+  </a>
+</div>
