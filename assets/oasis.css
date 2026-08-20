@@ -1470,10 +1470,10 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
 .product__title h1,
 .product__title h2 {
   font-family: var(--oasis-font-cond);
-  font-weight: 700;
+  font-weight: 500;              /* PSD: BarlowCondensed-Medium */
   font-size: 4.6rem;
-  line-height: 1.08;
-  letter-spacing: 0.01em;
+  line-height: 1.02;
+  letter-spacing: 0.05em;        /* PSD: +50 tracking */
   text-transform: none;
   color: var(--oasis-dark);
 }
@@ -1577,4 +1577,38 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
   .collection .card__heading, .collection .card__heading a,
   .collection .price, .collection .price-item { font-size: 2rem; }
   .related-products h2 { font-size: 2.8rem; }
+}
+
+
+/* ==========================================================================
+   PRODUCT PAGE — measured against Individual_Product_Design.psd
+   ========================================================================== */
+
+/* Thumbnails: PSD is a flat row of 102px squares, 9px apart, left aligned */
+.product__media-gallery .thumbnail-list { gap: 9px; justify-content: flex-start; }
+.product__media-gallery .thumbnail-list__item { max-width: 102px; flex: 0 0 102px; }
+.thumbnail { border: 1px solid var(--oasis-line); border-radius: 0; padding: 6px; }
+.thumbnail img { object-fit: contain; }
+.thumbnail-list__item .thumbnail[aria-current] {
+  border-color: var(--oasis-dark);
+  box-shadow: inset 0 0 0 1px var(--oasis-dark);
+}
+.product__media-gallery .slider-button { display: none; }
+
+/* Related products price — PSD: Garet Book 24 / +50 tracking */
+.related-products .price,
+.related-products .price-item {
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  font-size: 2.4rem;
+  letter-spacing: 0.05em;
+  color: var(--oasis-dark);
+}
+
+/* Story band: the PSD sets the opening line in Garet Heavy above the body copy */
+.oasis-story__text strong { font-weight: 700; }
+.oasis-story--tracked .oasis-story__text p:first-child:has(strong) { margin-bottom: 1.4rem; }
+
+@media screen and (max-width: 989px) {
+  .product__media-gallery .thumbnail-list__item { max-width: 76px; flex: 0 0 76px; }
 }

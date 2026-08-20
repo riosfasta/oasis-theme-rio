@@ -5,25 +5,57 @@
       "blocks": {
         "vendor": {
           "type": "text",
-          "settings": { "text": "{{ product.vendor }}", "text_style": "uppercase" }
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
         },
-        "title": { "type": "title", "settings": {} },
-        "price": { "type": "price", "settings": {} },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
         "variant_picker": {
           "type": "variant_picker",
-          "settings": { "picker_type": "button", "swatch_shape": "circle" }
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
         },
-        "quantity_selector": { "type": "quantity_selector", "settings": {} },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
         "buy_buttons": {
           "type": "buy_buttons",
-          "settings": { "show_dynamic_checkout": true, "show_gift_card_recipient": true }
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
         },
-        "description": { "type": "description", "settings": {} },
-        "share": { "type": "share", "settings": { "share_label": "Share" } }
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
       },
       "block_order": [
-        "vendor", "title", "price", "variant_picker",
-        "quantity_selector", "buy_buttons", "description", "share"
+        "vendor",
+        "title",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "description",
+        "share"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -58,7 +90,30 @@
         "padding_top": 36,
         "padding_bottom": 28
       }
+    },
+    "story": {
+      "type": "oasis-story-banner",
+      "settings": {
+        "fallback_asset": "oasis-story-take-home.jpg",
+        "content_position": "right",
+        "kicker_style": "tracked",
+        "text_align": "center",
+        "height": 585,
+        "content_width": 660,
+        "scrim_color": "#fbf7f4",
+        "show_leaf": true,
+        "show_rule": true,
+        "kicker": "Be a part of her",
+        "script": "freedom story",
+        "text": "<p><strong>Take home something beautiful.<br/>Help make something beautiful possible.</strong></p><p>When you purchase an Oasis product, you don't just take home something beautiful—you help make a new future possible.</p>",
+        "button_label": "Learn more about The Oasis",
+        "button_link": "/pages/about-us"
+      }
     }
   },
-  "order": ["main", "related-products"]
+  "order": [
+    "main",
+    "related-products",
+    "story"
+  ]
 }
