@@ -41,7 +41,14 @@
         "filter_type": "horizontal",
         "enable_sorting": true,
         "padding_top": 0,
-        "padding_bottom": 72
+        "padding_bottom": 72,
+        "oasis_card": true,
+        "oasis_image_ratio": "2 / 3",
+        "oasis_media_width": 76,
+        "oasis_media_background": "none",
+        "oasis_media_inset": 0,
+        "oasis_swatches": true,
+        "oasis_swatch_limit": 6
       }
     },
     "story": {

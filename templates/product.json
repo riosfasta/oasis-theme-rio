@@ -88,7 +88,13 @@
         "show_vendor": false,
         "show_rating": false,
         "padding_top": 36,
-        "padding_bottom": 28
+        "padding_bottom": 28,
+        "oasis_card": true,
+        "oasis_image_ratio": "2 / 3",
+        "oasis_media_width": 76,
+        "oasis_media_inset": 0,
+        "oasis_media_background": "none",
+        "oasis_swatches": true
       }
     },
     "story": {

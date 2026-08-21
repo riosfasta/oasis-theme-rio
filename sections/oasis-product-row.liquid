@@ -35,12 +35,21 @@
             card_product: product,
             show_swatches: section.settings.show_swatches,
             swatch_limit: section.settings.swatch_limit,
-            image_ratio: section.settings.image_ratio
+            image_ratio: section.settings.image_ratio,
+            media_width: section.settings.oasis_media_width,
+                media_inset: section.settings.oasis_media_inset,
+            media_background: section.settings.oasis_media_background
           -%}
         {%- endfor -%}
       {%- else -%}
         {%- for i in (1..products_to_show) -%}
-          {%- render 'oasis-product-card', card_product: null, image_ratio: section.settings.image_ratio -%}
+          {%- render 'oasis-product-card',
+          card_product: null,
+          image_ratio: section.settings.image_ratio,
+          media_width: section.settings.oasis_media_width,
+                media_inset: section.settings.oasis_media_inset,
+          media_background: section.settings.oasis_media_background
+        -%}
         {%- endfor -%}
       {%- endif -%}
     </div>
@@ -125,9 +134,43 @@
       "options": [
         { "value": "1 / 1", "label": "Square" },
         { "value": "4 / 5", "label": "Portrait" },
-        { "value": "3 / 4", "label": "Tall portrait" }
+        { "value": "3 / 4", "label": "Tall portrait" },
+        { "value": "2 / 3", "label": "Extra tall portrait" }
       ],
-      "default": "1 / 1"
+      "default": "2 / 3"
+    },
+    {
+      "type": "range",
+      "id": "oasis_media_width",
+      "min": 40,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Product size in the grid",
+      "info": "How much of each column the product fills. The PSD uses 76% for journals and 53% for the smaller greeting cards.",
+      "default": 76
+    },
+    {
+      "type": "range",
+      "id": "oasis_media_inset",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "%",
+      "label": "Space around the product",
+      "info": "Renders the product smaller inside the same box. The PSD uses 0 for journals and 15% for the physically smaller greeting cards.",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "oasis_media_background",
+      "label": "Tile behind the product",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "#ffffff", "label": "White" },
+        { "value": "var(--oasis-blush)", "label": "Blush" }
+      ],
+      "default": "none"
     },
     {
       "type": "checkbox",

@@ -272,10 +272,16 @@ button.shopify-payment-button__button--unbranded {
 
 .oasis-card { text-align: center; }
 
+/* Box shape, how much clear space sits around the product, and whether there's
+   a tile behind it all come from the section settings via custom properties —
+   a greeting card is physically smaller than a journal, so the PSD sits it
+   smaller in the same grid. Defaults below match the old hard-coded values. */
 .oasis-card__media {
   display: block;
-  background: #fff;
-  aspect-ratio: 1 / 1;
+  width: var(--oasis-card-media-width, 100%);
+  margin-inline: auto;
+  background: var(--oasis-card-media-bg, none);
+  aspect-ratio: var(--oasis-card-ratio, 1 / 1);
   overflow: hidden;
   position: relative;
 }
@@ -283,7 +289,8 @@ button.shopify-payment-button__button--unbranded {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  padding: 7%;
+  box-sizing: border-box;      /* so the inset shrinks the product, not the box */
+  padding: var(--oasis-card-inset, 0%);
   transition: transform 0.5s ease, opacity 0.2s ease;
 }
 .oasis-card:hover .oasis-card__media img { transform: scale(1.04); }
@@ -1462,6 +1469,32 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
 
 .collection .card__media img,
 .collection .card--standard .card__media img { object-fit: contain; padding: 7%; }
+
+/* ---------- Oasis cards inside Dawn's collection grid --------------------
+   The collection route owns pagination, filtering and sorting; we only swap in
+   the same card the homepage rows use so the two grids match. Dawn's grid
+   spacing comes from custom properties, so tightening the gutters to the PSD's
+   16px is a variable override rather than a layout rewrite. */
+
+.product-grid.oasis-grid {
+  --grid-desktop-horizontal-spacing: 16px;
+  --grid-desktop-vertical-spacing: 24px;
+  --grid-mobile-horizontal-spacing: 12px;
+  --grid-mobile-vertical-spacing: 32px;
+}
+.oasis-grid .grid__item { max-width: none; }
+.oasis-grid oasis-card { height: 100%; }
+
+/* Per-category hooks. The grid carries `oasis-cat--<collection-handle>`, so a
+   one-off tweak for a single category needs no new section or template — e.g.
+   `.oasis-cat--cards .oasis-card__title { ... }`. Everything the PSDs actually
+   differ on (product size in the box, tile behind it, whether variant
+   thumbnails show) is a theme-editor setting instead, so it stays editable.
+   Measured from the PSDs: 4 columns of 304px with 16px gutters; the product box
+   is 76% of the column at a 2/3 ratio on every shop page; journals fill that
+   box, greeting cards sit 15% in from it. */
+
+.oasis-cat--cards .oasis-card__title { text-wrap: balance; }
 
 /* Dawn's own pagination */
 .pagination__item {

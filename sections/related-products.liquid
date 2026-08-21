@@ -32,21 +32,33 @@
         {{ section.settings.heading }}
       </h2>
       <ul
-        class="grid product-grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down"
+        class="grid product-grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down{% if section.settings.oasis_card %} oasis-grid{% endif %}"
         role="list"
       >
         {% assign skip_card_product_styles = false %}
         {% for recommendation in recommendations.products %}
           <li class="grid__item">
-            {% render 'card-product',
-              card_product: recommendation,
-              media_aspect_ratio: section.settings.image_ratio,
-              image_shape: section.settings.image_shape,
-              show_secondary_image: section.settings.show_secondary_image,
-              show_vendor: section.settings.show_vendor,
-              show_rating: section.settings.show_rating,
-              skip_styles: skip_card_product_styles
-            %}
+            {%- if section.settings.oasis_card -%}
+              {%- render 'oasis-product-card',
+                card_product: recommendation,
+                show_swatches: section.settings.oasis_swatches,
+                swatch_limit: 6,
+                image_ratio: section.settings.oasis_image_ratio,
+                media_width: section.settings.oasis_media_width,
+                media_inset: section.settings.oasis_media_inset,
+                media_background: section.settings.oasis_media_background
+              -%}
+            {%- else -%}
+              {% render 'card-product',
+                card_product: recommendation,
+                media_aspect_ratio: section.settings.image_ratio,
+                image_shape: section.settings.image_shape,
+                show_secondary_image: section.settings.show_secondary_image,
+                show_vendor: section.settings.show_vendor,
+                show_rating: section.settings.show_rating,
+                skip_styles: skip_card_product_styles
+              %}
+            {%- endif -%}
           </li>
           {%- assign skip_card_product_styles = true -%}
         {% endfor %}
@@ -110,6 +122,68 @@
       "step": 1,
       "default": 4,
       "label": "t:sections.related-products.settings.products_to_show.label"
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "checkbox",
+      "id": "oasis_card",
+      "default": true,
+      "label": "Use the Oasis product card",
+      "info": "Same card as the homepage rows: centred title, price, and variant thumbnails that swap the main image on hover."
+    },
+    {
+      "type": "select",
+      "id": "oasis_image_ratio",
+      "label": "Image box shape",
+      "options": [
+        { "value": "1 / 1", "label": "Square" },
+        { "value": "4 / 5", "label": "Portrait" },
+        { "value": "3 / 4", "label": "Tall portrait" },
+        { "value": "2 / 3", "label": "Extra tall portrait" }
+      ],
+      "default": "2 / 3"
+    },
+    {
+      "type": "range",
+      "id": "oasis_media_width",
+      "min": 40,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Product size in the grid",
+      "info": "How much of each column the product fills. The PSD uses 76% for journals and 53% for the smaller greeting cards.",
+      "default": 76
+    },
+    {
+      "type": "range",
+      "id": "oasis_media_inset",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "%",
+      "label": "Space around the product",
+      "info": "Renders the product smaller inside the same box. The PSD uses 0 for journals and 15% for the physically smaller greeting cards.",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "oasis_media_background",
+      "label": "Tile behind the product",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "#ffffff", "label": "White" },
+        { "value": "var(--oasis-blush)", "label": "Blush" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "checkbox",
+      "id": "oasis_swatches",
+      "default": true,
+      "label": "Show variant thumbnails"
     },
     {
       "type": "range",

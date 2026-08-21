@@ -98,11 +98,14 @@
         "columns_desktop": 4,
         "columns_mobile": "2",
         "grid_gap": 16,
-        "image_ratio": "1 / 1",
+        "image_ratio": "2 / 3",
         "show_swatches": true,
         "show_view_all": true,
         "padding_top": 70,
-        "padding_bottom": 100
+        "padding_bottom": 100,
+        "oasis_media_width": 76,
+        "oasis_media_inset": 0,
+        "oasis_media_background": "none"
       }
     },
     "freedom_story": {
@@ -131,11 +134,14 @@
         "columns_desktop": 4,
         "columns_mobile": "2",
         "grid_gap": 16,
-        "image_ratio": "1 / 1",
+        "image_ratio": "2 / 3",
         "show_swatches": true,
         "show_view_all": true,
         "padding_top": 70,
-        "padding_bottom": 100
+        "padding_bottom": 100,
+        "oasis_media_width": 76,
+        "oasis_media_inset": 0,
+        "oasis_media_background": "none"
       }
     },
     "purpose": {

@@ -8,16 +8,27 @@
     - show_swatches: {Boolean} render variant image thumbnails under the price
     - image_ratio: {String} css aspect-ratio value, e.g. "1 / 1"
     - swatch_limit: {Number} how many thumbnails to show (default 6)
+    - media_width: {Number} percentage of the column the product box fills
+    - media_inset: {Number} percentage of the box kept clear around the product,
+      so a greeting card renders smaller than a journal in the same box
+    - media_background: {String} css colour behind the product, or 'none'
 {%- endcomment -%}
 
 {%- liquid
   assign ratio = image_ratio | default: '1 / 1'
   assign max_swatches = swatch_limit | default: 6
+  assign box_width = media_width | default: 100
+  assign inset = media_inset | default: 0
+  assign media_bg = media_background | default: 'none'
 -%}
 
+{%- capture card_vars -%}
+  --oasis-card-ratio: {{ ratio }}; --oasis-card-media-width: {{ box_width }}%; --oasis-card-inset: {{ inset }}%; --oasis-card-media-bg: {{ media_bg }};
+{%- endcapture -%}
+
 {%- if card_product and card_product != empty -%}
-  <oasis-card class="oasis-card">
-    <a class="oasis-card__media" href="{{ card_product.url }}" style="aspect-ratio: {{ ratio }};">
+  <oasis-card class="oasis-card" style="{{ card_vars | strip_newlines | strip }}">
+    <a class="oasis-card__media" href="{{ card_product.url }}">
       {%- if card_product.featured_media -%}
         {{
           card_product.featured_media
@@ -89,8 +100,8 @@
     {%- endif -%}
   </oasis-card>
 {%- else -%}
-  <div class="oasis-card">
-    <span class="oasis-card__media" style="aspect-ratio: {{ ratio }};">
+  <div class="oasis-card" style="{{ card_vars | strip_newlines | strip }}">
+    <span class="oasis-card__media">
       {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
     </span>
     <span class="oasis-card__title">{{ 'onboarding.product_title' | t }}</span>
