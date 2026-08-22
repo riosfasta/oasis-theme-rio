@@ -1,7 +1,16 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
-    "logo": "shopify://shop_images/Oasis_Square_Large_034987b1-dcea-498d-aae2-c911eb45e263.png",
-    "logo_width": 90,
+    "logo": "shopify://shop_images/Logo.png",
+    "logo_width": 130,
     "favicon": "shopify://shop_images/Oasis_Square_Large_034987b1-dcea-498d-aae2-c911eb45e263.png",
     "type_header_font": "lato_n4",
     "heading_scale": 100,
@@ -139,14 +148,12 @@
         "type": "shopify://apps/inbox/blocks/chat/841fc607-4181-4ad1-842d-e24d7f8bad6b",
         "disabled": false,
         "settings": {
+          "greeting_message": "",
           "button_color": "#000000",
-          "secondary_color": "#FFFFFF",
-          "ternary_color": "#6A6A6A",
           "button_icon": "chat_bubble",
           "button_text": "chat_with_us",
           "button_horizontal_position": "bottom_right",
-          "button_vertical_position": "lowest",
-          "greeting_message": ""
+          "button_vertical_position": "lowest"
         }
       },
       "5890205134905443601": {
