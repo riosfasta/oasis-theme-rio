@@ -67,10 +67,31 @@
               {%- if block.settings.heading != blank -%}
                 <h2 class="oasis-footer__heading">{{ block.settings.heading | escape }}</h2>
               {%- endif -%}
+              {%- comment -%}
+                A Shopify navigation menu wins when one is chosen. Without it the
+                column falls back to the typed list, so the footer matches the
+                design out of the box and doesn't need two menus built first.
+              {%- endcomment -%}
               {%- if block.settings.menu != blank -%}
                 <ul class="oasis-footer__links">
                   {%- for link in block.settings.menu.links -%}
                     <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+                  {%- endfor -%}
+                </ul>
+              {%- elsif block.settings.links != blank -%}
+                <ul class="oasis-footer__links">
+                  {%- assign link_rows = block.settings.links | newline_to_br | split: '<br />' -%}
+                  {%- for row in link_rows -%}
+                    {%- liquid
+                      assign parts = row | split: '|'
+                      assign link_label = parts[0] | strip
+                      assign link_href = parts[1] | strip
+                    -%}
+                    {%- if link_label != blank -%}
+                      <li>
+                        <a href="{{ link_href | default: '#' | escape }}">{{ link_label | escape }}</a>
+                      </li>
+                    {%- endif -%}
                   {%- endfor -%}
                 </ul>
               {%- endif -%}
@@ -263,7 +284,15 @@
         {
           "type": "link_list",
           "id": "menu",
-          "label": "Menu"
+          "label": "Menu",
+          "info": "Optional. When set, it replaces the typed list below."
+        },
+        {
+          "type": "textarea",
+          "id": "links",
+          "label": "Links",
+          "info": "One per line, as Label | /url \u2014 used when no menu is chosen above.",
+          "default": "New Arrivals | /collections/all-products?sort_by=created-descending\nBest Sellers | /collections/all-products?sort_by=best-selling\nJournals | /collections/journals-only\nCards | /collections/cards\nWholesale | /pages/bulk-ordering"
         }
       ]
     },

@@ -18,14 +18,14 @@
           "type": "link_list",
           "settings": {
             "heading": "Shop",
-            "menu": "footer"
+            "links": "New Arrivals | /collections/all-products?sort_by=created-descending\nBest Sellers | /collections/all-products?sort_by=best-selling\nJournals | /collections/journals-only\nCards | /collections/cards\nWholesale | /pages/bulk-ordering"
           }
         },
         "care": {
           "type": "link_list",
           "settings": {
             "heading": "Customer care",
-            "menu": "footer"
+            "links": "Your Account | /account\nContact Us | /pages/contact\nReturns | /policies/refund-policy\nShipping | /policies/shipping-policy\nPrivacy Policy | /policies/privacy-policy"
           }
         },
         "follow": {
