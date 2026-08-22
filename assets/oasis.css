@@ -655,7 +655,7 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
   justify-content: flex-end;
 }
 .oasis-purpose__content {
-  max-width: 660px;
+  max-width: 600px;
   text-align: center;
   display: flex;
   flex-direction: column;
