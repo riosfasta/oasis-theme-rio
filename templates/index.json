@@ -1,56 +1,39 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "oasis-hero-slider",
       "blocks": {
-        "s1": {
+        "slide_6f3Xhk": {
           "type": "slide",
           "settings": {
             "content_position": "left",
             "heading": "Every story finds hope.",
             "text": "<p>Behind every beautiful product is a story of courage and resilience.</p><p>Your purchase helps carry her story forward.</p>",
             "button_label_1": "Shop journals",
-            "button_link_1": "/collections/all",
+            "button_link_1": "",
             "button_label_2": "Shop cards",
-            "button_link_2": "/collections/all"
-          }
-        },
-        "s2": {
-          "type": "slide",
-          "settings": {
-            "content_position": "left",
-            "heading": "Made to hold your story.",
-            "text": "<p>Hand-stitched journals for your ideas, prayers and dreams — each one embroidered by a woman rebuilding her life.</p>",
-            "button_label_1": "Shop journals",
-            "button_link_1": "/collections/all",
-            "button_label_2": "",
-            "button_link_2": ""
-          }
-        },
-        "s3": {
-          "type": "slide",
-          "settings": {
-            "content_position": "left",
-            "heading": "For the moments that matter.",
-            "text": "<p>Hand-stitched cards to celebrate, encourage and connect — with a story of hope behind every stitch.</p>",
-            "button_label_1": "Shop cards",
-            "button_link_1": "/collections/all",
-            "button_label_2": "",
             "button_link_2": ""
           }
         }
       },
       "block_order": [
-        "s1",
-        "s2",
-        "s3"
+        "slide_6f3Xhk"
       ],
       "settings": {
         "height": 675,
-        "autoplay": true,
+        "autoplay": false,
         "autoplay_speed": 6,
-        "show_dots": true,
-        "show_arrows": true
+        "show_dots": false,
+        "show_arrows": false
       }
     },
     "shop_tiles": {
@@ -59,21 +42,21 @@
         "t1": {
           "type": "tile",
           "settings": {
+            "collection": "journals-only",
             "title": "Journals",
-            "cta_label": "Explore",
             "link": "/collections/journals-only",
-            "fallback_asset": "oasis-tile-journals.jpg",
-            "collection": "journals-only"
+            "cta_label": "Explore",
+            "fallback_asset": "oasis-tile-journals.jpg"
           }
         },
         "t2": {
           "type": "tile",
           "settings": {
+            "collection": "cards",
             "title": "Cards",
-            "cta_label": "Explore",
             "link": "/collections/cards",
-            "fallback_asset": "oasis-tile-cards.jpg",
-            "collection": "cards"
+            "cta_label": "Explore",
+            "fallback_asset": "oasis-tile-cards.jpg"
           }
         }
       },
@@ -92,56 +75,65 @@
       "type": "oasis-product-row",
       "settings": {
         "heading": "New arrivals",
-        "view_all_label": "View all",
         "collection": "all-products",
         "products_to_show": 4,
         "columns_desktop": 4,
         "columns_mobile": "2",
         "grid_gap": 16,
         "image_ratio": "2 / 3",
-        "show_swatches": true,
-        "show_view_all": true,
-        "padding_top": 70,
-        "padding_bottom": 100,
         "oasis_media_width": 76,
         "oasis_media_inset": 0,
-        "oasis_media_background": "none"
+        "oasis_media_background": "none",
+        "show_swatches": true,
+        "swatch_limit": 6,
+        "show_view_all": true,
+        "view_all_label": "View all",
+        "button_label": "",
+        "button_link": "",
+        "padding_top": 70,
+        "padding_bottom": 100
       }
     },
     "freedom_story": {
       "type": "oasis-story-banner",
       "settings": {
+        "fallback_asset": "oasis-freedom-story-bg.jpg",
         "content_position": "left",
+        "kicker_style": "condensed",
         "text_align": "center",
-        "kicker": "Be a part of her",
-        "script": "freedom story",
         "height": 670,
         "content_width": 580,
         "scrim_color": "#e9dacb",
         "show_leaf": false,
+        "kicker": "Be a part of her",
+        "script": "freedom story",
         "show_rule": false,
         "text": "<p>At The Oasis, women who have survived trafficking are rebuilding their lives through healing, new skills, and the dignity of meaningful work. God is rewriting their stories. And their courage is being woven into something beautiful.</p><p>Now their hand-stitched journals and cards are making their way to you. When you purchase one, you don't just take home something beautiful—you carry her story forward.</p>",
-        "fallback_asset": "oasis-freedom-story-bg.jpg"
+        "button_label": "",
+        "button_link": ""
       }
     },
     "best_sellers": {
       "type": "oasis-product-row",
       "settings": {
         "heading": "Best sellers",
-        "view_all_label": "View all",
         "collection": "all-products",
         "products_to_show": 4,
         "columns_desktop": 4,
         "columns_mobile": "2",
         "grid_gap": 16,
         "image_ratio": "2 / 3",
-        "show_swatches": true,
-        "show_view_all": true,
-        "padding_top": 70,
-        "padding_bottom": 100,
         "oasis_media_width": 76,
         "oasis_media_inset": 0,
-        "oasis_media_background": "none"
+        "oasis_media_background": "none",
+        "show_swatches": true,
+        "swatch_limit": 6,
+        "show_view_all": true,
+        "view_all_label": "View all",
+        "button_label": "",
+        "button_link": "",
+        "padding_top": 70,
+        "padding_bottom": 100
       }
     },
     "purpose": {
@@ -187,18 +179,18 @@
       ],
       "settings": {
         "content_position": "right",
-        "heading": "Shop with purpose",
-        "tagline": "Every purchase has a purpose.",
-        "equation_label": "Every purchase =",
-        "button_label": "Learn more about The Oasis",
-        "button_link": "/pages/about-us",
         "height": 845,
         "content_width": 660,
         "scrim_color": "#fbf7f4",
         "show_leaf": true,
+        "heading": "Shop with purpose",
         "show_rule": true,
+        "tagline": "Every purchase has a purpose.",
+        "equation_label": "Every purchase =",
         "show_rule_2": true,
-        "text": "<p>Your purchase helps provide women rebuilding their lives after trafficking with dignified work, skills training, healing, and hope for a new future—<strong>while creating greater opportunities for their children to thrive.</strong></p>"
+        "text": "<p>Your purchase helps provide women rebuilding their lives after trafficking with dignified work, skills training, healing, and hope for a new future—<strong>while creating greater opportunities for their children to thrive.</strong></p>",
+        "button_label": "Learn more about The Oasis",
+        "button_link": "/pages/about-us"
       }
     }
   },
