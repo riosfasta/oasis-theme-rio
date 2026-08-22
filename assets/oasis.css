@@ -701,13 +701,13 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
   flex-wrap: nowrap;
 }
 .oasis-purpose__icon {
-  width: 128px;
+  width: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.2rem;
 }
-.oasis-purpose__icon img { width: 108px; height: auto; }
+.oasis-purpose__icon img { width: 80px; height: auto; }
 
 /* Icon labels — Garet Book 16 / +50 tracking */
 .oasis-purpose__icon span {
