@@ -247,6 +247,19 @@ button.shopify-payment-button__button--unbranded {
 
 .header__icons { padding-right: 0; gap: 0.6rem; }
 .header__icon .icon { width: 26px; height: 26px; }
+
+/* The cart glyph is drawn inside a 40x40 viewBox with ~11 units of transparent
+   padding on every side, so its ink is only ~43% of its box - where search and
+   account fill theirs edge to edge. Dawn compensates with a cart-only 4.4rem
+   rule, but the 26px rule above has equal specificity and loads later, so it
+   was winning and the cart rendered at ~11px of ink against the others' 25px.
+   58px of box gives 25.2px of ink, matching search exactly; the -7px margin
+   keeps the layout footprint at Dawn's 44px so nothing shifts. */
+.header__icon--cart .icon {
+  width: 58px;
+  height: 58px;
+  margin: -7px;
+}
 .header__icon, .header__icon--cart { color: var(--oasis-dark); }
 
 @media screen and (min-width: 990px) {
