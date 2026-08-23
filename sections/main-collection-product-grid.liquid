@@ -127,10 +127,6 @@
             enable_filtering: section.settings.enable_filtering,
             enable_sorting: section.settings.enable_sorting,
             filter_type: section.settings.filter_type,
-            oasis_tabs: section.settings.oasis_tabs,
-            oasis_tabs_menu: section.settings.oasis_tabs_menu,
-            oasis_tabs_label: section.settings.oasis_tabs_label,
-            oasis_price_bands: section.settings.oasis_price_bands,
             paginate: paginate
           %}
         </aside>
@@ -448,17 +444,10 @@
       "label": "t:sections.main-collection-product-grid.settings.filter_type.label"
     },
     {
-      "type": "textarea",
-      "id": "oasis_tabs",
-      "label": "Category tabs",
-      "info": "One per line, as Label | /url. Leave the URL off and the tab shows as plain text. Used unless a menu is chosen below.",
-      "default": ""
-    },
-    {
       "type": "link_list",
       "id": "oasis_tabs_menu",
-      "label": "Category tabs menu (optional)",
-      "info": "Overrides the typed tabs above. Note: if the menu is ever deleted, the theme editor clears this setting on the next save."
+      "label": "Category tabs menu",
+      "info": "Each menu item becomes a tab on the same line as Sort by. Needs \"Filter type: horizontal\". Leave empty for no tabs."
     },
     {
       "type": "text",

@@ -37,7 +37,7 @@
         "show_vendor": false,
         "show_rating": false,
         "quick_add": "none",
-        "enable_filtering": false,
+        "enable_filtering": true,
         "filter_type": "horizontal",
         "oasis_tabs_menu": "",
         "oasis_tabs_label": "Journal categories",
@@ -51,8 +51,7 @@
         "oasis_media_background": "none",
         "oasis_swatch_limit": 6,
         "padding_top": 0,
-        "padding_bottom": 72,
-        "oasis_tabs": "All Journals | /collections/journals-only\nFloral | \nNature | \nFaith | \nTravel & World | \nPatterns & Designs | "
+        "padding_bottom": 72
       }
     },
     "story": {

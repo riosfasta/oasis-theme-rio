@@ -19,9 +19,9 @@
         "scrim_color": "#f1e4d4",
         "use_collection": false,
         "use_page": false,
+        "title": "Shop Cards",
         "show_ornament": true,
-        "text": "<p>Hand-stitched cards for the moments that matter. Celebrate, encourage, and connect with a story of hope behind every stitch.</p>",
-        "title": "Shop Cards"
+        "text": "<p>Hand-stitched cards for the moments that matter. Celebrate, encourage, and connect with a story of hope behind every stitch.</p>"
       }
     },
     "promo": {
@@ -48,19 +48,18 @@
         "quick_add": "none",
         "enable_filtering": false,
         "filter_type": "horizontal",
-        "enable_sorting": true,
-        "padding_top": 0,
-        "padding_bottom": 72,
-        "oasis_card": true,
-        "oasis_image_ratio": "2 / 3",
-        "oasis_media_width": 76,
-        "oasis_media_background": "none",
-        "oasis_media_inset": 15,
-        "oasis_swatches": false,
-        "oasis_swatch_limit": 6,
         "oasis_tabs_menu": "",
         "oasis_tabs_label": "Card categories",
-        "oasis_tabs": "All Cards | /collections/cards\nBirthday | \nThank You | \nThinking of You | \nChristmas | \nSeasonal | \nFloral Collection | "
+        "enable_sorting": true,
+        "oasis_card": true,
+        "oasis_swatches": false,
+        "oasis_image_ratio": "2 / 3",
+        "oasis_media_width": 76,
+        "oasis_media_inset": 15,
+        "oasis_media_background": "none",
+        "oasis_swatch_limit": 6,
+        "padding_top": 0,
+        "padding_bottom": 72
       }
     },
     "story": {
@@ -74,9 +73,9 @@
         "content_width": 620,
         "scrim_color": "#fbf7f4",
         "show_leaf": true,
-        "show_rule": true,
         "kicker": "A little card.",
         "script": "a bigger story.",
+        "show_rule": true,
         "text": "<p>Each card is lovingly hand-stitched by a woman rebuilding her life after trafficking. Your purchase provides meaningful work and helps create a pathway toward hope and a new future.</p>",
         "button_label": "Learn more about The Oasis",
         "button_link": "/pages/about-us"
