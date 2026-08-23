@@ -15,28 +15,16 @@
         "text": "<p>Hand-stitched journals made to hold your stories, ideas, prayers, and dreams.</p>"
       }
     },
-<<<<<<< HEAD
     "grid": {
       "type": "oasis-product-grid",
       "settings": {
         "collection": "journals-only",
         "products_per_page": 12,
-=======
-    "featured_collection_qnPViL": {
-      "type": "featured-collection",
-      "name": "t:sections.featured-collection.presets.name",
-      "settings": {
-        "collection": "",
-        "products_to_show": 24,
-        "title": "Featured collectionb",
-        "heading_size": "h1",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
->>>>>>> f4c5f77b325f562d78dae8e034ac51ed33fea607
         "columns_desktop": 4,
         "columns_mobile": "2",
         "grid_gap": 16,
+        "tabs": "All Journals | /pages/journals\nFloral | \nNature | \nFaith | \nTravel & World | \nPatterns & Designs | ",
+        "tabs_label": "Journal categories",
         "show_count": true,
         "image_ratio": "2 / 3",
         "oasis_media_width": 76,
@@ -69,13 +57,8 @@
     }
   },
   "order": [
-<<<<<<< HEAD
     "banner",
     "grid",
     "story"
-=======
-    "main",
-    "featured_collection_qnPViL"
->>>>>>> f4c5f77b325f562d78dae8e034ac51ed33fea607
   ]
 }

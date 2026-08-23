@@ -1815,9 +1815,25 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
 .facets__form .product-count { flex: 0 0 100%; margin: 0; }
 
 /* Standalone grid (page templates) — same count treatment as the collection
-   pages, so /pages/... and /collections/... read as one family. */
+   pages, so /pages/... and /collections/... read as one family.
+   PSD geometry: tabs on one line from the container's left edge, the count on
+   the next line, ~40px below the tab underline. */
+.oasis-grid-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 2.4rem;
+  row-gap: 3.2rem;      /* PSD: ~40px from the tab underline down to the count */
+  padding-bottom: 0.8rem;
+}
+.oasis-grid-head .oasis-tabs__nav { flex: 0 1 auto; }
+.oasis-grid-head .oasis-grid-count { flex: 0 0 100%; }
+
+/* A tab with no URL yet is a span, not a link — same type, no pointer. */
+span.oasis-tabs__link { cursor: default; }
+
 .oasis-grid-count {
-  margin: 0 0 2.6rem;
+  margin: 0;
   font-family: var(--oasis-font-body);
   font-weight: 300;
   font-size: 1.3rem;

@@ -26,10 +26,23 @@
   <div class="oasis-container">
     {%- if target != blank and target.products_count > 0 -%}
       {%- paginate target.products by per_page -%}
-        {%- if section.settings.show_count -%}
-          <p class="oasis-grid-count">
-            {{- 'products.facets.product_count_simple' | t: count: target.products_count -}}
-          </p>
+        {%- comment -%}
+          PSD: the tab row sits on one line and the product count on the next,
+          both hard left. One wrapping flex row, with the count taking the full
+          width so it is pushed down by layout rather than by a fixed margin.
+        {%- endcomment -%}
+        {%- if section.settings.tabs != blank or section.settings.show_count -%}
+          <div class="oasis-grid-head">
+            {%- render 'oasis-tab-links',
+              links: section.settings.tabs,
+              aria_label: section.settings.tabs_label
+            -%}
+            {%- if section.settings.show_count -%}
+              <p class="oasis-grid-count">
+                {{- 'products.facets.product_count_simple' | t: count: target.products_count -}}
+              </p>
+            {%- endif -%}
+          </div>
         {%- endif -%}
 
         <div
@@ -126,6 +139,23 @@
       "unit": "px",
       "label": "Space between cards",
       "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Category tabs"
+    },
+    {
+      "type": "textarea",
+      "id": "tabs",
+      "label": "Tabs",
+      "info": "One per line, as Label | /url. Leave the URL off and the tab shows as plain text. Empty this field for no tab row.",
+      "default": "All Journals | /pages/journals\nFloral | \nNature | \nFaith | \nTravel & World | \nPatterns & Designs | "
+    },
+    {
+      "type": "text",
+      "id": "tabs_label",
+      "label": "Tabs accessible label",
+      "default": "Journal categories"
     },
     {
       "type": "checkbox",
