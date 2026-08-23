@@ -1590,7 +1590,21 @@ body .facet-filters__sort:hover {
   border: 1px solid var(--oasis-line);
   border-radius: 0;
   background: #fff;
-  padding: 1.1rem 3.4rem 1.1rem 1.4rem;
+  /* PSD: 22px from the left border to the text; right padding clears the caret
+     (18px gap + 12px glyph) with room to spare so a long option never collides. */
+  padding: 1.1rem 4rem 1.1rem 2.2rem;
+}
+
+/* Dawn pins the caret to `right: 0`, which is why it sat against the border.
+   The design insets it, and sizes it slightly larger than Dawn's 10x6.
+   Scoped with :has so only the sort select changes, not every select in the
+   theme, and specific enough to beat base.css's `.select .svg-wrapper`. */
+body .select:has(.facet-filters__sort) .svg-wrapper {
+  right: 1.8rem;
+  width: 1.2rem;
+  height: 0.7rem;
+  top: calc(50% - 0.35rem);
+  color: var(--oasis-dark);
 }
 
 /* Product cards in the grid — white tile, centred meta, brand type */
