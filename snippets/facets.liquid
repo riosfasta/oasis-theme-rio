@@ -408,6 +408,17 @@
               menu: section.settings.oasis_tabs_menu,
               aria_label: section.settings.oasis_tabs_label
             %}
+          {%- elsif section.settings.oasis_tabs != blank -%}
+            {%- comment -%}
+              Typed tabs, not a menu. A link_list setting pointing at a menu that
+              does not exist gets silently emptied by the theme editor the next
+              time anyone saves, which is exactly how this row lost its tabs
+              once already. Text cannot be cleared that way.
+            {%- endcomment -%}
+            {% render 'oasis-tab-links',
+              links: section.settings.oasis_tabs,
+              aria_label: section.settings.oasis_tabs_label
+            %}
           {%- endif -%}
           {% comment %} Sorting and product count are the last elements when filter type is horizontal {% endcomment %}
           {%- if enable_sorting -%}

@@ -58,8 +58,9 @@
         "oasis_media_inset": 15,
         "oasis_swatches": false,
         "oasis_swatch_limit": 6,
-        "oasis_tabs_menu": "card-categories",
-        "oasis_tabs_label": "Card categories"
+        "oasis_tabs_menu": "",
+        "oasis_tabs_label": "Card categories",
+        "oasis_tabs": "All Cards | /collections/cards\nBirthday | \nThank You | \nThinking of You | \nChristmas | \nSeasonal | \nFloral Collection | "
       }
     },
     "story": {
