@@ -1814,6 +1814,19 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
 .facets__form .facet-filters.sorting { margin-left: auto; }
 .facets__form .product-count { flex: 0 0 100%; margin: 0; }
 
+/* Standalone grid (page templates) — same count treatment as the collection
+   pages, so /pages/... and /collections/... read as one family. */
+.oasis-grid-count {
+  margin: 0 0 2.6rem;
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  font-size: 1.3rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--oasis-dark);
+}
+.oasis-section-grid .pagination-wrapper { margin-top: 4.4rem; }
+
 .facets-container .product-count,
 .facets-container .product-count__text {
   font-size: 1.3rem;

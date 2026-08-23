@@ -1,0 +1,227 @@
+{%- comment -%}
+  THE OASIS — product grid (works on any route)
+
+  A paginated grid of a chosen collection's products, for use on page templates
+  where Dawn's main-collection-product-grid isn't available.
+
+  What this can and cannot do, so the settings don't promise more than Shopify
+  allows outside the collection route:
+    - Pagination works: the paginate tag reads ?page= on any route (Shopify
+      caps a page at 50 products).
+    - The product count works.
+    - Sorting and faceted filtering do NOT. collection.filters and
+      collection.sort_options are only populated on /collections/..., so there is
+      deliberately no sort control here rather than one that does nothing.
+{%- endcomment -%}
+
+{%- liquid
+  assign target = section.settings.collection
+  assign per_page = section.settings.products_per_page
+-%}
+
+<div
+  class="oasis-row"
+  style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="oasis-container">
+    {%- if target != blank and target.products_count > 0 -%}
+      {%- paginate target.products by per_page -%}
+        {%- if section.settings.show_count -%}
+          <p class="oasis-grid-count">
+            {{- 'products.facets.product_count_simple' | t: count: target.products_count -}}
+          </p>
+        {%- endif -%}
+
+        <div
+          class="oasis-products"
+          style="grid-template-columns: repeat({{ section.settings.columns_desktop }}, minmax(0, 1fr));"
+        >
+          {%- for product in target.products -%}
+            {%- liquid
+              assign lazy = true
+              if forloop.index <= section.settings.columns_desktop
+                assign lazy = false
+              endif
+            -%}
+            {%- render 'oasis-product-card',
+              card_product: product,
+              show_swatches: section.settings.show_swatches,
+              swatch_limit: section.settings.swatch_limit,
+              image_ratio: section.settings.image_ratio,
+              media_width: section.settings.oasis_media_width,
+              media_inset: section.settings.oasis_media_inset,
+              media_background: section.settings.oasis_media_background,
+              lazy_load: lazy
+            -%}
+          {%- endfor -%}
+        </div>
+
+        {%- if paginate.pages > 1 -%}
+          {% render 'pagination', paginate: paginate, anchor: '' %}
+        {%- endif -%}
+      {%- endpaginate -%}
+    {%- else -%}
+      <p class="oasis-grid-count">{{ 'sections.collection_template.empty' | t }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+  #shopify-section-{{ section.id }} .oasis-products {
+    gap: {{ section.settings.grid_gap }}px;
+    --oasis-gap: {{ section.settings.grid_gap }}px;
+    --oasis-per-view: {{ section.settings.columns_desktop }};
+  }
+  @media screen and (max-width: 989px) {
+    #shopify-section-{{ section.id }} .oasis-products {
+      grid-template-columns: repeat({{ section.settings.columns_mobile }}, minmax(0, 1fr)) !important;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Oasis product grid",
+  "class": "oasis-section-grid",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 4,
+      "max": 48,
+      "step": 4,
+      "label": "Products per page",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "label": "Columns on desktop",
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Space between cards",
+      "default": 16
+    },
+    {
+      "type": "checkbox",
+      "id": "show_count",
+      "label": "Show product count",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image box shape",
+      "options": [
+        { "value": "1 / 1", "label": "Square" },
+        { "value": "4 / 5", "label": "Portrait" },
+        { "value": "3 / 4", "label": "Tall portrait" },
+        { "value": "2 / 3", "label": "Extra tall portrait" }
+      ],
+      "default": "2 / 3"
+    },
+    {
+      "type": "range",
+      "id": "oasis_media_width",
+      "min": 40,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Product size in the grid",
+      "default": 76
+    },
+    {
+      "type": "range",
+      "id": "oasis_media_inset",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "%",
+      "label": "Space around the product",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "oasis_media_background",
+      "label": "Tile behind the product",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "#ffffff", "label": "White" },
+        { "value": "var(--oasis-blush)", "label": "Blush" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_swatches",
+      "label": "Show variant thumbnails",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "swatch_limit",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "label": "Maximum thumbnails per card",
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 72
+    }
+  ],
+  "presets": [
+    { "name": "Oasis product grid" }
+  ]
+}
+{% endschema %}

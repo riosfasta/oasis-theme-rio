@@ -6,9 +6,14 @@
   facets snippet inside the product-grid section — so the same markup has to be
   reachable from two places without being written twice.
 
-  The active tab is matched on the link's path as well as Shopify's own
-  link.active, so it lights up whether tabs point at collections or at filtered
-  URLs on the current collection.
+  Active-tab matching handles both shapes of tab:
+    - a tab pointing at its own collection  -> compare paths
+    - a tab pointing at a filtered URL on THIS collection
+      (/collections/journals?filter.p.tag=Floral) -> compare the filter value
+      against the collection's active filter values
+  Comparing paths alone would light up every filtered tab at once, since they
+  all share the collection's path. A tab with no query string is the "all" tab,
+  so it is active only while nothing is filtered.
 
   Accepts:
     - menu: {Object} link_list
@@ -21,12 +26,33 @@
       {%- for link in menu.links -%}
         {%- liquid
           assign is_active = false
-          if link.active or link.child_active
-            assign is_active = true
-          endif
           assign link_path = link.url | split: '?' | first
-          if link_path == request.path
-            assign is_active = true
+          assign link_parts = link.url | split: '?'
+
+          if link_parts.size > 1
+            # Filtered tab: active when its value is one the collection is filtered by.
+            assign link_query = link_parts | last
+            assign link_value = link_query | split: '=' | last | replace: '+', ' ' | url_decode
+            for active_filter in collection.filters
+              for active_value in active_filter.active_values
+                if active_value.value == link_value
+                  assign is_active = true
+                endif
+              endfor
+            endfor
+          else
+            # Plain tab: its own path, and for the "all" tab only when unfiltered.
+            if link.active or link.child_active
+              assign is_active = true
+            endif
+            if link_path == request.path
+              assign is_active = true
+              for active_filter in collection.filters
+                if active_filter.active_values.size > 0
+                  assign is_active = false
+                endif
+              endfor
+            endif
           endif
         -%}
         <li class="oasis-tabs__item">
