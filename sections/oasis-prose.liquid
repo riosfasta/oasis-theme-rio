@@ -1,0 +1,104 @@
+{%- comment -%}
+  THE OASIS — centred prose block
+
+  The long About Us passage: a condensed kicker, a script line, a flourish, the
+  body, and a closing condensed line. No photograph — it sits on the page cream.
+{%- endcomment -%}
+
+<div
+  class="oasis-prose"
+  id="OasisProse-{{ section.id }}"
+  style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="oasis-container">
+    <div class="oasis-prose__inner">
+      {%- if section.settings.kicker != blank -%}
+        <p class="oasis-prose__kicker">{{ section.settings.kicker | escape }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.script != blank -%}
+        <h2 class="oasis-prose__script">{{ section.settings.script | escape }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.show_flourish -%}
+        <img
+          class="oasis-prose__flourish"
+          src="{{ 'oasis-about-rule.png' | asset_url }}"
+          alt=""
+          width="446"
+          height="24"
+          loading="lazy"
+        >
+      {%- endif -%}
+
+      {%- if section.settings.text != blank -%}
+        <div class="oasis-prose__text rte">{{ section.settings.text }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.closing != blank -%}
+        <p class="oasis-prose__closing">{{ section.settings.closing | escape }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<style>
+  #OasisProse-{{ section.id }} .oasis-prose__inner { max-width: {{ section.settings.content_width }}px; }
+  #OasisProse-{{ section.id }} .oasis-prose__script { font-size: {{ section.settings.script_size }}px; }
+</style>
+
+{% schema %}
+{
+  "name": "Oasis prose block",
+  "class": "oasis-section-prose",
+  "settings": [
+    {
+      "type": "range",
+      "id": "content_width",
+      "min": 560,
+      "max": 1100,
+      "step": 10,
+      "unit": "px",
+      "label": "Text width",
+      "default": 980
+    },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "A refuge. A place of healing." },
+    { "type": "text", "id": "script", "label": "Script line" },
+    {
+      "type": "range",
+      "id": "script_size",
+      "min": 32,
+      "max": 88,
+      "step": 2,
+      "unit": "px",
+      "label": "Script size",
+      "default": 46
+    },
+    { "type": "checkbox", "id": "show_flourish", "label": "Show floral flourish", "default": true },
+    { "type": "richtext", "id": "text", "label": "Body" },
+    { "type": "text", "id": "closing", "label": "Closing line" },
+    { "type": "header", "content": "Spacing" },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 100
+    }
+  ],
+  "presets": [{ "name": "Oasis prose block" }]
+}
+{% endschema %}

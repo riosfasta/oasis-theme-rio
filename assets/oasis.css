@@ -1981,3 +1981,214 @@ body .product-count-vertical,
   .oasis-tabs__list { gap: 0.6rem 2rem; }
   .oasis-tabs__link { font-size: 1.4rem; }
 }
+
+/* ==========================================================================
+   ABOUT US
+   Type sizes are the PSD's own type-layer values:
+     band eyebrow  Garet-Book 26 / BarlowCondensed-SemiBold 32 / Garet-Book 42
+     band script   BrittanySignature, per-section size setting
+     band display  BarlowCondensed-Medium 70 / SemiBold 32
+     body          Garet-Book 20 (18 in Meet the Makers)
+     prose kicker  BarlowCondensed-SemiBold 36
+     journey title BarlowCondensed-SemiBold 26 / +50 tracking
+     journey copy  Garet-Book 16
+   Brittany's swashes overflow the em box, so every script line here gets a
+   line-height from the PSD ink height rather than 1.
+   ========================================================================== */
+
+.oasis-band {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.oasis-band__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.oasis-band__scrim { position: absolute; inset: 0; }
+.oasis-band__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: calc(var(--oasis-content) + var(--oasis-gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--oasis-gutter);
+  display: flex;
+}
+.oasis-band__content { display: flex; flex-direction: column; }
+
+.oasis-band__eyebrow {
+  margin: 0;
+  color: var(--oasis-dark);
+  font-weight: 300;
+}
+.oasis-band__eyebrow--garet {
+  font-family: var(--oasis-font-body);
+  font-size: 2.6rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.oasis-band__eyebrow--garet-lg {
+  font-family: var(--oasis-font-body);
+  font-size: 4.2rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.oasis-band__eyebrow--condensed {
+  font-family: var(--oasis-font-cond);
+  font-weight: 600;
+  font-size: 3.2rem;
+  letter-spacing: 0.02em;
+}
+
+.oasis-band__script {
+  margin: 0.6rem 0 0;
+  font-family: var(--oasis-font-script);
+  font-weight: 400;
+  line-height: 1.45;          /* swash clearance, from the PSD ink height */
+  color: var(--oasis-dark);
+}
+.oasis-band__display {
+  margin: 0;
+  font-family: var(--oasis-font-cond);
+  color: var(--oasis-dark);
+  text-transform: uppercase;
+}
+.oasis-band__display--large { font-weight: 500; font-size: 7rem; line-height: 0.95; letter-spacing: 0.01em; }
+.oasis-band__display--small { font-weight: 600; font-size: 3.2rem; line-height: 1.1; letter-spacing: 0.02em; }
+
+.oasis-band__flourish { display: block; width: 278px; max-width: 100%; height: auto; margin: 2.2rem 0; }
+.oasis-band__text {
+  margin-top: 2.4rem;
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  font-size: 2rem;
+  line-height: 1.7;
+  color: var(--oasis-dark);
+}
+.oasis-band__text p + p { margin-top: 1.6rem; }
+.oasis-band__button { margin-top: 3.2rem; }
+
+/* ---------- centred prose ------------------------------------------------- */
+
+.oasis-prose { background: var(--oasis-cream); }
+.oasis-prose__inner {
+  margin-inline: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.oasis-prose__kicker,
+.oasis-prose__closing {
+  margin: 0;
+  font-family: var(--oasis-font-cond);
+  font-weight: 600;
+  font-size: 3.6rem;
+  letter-spacing: 0.01em;
+  color: var(--oasis-dark);
+}
+.oasis-prose__script {
+  margin: 0.4rem 0 0;
+  font-family: var(--oasis-font-script);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.03em;     /* PSD tracking +30 */
+  color: var(--oasis-dark);
+}
+.oasis-prose__flourish { display: block; width: 446px; max-width: 100%; height: auto; margin: 1.6rem 0 3.2rem; }
+.oasis-prose__text {
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  font-size: 2rem;
+  line-height: 1.85;
+  color: var(--oasis-dark);
+}
+.oasis-prose__text p + p { margin-top: 2rem; }
+.oasis-prose__closing { margin-top: 3.4rem; }
+
+/* ---------- journey row --------------------------------------------------- */
+
+.oasis-journey__intro { margin-inline: auto; text-align: center; }
+.oasis-journey__eyebrow {
+  margin: 0;
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  font-size: 2.8rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--oasis-dark);
+}
+.oasis-journey__heading {
+  margin: 0.6rem 0 0;
+  font-family: var(--oasis-font-cond);
+  font-weight: 600;
+  font-size: 3.8rem;
+  line-height: 1.15;
+  color: var(--oasis-dark);
+}
+.oasis-journey__text {
+  margin-top: 1.8rem;
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  font-size: 2rem;
+  line-height: 1.7;
+  color: var(--oasis-dark);
+}
+.oasis-journey__grid {
+  display: grid;
+  gap: 0;
+  margin-top: 6rem;
+}
+.oasis-journey__col {
+  padding-inline: 3.4rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* Hairline between columns, drawn on every column but the first so it can never
+   trail after the last one however many blocks the merchant adds. */
+.oasis-journey__col + .oasis-journey__col { border-left: 1px solid var(--oasis-line); }
+.oasis-journey__icon { height: 97px; display: flex; align-items: flex-end; }
+.oasis-journey__icon img { width: auto; height: auto; max-height: 97px; max-width: 100px; }
+.oasis-journey__title {
+  margin: 2.4rem 0 0;
+  font-family: var(--oasis-font-cond);
+  font-weight: 600;
+  font-size: 2.6rem;
+  letter-spacing: 0.05em;     /* PSD tracking +50 */
+  text-transform: uppercase;
+  color: var(--oasis-dark);
+}
+.oasis-journey__copy {
+  margin-top: 1.4rem;
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  font-size: 1.6rem;
+  line-height: 1.65;
+  color: var(--oasis-dark);
+}
+
+@media screen and (max-width: 989px) {
+  .oasis-band { flex-direction: column; }
+  .oasis-band__bg { position: relative; height: 320px; }
+  .oasis-band__scrim { display: none; }
+  .oasis-band__inner { justify-content: center !important; padding-block: 4.4rem; text-align: center !important; }
+  .oasis-band__content { align-items: center !important; }
+  .oasis-band__display--large { font-size: 4.4rem; }
+  .oasis-band__eyebrow--garet-lg { font-size: 3rem; }
+  .oasis-band__eyebrow--garet { font-size: 2rem; }
+  .oasis-band__eyebrow--condensed { font-size: 2.4rem; }
+  .oasis-band__text, .oasis-prose__text, .oasis-journey__text { font-size: 1.7rem; }
+  .oasis-prose__kicker, .oasis-prose__closing { font-size: 2.6rem; }
+  .oasis-journey__heading { font-size: 2.8rem; }
+  .oasis-journey__eyebrow { font-size: 2rem; }
+  .oasis-journey__grid { margin-top: 3.6rem; row-gap: 4rem; }
+  .oasis-journey__col { padding-inline: 1.6rem; }
+  .oasis-journey__col + .oasis-journey__col { border-left: 0; }
+}

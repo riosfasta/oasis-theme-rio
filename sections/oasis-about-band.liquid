@@ -1,0 +1,251 @@
+{%- comment -%}
+  THE OASIS — About band
+
+  Full-bleed photograph with an offset text column, used three times on the
+  About page. The three bands stack the same four text roles in different orders
+  and sizes, so each role carries its own style select rather than being three
+  near-identical sections:
+
+    eyebrow  small line above the script   (Garet 26 / Condensed 32 / Garet 42)
+    script   the Brittany Signature line   (size is a setting)
+    display  a large line under the script (Condensed 70 / Condensed 32)
+    body     the paragraph
+
+  The PSD photographs already have the cream fade painted into them, so the
+  scrim defaults to none — turning it on would double the fade.
+{%- endcomment -%}
+
+<div
+  class="oasis-band oasis-band--{{ section.settings.content_position }}"
+  id="OasisBand-{{ section.id }}"
+>
+  {%- if section.settings.image != blank -%}
+    {{
+      section.settings.image
+      | image_url: width: 2880
+      | image_tag:
+        class: 'oasis-band__bg',
+        widths: '750, 1100, 1440, 1900, 2880',
+        sizes: '100vw',
+        loading: section.settings.image_loading,
+        alt: section.settings.image.alt
+    }}
+  {%- elsif section.settings.fallback_asset != blank -%}
+    <img
+      class="oasis-band__bg"
+      src="{{ section.settings.fallback_asset | asset_url }}"
+      alt=""
+      width="1440"
+      height="{{ section.settings.height }}"
+      loading="{{ section.settings.image_loading }}"
+    >
+  {%- endif -%}
+
+  {%- if section.settings.scrim_color != 'rgba(0,0,0,0)' and section.settings.scrim_color != blank -%}
+    <div class="oasis-band__scrim" aria-hidden="true"></div>
+  {%- endif -%}
+
+  <div class="oasis-band__inner">
+    <div class="oasis-band__content">
+      {%- if section.settings.show_leaf -%}
+        <img
+          class="oasis-leaf"
+          src="{{ 'oasis-ornament-leaf.png' | asset_url }}"
+          alt=""
+          width="107"
+          height="71"
+          loading="lazy"
+        >
+      {%- endif -%}
+
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="oasis-band__eyebrow oasis-band__eyebrow--{{ section.settings.eyebrow_style }}">
+          {{- section.settings.eyebrow | escape -}}
+        </p>
+      {%- endif -%}
+
+      {%- if section.settings.script != blank -%}
+        <h2 class="oasis-band__script">{{ section.settings.script | escape }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.display != blank -%}
+        <p class="oasis-band__display oasis-band__display--{{ section.settings.display_style }}">
+          {{- section.settings.display | escape -}}
+        </p>
+      {%- endif -%}
+
+      {%- case section.settings.rule_style -%}
+        {%- when 'flourish' -%}
+          <img
+            class="oasis-band__flourish"
+            src="{{ 'oasis-about-hero-rule.png' | asset_url }}"
+            alt=""
+            width="278"
+            height="37"
+            loading="lazy"
+          >
+        {%- when 'plain' -%}
+          <hr class="oasis-rule">
+      {%- endcase -%}
+
+      {%- if section.settings.text != blank -%}
+        <div class="oasis-band__text rte">{{ section.settings.text }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.button_label != blank -%}
+        <a class="oasis-btn oasis-btn--tan oasis-band__button" href="{{ section.settings.button_link | default: '#' }}">
+          {{- section.settings.button_label | escape -}}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<style>
+  #OasisBand-{{ section.id }} { min-height: {{ section.settings.height }}px; }
+  #OasisBand-{{ section.id }} .oasis-band__content { max-width: {{ section.settings.content_width }}px; }
+  #OasisBand-{{ section.id }} .oasis-band__script { font-size: {{ section.settings.script_size }}px; }
+  #OasisBand-{{ section.id }} .oasis-band__inner {
+    justify-content: {% if section.settings.content_position == 'left' %}flex-start{% else %}flex-end{% endif %};
+    text-align: {{ section.settings.text_align }};
+  }
+  #OasisBand-{{ section.id }} .oasis-band__content { align-items: {% if section.settings.text_align == 'center' %}center{% elsif section.settings.text_align == 'right' %}flex-end{% else %}flex-start{% endif %}; }
+  {%- if section.settings.scrim_color != 'rgba(0,0,0,0)' and section.settings.scrim_color != blank -%}
+    #OasisBand-{{ section.id }} .oasis-band__scrim {
+      background: linear-gradient({% if section.settings.content_position == 'left' %}90deg{% else %}270deg{% endif %},
+        {{ section.settings.scrim_color }} 0%,
+        {{ section.settings.scrim_color | color_modify: 'alpha', 0.75 }} 32%,
+        {{ section.settings.scrim_color | color_modify: 'alpha', 0 }} 58%);
+    }
+  {%- endif -%}
+  @media screen and (max-width: 989px) {
+    #OasisBand-{{ section.id }} { min-height: 0; }
+    #OasisBand-{{ section.id }} .oasis-band__content { max-width: none; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Oasis about band",
+  "class": "oasis-section-band",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Photograph" },
+    {
+      "type": "text",
+      "id": "fallback_asset",
+      "label": "Packaged image file",
+      "info": "Used when no photograph is chosen, e.g. oasis-about-hero.jpg",
+      "default": "oasis-about-hero.jpg"
+    },
+    {
+      "type": "select",
+      "id": "image_loading",
+      "label": "Image loading",
+      "options": [
+        { "value": "lazy", "label": "Lazy (below the fold)" },
+        { "value": "eager", "label": "Eager (first band on the page)" }
+      ],
+      "default": "lazy"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Text side",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centre" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "min": 320,
+      "max": 900,
+      "step": 10,
+      "unit": "px",
+      "label": "Band height",
+      "default": 800
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "min": 320,
+      "max": 800,
+      "step": 5,
+      "unit": "px",
+      "label": "Text column width",
+      "default": 490
+    },
+    {
+      "type": "color",
+      "id": "scrim_color",
+      "label": "Scrim over the photo",
+      "info": "The packaged photographs already fade to cream, so leave this transparent unless you swap in a photo that doesn't.",
+      "default": "rgba(0,0,0,0)"
+    },
+    { "type": "header", "content": "Text" },
+    { "type": "checkbox", "id": "show_leaf", "label": "Show leaf ornament", "default": false },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    {
+      "type": "select",
+      "id": "eyebrow_style",
+      "label": "Eyebrow style",
+      "options": [
+        { "value": "garet", "label": "Garet caps, 26" },
+        { "value": "condensed", "label": "Barlow Condensed, 32" },
+        { "value": "garet-lg", "label": "Garet caps, 42" }
+      ],
+      "default": "garet"
+    },
+    { "type": "text", "id": "script", "label": "Script line" },
+    {
+      "type": "range",
+      "id": "script_size",
+      "min": 32,
+      "max": 88,
+      "step": 2,
+      "unit": "px",
+      "label": "Script size",
+      "default": 56
+    },
+    { "type": "text", "id": "display", "label": "Display line (under the script)" },
+    {
+      "type": "select",
+      "id": "display_style",
+      "label": "Display line style",
+      "options": [
+        { "value": "large", "label": "Barlow Condensed, 70" },
+        { "value": "small", "label": "Barlow Condensed, 32" }
+      ],
+      "default": "large"
+    },
+    {
+      "type": "select",
+      "id": "rule_style",
+      "label": "Ornament under the heading",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "plain", "label": "Thin rule" },
+        { "value": "flourish", "label": "Floral flourish" }
+      ],
+      "default": "none"
+    },
+    { "type": "richtext", "id": "text", "label": "Body" },
+    { "type": "text", "id": "button_label", "label": "Button label" },
+    { "type": "url", "id": "button_link", "label": "Button link" }
+  ],
+  "presets": [{ "name": "Oasis about band" }]
+}
+{% endschema %}

@@ -1,0 +1,146 @@
+{%- comment -%}
+  THE OASIS — journey row
+
+  Intro trio (eyebrow / heading / body) above a row of columns, each an icon,
+  a tracked title and a short paragraph, separated by hairline vertical rules.
+  Columns are blocks so the merchant can add, remove and reorder them; the
+  dividers are drawn with a border on each column but the first, so they can
+  never end up trailing after the last one.
+{%- endcomment -%}
+
+<div
+  class="oasis-journey"
+  id="OasisJourney-{{ section.id }}"
+  style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="oasis-container">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.text != blank -%}
+      <div class="oasis-journey__intro">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="oasis-journey__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="oasis-journey__heading">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="oasis-journey__text rte">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div
+        class="oasis-journey__grid"
+        style="grid-template-columns: repeat({{ section.blocks.size }}, minmax(0, 1fr));"
+      >
+        {%- for block in section.blocks -%}
+          <div class="oasis-journey__col" {{ block.shopify_attributes }}>
+            <div class="oasis-journey__icon">
+              {%- if block.settings.image != blank -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 200
+                  | image_tag: widths: '80, 120, 200', loading: 'lazy', alt: block.settings.title
+                }}
+              {%- elsif block.settings.icon_asset != blank -%}
+                <img src="{{ block.settings.icon_asset | asset_url }}" alt="" loading="lazy">
+              {%- endif -%}
+            </div>
+            {%- if block.settings.title != blank -%}
+              <h3 class="oasis-journey__title">{{ block.settings.title | escape }}</h3>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <div class="oasis-journey__copy rte">{{ block.settings.text }}</div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+  #OasisJourney-{{ section.id }} .oasis-journey__intro { max-width: {{ section.settings.intro_width }}px; }
+  @media screen and (max-width: 749px) {
+    #OasisJourney-{{ section.id }} .oasis-journey__grid {
+      grid-template-columns: repeat({{ section.settings.columns_mobile }}, minmax(0, 1fr)) !important;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Oasis journey row",
+  "class": "oasis-section-journey",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "It doesn't end at rescue." },
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "richtext", "id": "text", "label": "Intro paragraph" },
+    {
+      "type": "range",
+      "id": "intro_width",
+      "min": 560,
+      "max": 1100,
+      "step": 10,
+      "unit": "px",
+      "label": "Intro width",
+      "default": 940
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "2"
+    },
+    { "type": "header", "content": "Spacing" },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Column",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Icon" },
+        {
+          "type": "text",
+          "id": "icon_asset",
+          "label": "Packaged icon file",
+          "info": "Used when no icon is chosen, e.g. oasis-about-icon-healing.png"
+        },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "richtext", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Oasis journey row",
+      "blocks": [{ "type": "step" }, { "type": "step" }, { "type": "step" }, { "type": "step" }]
+    }
+  ]
+}
+{% endschema %}
