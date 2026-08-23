@@ -1469,6 +1469,14 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
 .collection { padding-top: 4.6rem; }
 
 /* Sidebar headings — "FILTER BY", "PRODUCT TYPE", "CATEGORY", "PRICE" */
+/* NOTE ON THE `body` PREFIXES BELOW
+   Dawn loads component-facets.css from inside the product-grid section, i.e.
+   in the body — after this file, which is in the head. So on equal specificity
+   Dawn wins, and single-class overrides here silently did nothing. The `body`
+   prefix buys one element of specificity, which is enough, and is cheaper than
+   !important or duplicating Dawn's selectors. Only the selectors Dawn also
+   defines carry it. */
+
 /* ---------- Shop All header row ------------------------------------------
    PSD (Shop_All_Products_Design, y732-775): FILTER BY over the sidebar column,
    "39 PRODUCTS" at the grid's left edge (x346), SORT BY hard right with the
@@ -1480,7 +1488,7 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
    width (26rem + 3rem of padding) puts each piece where the design has it. */
 
 @media screen and (min-width: 750px) {
-  .facets-vertical-form {
+  body .facets-vertical-form {
     display: grid;
     grid-template-columns: 29rem minmax(0, 1fr);
     align-items: center;
@@ -1521,8 +1529,8 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
   color: var(--oasis-dark);
 }
 
-.facets__heading,
-.facets__summary span:first-of-type,
+body .facets__heading,
+body .facets__summary span:first-of-type,
 .facets__disclosure-vertical .facets__summary {
   font-family: var(--oasis-font-body);
   font-weight: 300;
@@ -1531,13 +1539,13 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
   text-transform: uppercase;
   color: var(--oasis-dark);
 }
-.facets__heading { margin-bottom: 2rem; }
+body .facets__heading { margin-bottom: 2rem; }
 
-.facets__disclosure-vertical { border-bottom: 1px solid var(--oasis-line); }
+body .facets__disclosure-vertical { border-bottom: 1px solid var(--oasis-line); }
 .facets__disclosure-vertical .facets__summary { padding-block: 1.8rem; }
 
 /* Filter options — Garet Book 17 */
-.facet-checkbox,
+body .facet-checkbox,
 .facets-layout-list .facet-checkbox__text-label,
 .facet-checkbox__text {
   font-family: var(--oasis-font-body);
@@ -1561,9 +1569,9 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
 
 
 /* Product count and sort row */
-.facets__form .product-count,
-.product-count__text,
-.facet-filters__label,
+body .facets__form .product-count,
+body .product-count__text,
+body .facet-filters__label,
 .facets-container .product-count {
   font-family: var(--oasis-font-body);
   font-weight: 300;
@@ -1573,8 +1581,8 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
   color: var(--oasis-dark);
 }
 
-.facet-filters__sort,
-.facet-filters__sort:hover {
+body .facet-filters__sort,
+body .facet-filters__sort:hover {
   font-family: var(--oasis-font-body);
   font-weight: 300;
   font-size: 1.6rem;
@@ -1855,6 +1863,14 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
    on the next line hard left. One wrapping flex row does all three — the count
    is forced onto its own line by taking the full width, so nothing depends on
    guessed heights or negative margins. */
+/* Dawn makes .facets-container a 2-column grid, which would size our one-line
+   tabs row to its content instead of the full width. Only relax it where that
+   row is actually present. */
+body .facets-container:has(.oasis-tabs__nav) {
+  display: block;
+  padding-top: 0;
+}
+
 .facets__form:has(.oasis-tabs__nav) {
   display: flex;
   flex-wrap: wrap;
@@ -1864,7 +1880,7 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
 }
 .facets__form .oasis-tabs__nav { flex: 0 1 auto; }
 .facets__form .facet-filters.sorting { margin-left: auto; }
-.facets__form .product-count { flex: 0 0 100%; margin: 0; }
+body .facets__form .product-count { flex: 0 0 100%; margin: 0; }
 
 /* Standalone grid (page templates) — same count treatment as the collection
    pages, so /pages/... and /collections/... read as one family.
@@ -1901,7 +1917,7 @@ span.oasis-tabs__link { cursor: default; }
    FILTER BY and SORT BY beside it. */
 .facets-container .product-count,
 .facets-container .product-count__text,
-.product-count-vertical,
+body .product-count-vertical,
 .product-count-vertical .product-count__text {
   font-size: 1.3rem;
   letter-spacing: 0.11em;
