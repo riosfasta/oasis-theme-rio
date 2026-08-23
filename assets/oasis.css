@@ -1469,6 +1469,58 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
 .collection { padding-top: 4.6rem; }
 
 /* Sidebar headings — "FILTER BY", "PRODUCT TYPE", "CATEGORY", "PRICE" */
+/* ---------- Shop All header row ------------------------------------------
+   PSD (Shop_All_Products_Design, y732-775): FILTER BY over the sidebar column,
+   "39 PRODUCTS" at the grid's left edge (x346), SORT BY hard right with the
+   select ending at the container edge (x1345) — all on one line.
+
+   Dawn instead sets `.facets-vertical-form { justify-content: flex-end }`,
+   which stacks sort then count against the right edge, so the count ends up
+   furthest right and overhangs. A two-column grid mirroring Dawn's own sidebar
+   width (26rem + 3rem of padding) puts each piece where the design has it. */
+
+@media screen and (min-width: 750px) {
+  .facets-vertical-form {
+    display: grid;
+    grid-template-columns: 29rem minmax(0, 1fr);
+    align-items: center;
+    justify-content: initial;   /* undo Dawn's flex-end */
+    column-gap: 0;
+  }
+
+  .oasis-facets-bar {
+    display: flex;
+    align-items: center;
+    column-gap: 2.4rem;
+  }
+  .oasis-facets-bar .product-count-vertical { margin-left: 0; }
+  .oasis-facets-bar .facet-filters.sorting { margin-left: auto; }
+
+  /* The visible label now sits in this row; the aside keeps its own copy for
+     aria-labelledby, hidden rather than removed. */
+  .facets-vertical .facets__heading--vertical {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
+.oasis-facets-title {
+  margin: 0;
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  font-size: 1.4rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--oasis-dark);
+}
+
 .facets__heading,
 .facets__summary span:first-of-type,
 .facets__disclosure-vertical .facets__summary {
@@ -1843,11 +1895,24 @@ span.oasis-tabs__link { cursor: default; }
 }
 .oasis-section-grid .pagination-wrapper { margin-top: 4.4rem; }
 
+/* The vertical layout puts the count in .product-count-vertical, outside
+   .facets-container, so it was missing this treatment entirely — and Dawn's
+   `light` class faded it. The design has it the same weight and colour as
+   FILTER BY and SORT BY beside it. */
 .facets-container .product-count,
-.facets-container .product-count__text {
+.facets-container .product-count__text,
+.product-count-vertical,
+.product-count-vertical .product-count__text {
   font-size: 1.3rem;
   letter-spacing: 0.11em;
   text-transform: uppercase;
+}
+.product-count-vertical.light,
+.product-count-vertical .product-count__text {
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  color: var(--oasis-dark);
+  opacity: 1;
 }
 
 /* The tabs no longer sit in their own section, so the row carries the spacing

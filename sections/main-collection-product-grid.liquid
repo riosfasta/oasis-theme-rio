@@ -42,7 +42,41 @@
     {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
       <facet-filters-form class="facets facets-vertical-sort page-width small-hide">
         <form class="facets-vertical-form" id="FacetSortForm">
-          <div class="facet-filters sorting caption">
+          {%- comment -%}
+            The design runs FILTER BY, the product count and SORT BY across one
+            line: the label over the sidebar column, the count at the grid's
+            left edge, sorting hard right. Dawn's own heading sits inside the
+            aside on the next line down, so it is repeated here and the original
+            is left in place (visually hidden) to keep aria-labelledby valid.
+          {%- endcomment -%}
+          {%- if section.settings.enable_filtering -%}
+            <h2 class="oasis-facets-title" aria-hidden="true">
+              {{- 'products.facets.filter_by_label' | t -}}
+            </h2>
+          {%- endif -%}
+
+          <div class="oasis-facets-bar">
+          <div class="product-count-vertical light" role="status">
+            <h2 class="product-count__text text-body">
+              <span id="ProductCountDesktop">
+                {%- if collection.results_count -%}
+                  {{
+                    'templates.search.results_with_count'
+                    | t: terms: collection.terms, count: collection.results_count
+                  }}
+                {%- elsif collection.products_count == collection.all_products_count -%}
+                  {{ 'products.facets.product_count_simple' | t: count: collection.products_count }}
+                {%- else -%}
+                  {{
+                    'products.facets.product_count'
+                    | t: product_count: collection.products_count, count: collection.all_products_count
+                  }}
+                {%- endif -%}
+              </span>
+            </h2>
+            {%- render 'loading-spinner' -%}
+          </div>
+            <div class="facet-filters sorting caption">
             <div class="facet-filters__field">
               <h2 class="facet-filters__label caption-large text-body">
                 <label for="SortBy">{{ 'products.facets.sort_by_label' | t }}</label>
@@ -73,25 +107,6 @@
             </div>
           </div>
 
-          <div class="product-count-vertical light" role="status">
-            <h2 class="product-count__text text-body">
-              <span id="ProductCountDesktop">
-                {%- if collection.results_count -%}
-                  {{
-                    'templates.search.results_with_count'
-                    | t: terms: collection.terms, count: collection.results_count
-                  }}
-                {%- elsif collection.products_count == collection.all_products_count -%}
-                  {{ 'products.facets.product_count_simple' | t: count: collection.products_count }}
-                {%- else -%}
-                  {{
-                    'products.facets.product_count'
-                    | t: product_count: collection.products_count, count: collection.all_products_count
-                  }}
-                {%- endif -%}
-              </span>
-            </h2>
-            {%- render 'loading-spinner' -%}
           </div>
         </form>
       </facet-filters-form>
