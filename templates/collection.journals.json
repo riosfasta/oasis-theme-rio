@@ -19,9 +19,9 @@
         "scrim_color": "#f1e4d4",
         "use_collection": false,
         "use_page": false,
+        "title": "Shop Journals",
         "show_ornament": true,
-        "text": "<p>Hand-stitched journals made to hold your stories, ideas, prayers, and dreams.</p>",
-        "title": "Shop Journals"
+        "text": "<p>Hand-stitched journals made to hold your stories, ideas, prayers, and dreams.</p>"
       }
     },
     "product-grid": {
@@ -37,20 +37,21 @@
         "show_vendor": false,
         "show_rating": false,
         "quick_add": "none",
-        "enable_filtering": false,
+        "enable_filtering": true,
         "filter_type": "horizontal",
+        "oasis_tabs_menu": "",
+        "oasis_tabs_label": "Journal categories",
+        "oasis_price_bands": "Under $10 |  | 10\n$10 – $20 | 10 | 20\n$20 – $30 | 20 | 30\n$30 and above | 30 |",
         "enable_sorting": true,
-        "padding_top": 0,
-        "padding_bottom": 72,
         "oasis_card": true,
+        "oasis_swatches": true,
         "oasis_image_ratio": "2 / 3",
         "oasis_media_width": 76,
-        "oasis_media_background": "none",
         "oasis_media_inset": 0,
-        "oasis_swatches": true,
+        "oasis_media_background": "none",
         "oasis_swatch_limit": 6,
-        "oasis_tabs_menu": "journal-categories",
-        "oasis_tabs_label": "Journal categories"
+        "padding_top": 0,
+        "padding_bottom": 72
       }
     },
     "story": {
@@ -64,9 +65,9 @@
         "content_width": 620,
         "scrim_color": "#fbf7f4",
         "show_leaf": false,
-        "show_rule": true,
         "kicker": "More than a",
         "script": "just a journal",
+        "show_rule": true,
         "text": "<p>Each journal is hand-stitched by a woman rebuilding her life after trafficking. Your purchase creates an opportunity for dignified work—and helps carry her story forward.</p>",
         "button_label": "Learn more about The Oasis",
         "button_link": "/pages/about-us"
