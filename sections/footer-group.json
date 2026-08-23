@@ -18,6 +18,7 @@
           "type": "link_list",
           "settings": {
             "heading": "Shop",
+            "menu": "",
             "links": "New Arrivals | /collections/all-products?sort_by=created-descending\nBest Sellers | /collections/all-products?sort_by=best-selling\nJournals | /collections/journals-only\nCards | /collections/cards\nWholesale | /pages/bulk-ordering"
           }
         },
@@ -25,7 +26,8 @@
           "type": "link_list",
           "settings": {
             "heading": "Customer care",
-            "links": "Your Account | /account\nContact Us | /pages/contact\nReturns | /policies/refund-policy\nShipping | /policies/shipping-policy\nPrivacy Policy | /policies/privacy-policy"
+            "menu": "",
+            "links": "Your Account | /customer_authentication/redirect?locale=en&region_country=US\nContact Us | /pages/contact\nReturns | /policies/refund-policy\nShipping | /policies/shipping-policy\nPrivacy Policy | /policies/privacy-policy"
           }
         },
         "follow": {
