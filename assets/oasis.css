@@ -182,11 +182,9 @@ button.shopify-payment-button__button--unbranded {
 .utility-bar .announcement-bar__message {
   font-family: var(--oasis-font-body);
   font-weight: 700;
-  font-size: 2rem;
-  line-height: 1.25;
+  font-size: 1.7rem;
   letter-spacing: 0;
   text-transform: none;
-  padding: 0.4rem 1rem;
   color: inherit;
 }
 
