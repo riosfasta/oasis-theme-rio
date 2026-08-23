@@ -6,6 +6,13 @@
   - enable_filtering: {Boolean} Show filtering when true
   - enable_sorting: {Boolean} Show sorting when true
   - filter_type: {String} Type of filter
+  - oasis_tabs: {String} typed category tabs, "Label | /url" per line
+  - oasis_tabs_menu: {Object} optional link_list that overrides oasis_tabs
+  - oasis_tabs_label: {String} accessible label for the tab row
+  - oasis_price_bands: {String} price filter bands, "Label | min | max" per line
+    NOTE: these arrive as parameters on purpose. `render` isolates scope, so
+    reading section.settings in here silently yields nothing — which is how the
+    tabs and the price bands both rendered as empty for a while.
   - paginate: {Object}
 
   Usage:
@@ -314,7 +321,7 @@
                       id="Facet-{{ forloop.index }}-{{ section.id }}"
                       class="{% if filter_type == 'horizontal' %}facets__display{% else %}facets__display-vertical{% endif %}"
                     >
-                      {%- if section.settings.oasis_price_bands != blank -%}
+                      {%- if oasis_price_bands != blank -%}
                         {%- comment -%}
                           The design uses tick-box price bands instead of Dawn's
                           From/To pair. The "highest price is ..." line and the
@@ -322,7 +329,7 @@
                         {%- endcomment -%}
                         {% render 'oasis-price-bands',
                           filter: filter,
-                          bands: section.settings.oasis_price_bands,
+                          bands: oasis_price_bands,
                           id_prefix: 'Filter-'
                         %}
                       {%- else -%}
@@ -403,12 +410,12 @@
             section above puts all three in the same flex row, so they align by
             layout instead of by hand-tuned negative margins.
           {%- endcomment -%}
-          {%- if section.settings.oasis_tabs_menu != blank -%}
+          {%- if oasis_tabs_menu != blank -%}
             {% render 'oasis-category-tab-list',
-              menu: section.settings.oasis_tabs_menu,
-              aria_label: section.settings.oasis_tabs_label
+              menu: oasis_tabs_menu,
+              aria_label: oasis_tabs_label
             %}
-          {%- elsif section.settings.oasis_tabs != blank -%}
+          {%- elsif oasis_tabs != blank -%}
             {%- comment -%}
               Typed tabs, not a menu. A link_list setting pointing at a menu that
               does not exist gets silently emptied by the theme editor the next
@@ -416,8 +423,8 @@
               once already. Text cannot be cleared that way.
             {%- endcomment -%}
             {% render 'oasis-tab-links',
-              links: section.settings.oasis_tabs,
-              aria_label: section.settings.oasis_tabs_label
+              links: oasis_tabs,
+              aria_label: oasis_tabs_label
             %}
           {%- endif -%}
           {% comment %} Sorting and product count are the last elements when filter type is horizontal {% endcomment %}
@@ -724,10 +731,10 @@
                             {{ filter.label | escape }}
                           </button>
 
-                          {%- if section.settings.oasis_price_bands != blank -%}
+                          {%- if oasis_price_bands != blank -%}
                             {% render 'oasis-price-bands',
                               filter: filter,
-                              bands: section.settings.oasis_price_bands,
+                              bands: oasis_price_bands,
                               id_prefix: 'Mobile-Filter-'
                             %}
                           {%- else -%}
