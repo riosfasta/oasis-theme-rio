@@ -758,7 +758,7 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
 .oasis-footer__heading {
   font-family: var(--oasis-font-cond);
   font-weight: 500;
-  font-size: 4rem;
+  font-size: 2rem;
   line-height: 1;
   letter-spacing: 0.05em;
   text-transform: uppercase;
