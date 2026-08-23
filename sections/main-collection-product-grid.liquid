@@ -158,8 +158,13 @@
               {% assign skip_card_product_styles = false %}
                  {% comment %} {% endcomment %}
               {%- for product in collection.products -%}
+                {%- comment -%}
+                  Dawn eager-loads the first two cards, which was right for its
+                  two-up mobile grid. At four across that defers half the first
+                  row, so key off the column count instead.
+                {%- endcomment -%}
                 {% assign lazy_load = false %}
-                {%- if forloop.index > 2 -%}
+                {%- if forloop.index > section.settings.columns_desktop -%}
                   {%- assign lazy_load = true -%}
                 {%- endif -%}
                 <li
@@ -177,7 +182,8 @@
                       image_ratio: section.settings.oasis_image_ratio,
                       media_width: section.settings.oasis_media_width,
                 media_inset: section.settings.oasis_media_inset,
-                      media_background: section.settings.oasis_media_background
+                      media_background: section.settings.oasis_media_background,
+                      lazy_load: lazy_load
                     -%}
                   {%- else -%}
                     {% render  'card-product',

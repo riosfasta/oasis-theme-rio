@@ -12,6 +12,8 @@
     - media_inset: {Number} percentage of the box kept clear around the product,
       so a greeting card renders smaller than a journal in the same box
     - media_background: {String} css colour behind the product, or 'none'
+    - lazy_load: {Boolean} pass false for cards above the fold so the first row
+      is not deferred (Dawn computes this per card; ignoring it costs LCP)
 {%- endcomment -%}
 
 {%- liquid
@@ -20,6 +22,11 @@
   assign box_width = media_width | default: 100
   assign inset = media_inset | default: 0
   assign media_bg = media_background | default: 'none'
+
+  assign img_loading = 'lazy'
+  if lazy_load == false
+    assign img_loading = 'eager'
+  endif
 -%}
 
 {%- capture card_vars -%}
@@ -36,7 +43,7 @@
           | image_tag:
             widths: '200, 300, 400, 600, 800',
             sizes: '(min-width: 990px) 300px, 45vw',
-            loading: 'lazy',
+            loading: img_loading,
             class: 'oasis-card__image',
             data-main-image: '',
             alt: card_product.featured_media.alt
