@@ -59,7 +59,8 @@
         "oasis_media_background": "none",
         "oasis_swatch_limit": 6,
         "padding_top": 0,
-        "padding_bottom": 72
+        "padding_bottom": 72,
+        "oasis_tabs": "All Cards | /collections/cards\nBirthday | \nThank You | \nThinking of You | \nChristmas | \nSeasonal | \nFloral Collection | "
       }
     },
     "story": {

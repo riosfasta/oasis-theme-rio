@@ -35,6 +35,38 @@
   endif
 -%}
 
+{%- comment -%}
+  Two things the markup below needs to know, worked out once:
+
+  - oasis_active_filters: Dawn always renders a "Clear all" <facet-remove> in the
+    pills row, so the row is never empty and CSS cannot tell "no filters applied"
+    from "some applied". Count the active values instead and skip the row.
+  - oasis_show_filters: when a category tab row is present the design has no
+    filter dropdowns, so the two never render together and cannot fight for the
+    same line.
+{%- endcomment -%}
+{%- liquid
+  assign oasis_active_filters = 0
+  for oasis_filter in results.filters
+    assign oasis_active_filters = oasis_active_filters | plus: oasis_filter.active_values.size
+    if oasis_filter.type == 'price_range'
+      if oasis_filter.min_value.value != null or oasis_filter.max_value.value != null
+        assign oasis_active_filters = oasis_active_filters | plus: 1
+      endif
+    endif
+  endfor
+
+  assign oasis_has_tabs = false
+  if oasis_tabs_menu != blank or oasis_tabs != blank
+    assign oasis_has_tabs = true
+  endif
+
+  assign oasis_show_filters = enable_filtering
+  if oasis_has_tabs and filter_type == 'horizontal'
+    assign oasis_show_filters = false
+  endif
+-%}
+
 <div class="facets-container{% if filter_type == 'drawer' %} facets-container-drawer{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
   {%- if filter_type == 'vertical' or filter_type == 'horizontal' -%}
     <facet-filters-form class="facets small-hide">
@@ -47,7 +79,7 @@
           <input name="options[prefix]" type="hidden" value="last">
         {%- endif -%}
 
-        {% if enable_filtering %}
+        {% if oasis_show_filters %}
           {% comment %} Heading is the first tabbable element on filter type horizontal {% endcomment %}
           <div
             id="FacetsWrapperDesktop"
@@ -356,7 +388,7 @@
             {%- endfor -%}
           </div>
           {% comment %} Pills after filtes on filter type horizontal {% endcomment %}
-          {%- if filter_type == 'horizontal' -%}
+          {%- if filter_type == 'horizontal' and oasis_active_filters > 0 -%}
             <div class="active-facets active-facets-desktop">
               {%- for filter in results.filters -%}
                 {%- for value in filter.active_values -%}

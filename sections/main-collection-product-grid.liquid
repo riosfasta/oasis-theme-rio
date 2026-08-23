@@ -444,10 +444,17 @@
       "label": "t:sections.main-collection-product-grid.settings.filter_type.label"
     },
     {
+      "type": "textarea",
+      "id": "oasis_tabs",
+      "label": "Category tabs",
+      "info": "One per line, as Label | /url. Leave the URL off and a tab shows as plain text. While this has tabs, the filter dropdowns are hidden \u2014 the design uses one or the other, not both. Clear the field to get the dropdowns back.",
+      "default": "All Journals | /collections/journals-only\nFloral | \nNature | \nFaith | \nTravel & World | \nPatterns & Designs | "
+    },
+    {
       "type": "link_list",
       "id": "oasis_tabs_menu",
-      "label": "Category tabs menu",
-      "info": "Each menu item becomes a tab on the same line as Sort by. Needs \"Filter type: horizontal\". Leave empty for no tabs."
+      "label": "Category tabs menu (optional)",
+      "info": "Overrides the typed tabs above. Careful: if the menu is ever deleted, the theme editor clears this setting on its next save."
     },
     {
       "type": "text",

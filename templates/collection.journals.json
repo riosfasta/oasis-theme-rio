@@ -51,7 +51,8 @@
         "oasis_media_background": "none",
         "oasis_swatch_limit": 6,
         "padding_top": 0,
-        "padding_bottom": 72
+        "padding_bottom": 72,
+        "oasis_tabs": "All Journals | /collections/journals-only\nFloral | \nNature | \nFaith | \nTravel & World | \nPatterns & Designs | "
       }
     },
     "story": {

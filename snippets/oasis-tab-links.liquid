@@ -37,8 +37,11 @@
     endif
   -%}
 
-  <nav class="oasis-tabs__nav" aria-label="{{ aria_label | default: 'Product categories' | escape }}">
-    <ul class="oasis-tabs__list">
+  {%- comment -%}
+    Build the items first and emit nothing at all if none survive, so a setting
+    that is nil or holds only separators can't leave an empty <nav> behind.
+  {%- endcomment -%}
+  {%- capture tab_items -%}
       {%- for row in rows -%}
         {%- liquid
           assign parts = row | split: '|'
@@ -69,6 +72,11 @@
           </li>
         {%- endif -%}
       {%- endfor -%}
-    </ul>
-  </nav>
+  {%- endcapture -%}
+
+  {%- if tab_items != blank -%}
+    <nav class="oasis-tabs__nav" aria-label="{{ aria_label | default: 'Product categories' | escape }}">
+      <ul class="oasis-tabs__list">{{ tab_items }}</ul>
+    </nav>
+  {%- endif -%}
 {%- endif -%}
