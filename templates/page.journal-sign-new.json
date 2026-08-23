@@ -1,0 +1,73 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "oasis-page-banner",
+      "settings": {
+        "fallback_asset": "oasis-banner-journals.jpg",
+        "content_position": "left",
+        "height": 365,
+        "content_width": 600,
+        "scrim_color": "#f1e4d4",
+        "use_collection": false,
+        "use_page": false,
+        "title": "Shop Journals",
+        "show_ornament": true,
+        "text": "<p>Hand-stitched journals made to hold your stories, ideas, prayers, and dreams.</p>"
+      }
+    },
+    "grid": {
+      "type": "oasis-product-grid",
+      "settings": {
+        "collection": "journals-only",
+        "products_per_page": 12,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "grid_gap": 16,
+        "tabs": "All Journals | /pages/journals\nFloral | \nNature | \nFaith | \nTravel & World | \nPatterns & Designs | ",
+        "tabs_label": "Journal categories",
+        "show_count": true,
+        "image_ratio": "2 / 3",
+        "oasis_media_width": 76,
+        "oasis_media_inset": 0,
+        "oasis_media_background": "none",
+        "show_swatches": true,
+        "swatch_limit": 6,
+        "padding_top": 40,
+        "padding_bottom": 72
+      }
+    },
+    "story": {
+      "type": "oasis-story-banner",
+      "settings": {
+        "fallback_asset": "oasis-story-just-a-journal.jpg",
+        "content_position": "right",
+        "kicker_style": "tracked",
+        "text_align": "center",
+        "height": 585,
+        "content_width": 620,
+        "scrim_color": "#fbf7f4",
+        "show_leaf": false,
+        "kicker": "More than a",
+        "script": "just a journal",
+        "show_rule": true,
+        "text": "<p>Each journal is hand-stitched by a woman rebuilding her life after trafficking. Your purchase creates an opportunity for dignified work—and helps carry her story forward.</p>",
+        "button_label": "Learn more about The Oasis",
+        "button_link": "/pages/about-us"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "grid",
+    "story"
+  ]
+}
