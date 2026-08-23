@@ -1777,7 +1777,7 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.8rem 3.4rem;
+  gap: 0.8rem 4.5rem;   /* PSD: ~45px between tab labels */
   list-style: none;
   margin: 0;
   padding: 0;
@@ -1798,19 +1798,37 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
 .oasis-tabs__link:hover { border-bottom-color: rgba(53, 29, 7, 0.35); }
 .oasis-tabs__link--active { border-bottom-color: var(--oasis-dark); }
 
-/* With filtering off, Dawn still renders the count + sort row — keep it tight
-   and push sorting to the right, as in the design. */
-.oasis-section-tabs + .shopify-section .facets-container {
-  padding-top: 0;
-  margin-bottom: 2.6rem;
+/* Tabs · SORT BY · count. Measured off the PSD: tabs and the sort control share
+   one line (tab text from x91, the select ending at x1345), and the count sits
+   on the next line hard left. One wrapping flex row does all three — the count
+   is forced onto its own line by taking the full width, so nothing depends on
+   guessed heights or negative margins. */
+.facets__form:has(.oasis-tabs__nav) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 2.4rem;
+  row-gap: 2.6rem;      /* PSD: ~40px from the tab underline to the count */
 }
+.facets__form .oasis-tabs__nav { flex: 0 1 auto; }
+.facets__form .facet-filters.sorting { margin-left: auto; }
+.facets__form .product-count { flex: 0 0 100%; margin: 0; }
+
 .facets-container .product-count,
 .facets-container .product-count__text {
   font-size: 1.3rem;
   letter-spacing: 0.11em;
   text-transform: uppercase;
 }
-.facet-filters.sorting { margin-left: auto; }
+
+/* The tabs no longer sit in their own section, so the row carries the spacing
+   the section used to provide. */
+.facets__form:has(.oasis-tabs__nav) { padding-top: 4rem; padding-bottom: 0.8rem; }
+
+@media screen and (max-width: 749px) {
+  .facets__form:has(.oasis-tabs__nav) { column-gap: 1.6rem; }
+  .facets__form .facet-filters.sorting { margin-left: 0; flex: 0 0 100%; }
+}
 
 @media screen and (max-width: 989px) {
   .oasis-tabs__list { gap: 0.6rem 2rem; }

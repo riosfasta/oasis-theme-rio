@@ -15,32 +15,10 @@
     style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;"
   >
     <div class="oasis-container">
-      <nav class="oasis-tabs__nav" aria-label="{{ section.settings.aria_label | escape }}">
-        <ul class="oasis-tabs__list">
-          {%- for link in section.settings.menu.links -%}
-            {%- liquid
-              assign is_active = false
-              if link.active or link.child_active
-                assign is_active = true
-              endif
-              # link.active only covers exact matches, so also compare the path
-              assign link_path = link.url | split: '?' | first
-              if link_path == request.path
-                assign is_active = true
-              endif
-            -%}
-            <li class="oasis-tabs__item">
-              <a
-                class="oasis-tabs__link{% if is_active %} oasis-tabs__link--active{% endif %}"
-                href="{{ link.url }}"
-                {% if is_active %}aria-current="page"{% endif %}
-              >
-                {{- link.title | escape -}}
-              </a>
-            </li>
-          {%- endfor -%}
-        </ul>
-      </nav>
+      {% render 'oasis-category-tab-list',
+        menu: section.settings.menu,
+        aria_label: section.settings.aria_label
+      %}
     </div>
   </div>
 {%- endif -%}

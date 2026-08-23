@@ -15,15 +15,6 @@
         "title": "Shop Journals"
       }
     },
-    "tabs": {
-      "type": "oasis-category-tabs",
-      "settings": {
-        "menu": "journal-categories",
-        "aria_label": "Journal categories",
-        "padding_top": 40,
-        "padding_bottom": 8
-      }
-    },
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
@@ -48,7 +39,9 @@
         "oasis_media_background": "none",
         "oasis_media_inset": 0,
         "oasis_swatches": true,
-        "oasis_swatch_limit": 6
+        "oasis_swatch_limit": 6,
+        "oasis_tabs_menu": "journal-categories",
+        "oasis_tabs_label": "Journal categories"
       }
     },
     "story": {
@@ -73,7 +66,6 @@
   },
   "order": [
     "banner",
-    "tabs",
     "product-grid",
     "story"
   ]

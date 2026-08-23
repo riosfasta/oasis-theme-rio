@@ -397,6 +397,18 @@
         {% endif %}
 
         {%- if filter_type == 'horizontal' -%}
+          {%- comment -%}
+            The design runs the category tabs and SORT BY along one line, with
+            the product count beneath. Rendering the tabs here rather than as a
+            section above puts all three in the same flex row, so they align by
+            layout instead of by hand-tuned negative margins.
+          {%- endcomment -%}
+          {%- if section.settings.oasis_tabs_menu != blank -%}
+            {% render 'oasis-category-tab-list',
+              menu: section.settings.oasis_tabs_menu,
+              aria_label: section.settings.oasis_tabs_label
+            %}
+          {%- endif -%}
           {% comment %} Sorting and product count are the last elements when filter type is horizontal {% endcomment %}
           {%- if enable_sorting -%}
             <div class="facet-filters sorting caption">

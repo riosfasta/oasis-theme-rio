@@ -24,15 +24,6 @@
         "height": 80
       }
     },
-    "tabs": {
-      "type": "oasis-category-tabs",
-      "settings": {
-        "menu": "card-categories",
-        "aria_label": "Card categories",
-        "padding_top": 40,
-        "padding_bottom": 8
-      }
-    },
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
@@ -57,7 +48,9 @@
         "oasis_media_background": "none",
         "oasis_media_inset": 15,
         "oasis_swatches": false,
-        "oasis_swatch_limit": 6
+        "oasis_swatch_limit": 6,
+        "oasis_tabs_menu": "card-categories",
+        "oasis_tabs_label": "Card categories"
       }
     },
     "story": {
@@ -83,7 +76,6 @@
   "order": [
     "banner",
     "promo",
-    "tabs",
     "product-grid",
     "story"
   ]

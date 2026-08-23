@@ -1,0 +1,46 @@
+{%- comment -%}
+  THE OASIS — category tab list
+
+  Just the <nav> of category links. Kept as a snippet because the design puts
+  the tabs on the same line as SORT BY, and that row is rendered by Dawn's
+  facets snippet inside the product-grid section — so the same markup has to be
+  reachable from two places without being written twice.
+
+  The active tab is matched on the link's path as well as Shopify's own
+  link.active, so it lights up whether tabs point at collections or at filtered
+  URLs on the current collection.
+
+  Accepts:
+    - menu: {Object} link_list
+    - aria_label: {String}
+{%- endcomment -%}
+
+{%- if menu != blank -%}
+  <nav class="oasis-tabs__nav" aria-label="{{ aria_label | default: 'Product categories' | escape }}">
+    <ul class="oasis-tabs__list">
+      {%- for link in menu.links -%}
+        {%- liquid
+          assign is_active = false
+          if link.active or link.child_active
+            assign is_active = true
+          endif
+          assign link_path = link.url | split: '?' | first
+          if link_path == request.path
+            assign is_active = true
+          endif
+        -%}
+        <li class="oasis-tabs__item">
+          <a
+            class="oasis-tabs__link{% if is_active %} oasis-tabs__link--active{% endif %}"
+            href="{{ link.url }}"
+            {% if is_active %}
+              aria-current="page"
+            {% endif %}
+          >
+            {{- link.title | escape -}}
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </nav>
+{%- endif -%}
