@@ -423,6 +423,13 @@
       "label": "t:sections.main-collection-product-grid.settings.filter_type.label"
     },
     {
+      "type": "textarea",
+      "id": "oasis_price_bands",
+      "label": "Price filter bands",
+      "info": "One per line, as Label | min | max \u2014 leave a bound blank for an open-ended band. Empty this field to go back to Dawn's From/To price fields. Bands that start above your highest price are hidden automatically.",
+      "default": "Under $10 |  | 10\n$10 \u2013 $20 | 10 | 20\n$20 \u2013 $30 | 20 | 30\n$30 and above | 30 | "
+    },
+    {
       "type": "checkbox",
       "id": "enable_sorting",
       "default": true,

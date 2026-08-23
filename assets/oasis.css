@@ -1496,6 +1496,18 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
 }
 .facet-checkbox > input[type='checkbox'] { accent-color: var(--oasis-dark); }
 
+/* Price bands. Deliberately no styling of the boxes or labels: reusing Dawn's
+   .facet-checkbox markup means they inherit exactly what Product type and
+   Category above them use, so the three groups can't drift apart. Only the
+   wrapper needs anything, because it replaces Dawn's .facets__price row. */
+.oasis-price-bands { display: block; }
+.oasis-price-bands .facets__list--vertical { margin: 0; padding: 0; }
+
+/* Dawn reserves room beside each option for a "(12)" count; the design shows no
+   counts on price, so close that gap back up. */
+.oasis-price-bands .facet-checkbox__text { display: inline-block; }
+
+
 /* Product count and sort row */
 .facets__form .product-count,
 .product-count__text,

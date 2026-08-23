@@ -1,0 +1,95 @@
+{%- comment -%}
+  THE OASIS — price filter as bands
+
+  The design asks for tick-box price bands ("Under $10", "$10 – $20", …) rather
+  than Dawn's From/To number pair. Shopify's price filter is a single range, so
+  each band simply writes that range: the visible boxes carry no name and are
+  never submitted, while two hidden inputs hold the real
+  filter.v.price.gte / .lte values. Dawn's own form listener does the rest, so
+  filtering stays AJAX and the URL stays canonical.
+
+  Accepts:
+    - filter: {Object} the price_range filter
+    - bands: {String} one per line, "Label | min | max" (either bound may be
+      blank for an open-ended band)
+    - id_prefix: {String} to keep desktop and mobile ids distinct
+{%- endcomment -%}
+
+{%- liquid
+  assign current_min = filter.min_value.value
+  assign current_max = filter.max_value.value
+  assign rows = bands | newline_to_br | split: '<br />'
+
+  # Compare through the same money formatting the inputs emit, so the tick state
+  # is decided on identical strings rather than on int-vs-float cent maths.
+  assign current_min_str = ''
+  assign current_max_str = ''
+  if current_min
+    assign current_min_str = current_min | money_without_currency | replace: ',', ''
+  endif
+  if current_max
+    assign current_max_str = current_max | money_without_currency | replace: ',', ''
+  endif
+-%}
+
+<oasis-price-bands class="oasis-price-bands">
+  <input type="hidden" name="{{ filter.min_value.param_name }}" value="{{ current_min_str }}" data-gte>
+  <input type="hidden" name="{{ filter.max_value.param_name }}" value="{{ current_max_str }}" data-lte>
+
+  <ul class="facets__list--vertical list-unstyled" role="list">
+    {%- for row in rows -%}
+      {%- liquid
+        assign parts = row | split: '|'
+        assign band_label = parts[0] | strip
+        assign band_min = parts[1] | strip
+        assign band_max = parts[2] | strip
+
+        # A band that starts above the most expensive product can never match,
+        # so don't offer it. Keeps the list honest as the catalogue changes.
+        assign skip_band = false
+        if band_min != blank
+          assign band_min_cents = band_min | times: 100
+          if band_min_cents > filter.range_max
+            assign skip_band = true
+          endif
+        endif
+
+        assign band_min_str = ''
+        if band_min != blank
+          assign band_min_str = band_min | times: 100 | money_without_currency | replace: ',', ''
+        endif
+        assign band_max_str = ''
+        if band_max != blank
+          assign band_max_str = band_max | times: 100 | money_without_currency | replace: ',', ''
+        endif
+
+        assign is_active = false
+        if band_min_str == current_min_str and band_max_str == current_max_str
+          assign is_active = true
+        endif
+
+        assign band_id = id_prefix | append: 'PriceBand-' | append: forloop.index
+      -%}
+
+      {%- unless skip_band or band_label == blank -%}
+        <li class="list-menu__item facets__item">
+          <label for="{{ band_id }}" class="facets__label facet-checkbox{% if is_active %} active{% endif %}">
+            <input
+              type="checkbox"
+              id="{{ band_id }}"
+              data-band
+              data-min="{{ band_min }}"
+              data-max="{{ band_max }}"
+              {% if is_active %}
+                checked
+              {% endif %}
+            >
+            <span class="facet-checkbox__text">
+              <span class="facet-checkbox__text-label">{{ band_label | escape }}</span>
+            </span>
+          </label>
+        </li>
+      {%- endunless -%}
+    {%- endfor -%}
+  </ul>
+</oasis-price-bands>
