@@ -1877,24 +1877,50 @@ body .select:has(.facet-filters__sort) .svg-wrapper {
    on the next line hard left. One wrapping flex row does all three — the count
    is forced onto its own line by taking the full width, so nothing depends on
    guessed heights or negative margins. */
-/* Dawn makes .facets-container a 2-column grid, which would size our one-line
-   tabs row to its content instead of the full width. Only relax it where that
-   row is actually present. */
-body .facets-container:has(.oasis-tabs__nav) {
+/* ---------- horizontal facets row ----------------------------------------
+   Dawn lays this row out as a grid: `grid-template-columns: 1fr max-content
+   max-content` with the count pinned to column 3 — which is why it sat to the
+   RIGHT of Sort by — and a full-width second row permanently reserved for
+   filter pills, whether or not any are active. Together with the container's
+   own grid and padding that left ~80px of dead space above the products.
+
+   The design wants one line of controls, the count on the line beneath, and the
+   grid starting straight after. A flex row gives that, and every override below
+   carries `body` because component-facets.css loads after this file. */
+
+body .facets-container:has(.facets__form) {
   display: block;
   padding-top: 0;
 }
 
-.facets__form:has(.oasis-tabs__nav) {
+body .facets__form {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   column-gap: 2.4rem;
-  row-gap: 2.6rem;      /* PSD: ~40px from the tab underline to the count */
+  row-gap: 2.6rem;        /* PSD: ~40px down to the count */
+  margin-bottom: 0;
+  padding-bottom: 2.4rem; /* PSD: ~24px from the count to the first product */
 }
-.facets__form .oasis-tabs__nav { flex: 0 1 auto; }
-.facets__form .facet-filters.sorting { margin-left: auto; }
-body .facets__form .product-count { flex: 0 0 100%; margin: 0; }
+body .facets__form .facets__wrapper,
+body .facets__form .oasis-tabs__nav { flex: 0 1 auto; }
+body .facets__form .facet-filters.sorting { margin-left: auto; }
+body .facets__form .product-count {
+  flex: 0 0 100%;
+  margin: 0;
+  grid-column-start: auto;   /* undo Dawn's column-3 placement */
+}
+
+/* The pills row only earns its space when a filter is actually active. */
+body .facets__form .active-facets {
+  grid-column: auto;
+  grid-row: auto;
+  margin-top: 0;
+}
+body .facets__form .active-facets:not(:has(facet-remove)) { display: none; }
+
+/* Tabs sit above the controls, so that variant carries the extra top space. */
+body .facets__form:has(.oasis-tabs__nav) { padding-top: 4rem; }
 
 /* Standalone grid (page templates) — same count treatment as the collection
    pages, so /pages/... and /collections/... read as one family.
@@ -1947,11 +1973,10 @@ body .product-count-vertical,
 
 /* The tabs no longer sit in their own section, so the row carries the spacing
    the section used to provide. */
-.facets__form:has(.oasis-tabs__nav) { padding-top: 4rem; padding-bottom: 0.8rem; }
 
 @media screen and (max-width: 749px) {
   .facets__form:has(.oasis-tabs__nav) { column-gap: 1.6rem; }
-  .facets__form .facet-filters.sorting { margin-left: 0; flex: 0 0 100%; }
+  body .facets__form .facet-filters.sorting { margin-left: 0; flex: 0 0 100%; }
 }
 
 @media screen and (max-width: 989px) {
