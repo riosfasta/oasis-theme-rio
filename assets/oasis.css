@@ -283,6 +283,72 @@ button.shopify-payment-button__button--unbranded {
   gap: 16px;
 }
 
+/* ---------- product row slider -------------------------------------------
+   One page = one viewport of cards, so eight products at four across is two
+   clean pages. Native scroll-snap does the moving; the JS only pages it and
+   syncs the arrows. --oasis-per-view and --oasis-gap come from the section. */
+
+.oasis-row__slider { position: relative; display: block; }
+
+.oasis-products--slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;              /* the arrows are the affordance */
+  -ms-overflow-style: none;
+  /* Snapping to a card edge that sits flush with the container edge needs the
+     scroll padding cleared, or the first card is nudged inwards. */
+  scroll-padding-inline: 0;
+}
+.oasis-products--slider::-webkit-scrollbar { display: none; }
+
+.oasis-products--slider > * {
+  flex: 0 0 calc((100% - (var(--oasis-per-view, 4) - 1) * var(--oasis-gap, 16px)) / var(--oasis-per-view, 4));
+  scroll-snap-align: start;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .oasis-products--slider { scroll-behavior: auto; }
+}
+
+.oasis-row__arrow {
+  position: absolute;
+  top: var(--oasis-arrow-top, 50%);
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--oasis-line);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--oasis-dark);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+.oasis-row__arrow svg { width: 18px; height: 18px; display: block; }
+.oasis-row__arrow--prev { left: -22px; }
+.oasis-row__arrow--next { right: -22px; }
+.oasis-row__arrow:hover { background: #fff; border-color: var(--oasis-tan); }
+.oasis-row__arrow:focus-visible { outline: 2px solid var(--oasis-tan); outline-offset: 2px; }
+
+/* Nothing to page through: no controls. */
+.oasis-row__arrow:disabled { opacity: 0.3; cursor: default; }
+oasis-row-slider[data-fits] .oasis-row__arrow { display: none; }
+
+/* Narrow viewports have no room outside the container, so tuck them inside. */
+@media screen and (max-width: 1360px) {
+  .oasis-row__arrow--prev { left: 4px; }
+  .oasis-row__arrow--next { right: 4px; }
+}
+@media screen and (max-width: 749px) {
+  .oasis-row__arrow { width: 38px; height: 38px; }
+  .oasis-row__arrow svg { width: 15px; height: 15px; }
+}
+
 .oasis-card { text-align: center; }
 
 /* Box shape, how much clear space sits around the product, and whether there's

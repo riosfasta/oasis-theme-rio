@@ -25,10 +25,13 @@
       {%- endif -%}
     </div>
 
-    <div
-      class="oasis-products"
-      style="grid-template-columns: repeat({{ section.settings.columns_desktop }}, minmax(0, 1fr));"
-    >
+    {%- comment -%}
+      The cards are identical either way, so capture them once and choose the
+      wrapper: a CSS grid, or a scroll-snap track with arrows. The track uses
+      native overflow scrolling rather than transforms, so touch swipe, keyboard
+      and reduced-motion all come for free.
+    {%- endcomment -%}
+    {%- capture row_cards -%}
       {%- if target != blank and target.products_count > 0 -%}
         {%- for product in target.products limit: products_to_show -%}
           {%- render 'oasis-product-card',
@@ -37,22 +40,59 @@
             swatch_limit: section.settings.swatch_limit,
             image_ratio: section.settings.image_ratio,
             media_width: section.settings.oasis_media_width,
-                media_inset: section.settings.oasis_media_inset,
+            media_inset: section.settings.oasis_media_inset,
             media_background: section.settings.oasis_media_background
           -%}
         {%- endfor -%}
       {%- else -%}
         {%- for i in (1..products_to_show) -%}
           {%- render 'oasis-product-card',
-          card_product: null,
-          image_ratio: section.settings.image_ratio,
-          media_width: section.settings.oasis_media_width,
-                media_inset: section.settings.oasis_media_inset,
-          media_background: section.settings.oasis_media_background
-        -%}
+            card_product: null,
+            image_ratio: section.settings.image_ratio,
+            media_width: section.settings.oasis_media_width,
+            media_inset: section.settings.oasis_media_inset,
+            media_background: section.settings.oasis_media_background
+          -%}
         {%- endfor -%}
       {%- endif -%}
-    </div>
+    {%- endcapture -%}
+
+    {%- if section.settings.enable_slider -%}
+      <oasis-row-slider class="oasis-row__slider">
+        <button
+          class="oasis-row__arrow oasis-row__arrow--prev"
+          type="button"
+          data-prev
+          aria-label="{{ 'general.slider.previous_slide' | t }}"
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+            <path d="M15 4 7 12l8 8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <div class="oasis-products oasis-products--slider" data-track>
+          {{ row_cards }}
+        </div>
+
+        <button
+          class="oasis-row__arrow oasis-row__arrow--next"
+          type="button"
+          data-next
+          aria-label="{{ 'general.slider.next_slide' | t }}"
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+            <path d="M9 4l8 8-8 8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </oasis-row-slider>
+    {%- else -%}
+      <div
+        class="oasis-products"
+        style="grid-template-columns: repeat({{ section.settings.columns_desktop }}, minmax(0, 1fr));"
+      >
+        {{ row_cards }}
+      </div>
+    {%- endif -%}
 
     {%- if section.settings.button_label != blank -%}
       <div style="text-align:center; margin-top: 4.4rem;">
@@ -65,10 +105,15 @@
 </div>
 
 <style>
-  #shopify-section-{{ section.id }} .oasis-products { gap: {{ section.settings.grid_gap }}px; }
+  #shopify-section-{{ section.id }} .oasis-products {
+    gap: {{ section.settings.grid_gap }}px;
+    --oasis-gap: {{ section.settings.grid_gap }}px;
+    --oasis-per-view: {{ section.settings.columns_desktop }};
+  }
   @media screen and (max-width: 989px) {
     #shopify-section-{{ section.id }} .oasis-products {
       grid-template-columns: repeat({{ section.settings.columns_mobile }}, minmax(0, 1fr)) !important;
+      --oasis-per-view: {{ section.settings.columns_mobile }};
     }
   }
 </style>
@@ -106,6 +151,13 @@
       "step": 1,
       "label": "Columns on desktop",
       "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_slider",
+      "label": "Slide instead of wrap",
+      "info": "Shows \"Columns on desktop\" products at a time with arrows to page through the rest. Without it, all products wrap onto multiple rows.",
+      "default": false
     },
     {
       "type": "select",
