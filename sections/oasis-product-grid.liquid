@@ -57,6 +57,7 @@
               endif
             -%}
             {%- render 'oasis-product-card',
+              show_secondary_image: section.settings.oasis_secondary_image,
               card_product: product,
               show_swatches: section.settings.show_swatches,
               swatch_limit: section.settings.swatch_limit,
@@ -209,6 +210,13 @@
         { "value": "var(--oasis-blush)", "label": "Blush" }
       ],
       "default": "none"
+    },
+    {
+      "type": "checkbox",
+      "id": "oasis_secondary_image",
+      "label": "Show second image on hover",
+      "info": "Cross-fades to the product's second image. Products with only one image are unaffected.",
+      "default": true
     },
     {
       "type": "checkbox",

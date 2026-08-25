@@ -35,6 +35,7 @@
       {%- if target != blank and target.products_count > 0 -%}
         {%- for product in target.products limit: products_to_show -%}
           {%- render 'oasis-product-card',
+            show_secondary_image: section.settings.oasis_secondary_image,
             card_product: product,
             show_swatches: section.settings.show_swatches,
             swatch_limit: section.settings.swatch_limit,
@@ -47,6 +48,7 @@
       {%- else -%}
         {%- for i in (1..products_to_show) -%}
           {%- render 'oasis-product-card',
+            show_secondary_image: section.settings.oasis_secondary_image,
             card_product: null,
             image_ratio: section.settings.image_ratio,
             media_width: section.settings.oasis_media_width,
@@ -223,6 +225,13 @@
         { "value": "var(--oasis-blush)", "label": "Blush" }
       ],
       "default": "none"
+    },
+    {
+      "type": "checkbox",
+      "id": "oasis_secondary_image",
+      "label": "Show second image on hover",
+      "info": "Cross-fades to the product's second image. Products with only one image are unaffected.",
+      "default": true
     },
     {
       "type": "checkbox",

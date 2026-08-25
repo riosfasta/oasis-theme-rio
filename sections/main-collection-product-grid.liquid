@@ -195,6 +195,7 @@
                 >
                   {%- if section.settings.oasis_card -%}
                     {%- render 'oasis-product-card',
+                      show_secondary_image: section.settings.oasis_secondary_image,
                       card_product: product,
                       show_swatches: section.settings.oasis_swatches,
                       swatch_limit: section.settings.oasis_swatch_limit,
@@ -489,6 +490,13 @@
       "default": true,
       "label": "Use the Oasis product card",
       "info": "Same card as the homepage rows: centred title, price, and variant thumbnails that swap the main image on hover."
+    },
+    {
+      "type": "checkbox",
+      "id": "oasis_secondary_image",
+      "label": "Show second image on hover",
+      "info": "Cross-fades to the product's second image. Products with only one image are unaffected.",
+      "default": true
     },
     {
       "type": "checkbox",

@@ -14,6 +14,10 @@
     - media_background: {String} css colour behind the product, or 'none'
     - lazy_load: {Boolean} pass false for cards above the fold so the first row
       is not deferred (Dawn computes this per card; ignoring it costs LCP)
+    - show_secondary_image: {Boolean} cross-fade to the product's second media
+      on hover. It is stacked, not swapped, so the fade is smooth and the
+      variant-thumbnail swap below keeps working: a hovered or selected swatch
+      hides the secondary image so its own image is the one you see.
 {%- endcomment -%}
 
 {%- liquid
@@ -48,6 +52,24 @@
             data-main-image: '',
             alt: card_product.featured_media.alt
         }}
+
+        {%- if show_secondary_image and card_product.media.size > 1 -%}
+          {%- comment -%}
+            media[1] rather than images[1] so it follows the order the merchant
+            set in the admin. Always lazy: it is never the LCP image.
+          {%- endcomment -%}
+          {{
+            card_product.media[1]
+            | image_url: width: 800
+            | image_tag:
+              widths: '200, 300, 400, 600, 800',
+              sizes: '(min-width: 990px) 300px, 45vw',
+              loading: 'lazy',
+              class: 'oasis-card__image oasis-card__image--secondary',
+              aria-hidden: 'true',
+              alt: ''
+          }}
+        {%- endif -%}
       {%- else -%}
         {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
       {%- endif -%}
