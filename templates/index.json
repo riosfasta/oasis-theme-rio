@@ -99,6 +99,7 @@
     "freedom_story": {
       "type": "oasis-story-banner",
       "settings": {
+        "image": "shopify://shop_images/stitching_banner.png",
         "fallback_asset": "oasis-freedom-story-bg.jpg",
         "content_position": "left",
         "kicker_style": "condensed",
