@@ -230,11 +230,11 @@ button.shopify-payment-button__button--unbranded {
 .header__heading-logo { max-width: 145px; }
 .header__inline-menu { margin-left: 0; }
 
-/* Nav — Garet Book 22 */
+/* Nav — Garet Book 17 */
 .header__menu-item,
 .header__menu-item.list-menu__item {
   font-family: var(--oasis-font-body);
-  font-size: 2.2rem;
+  font-size: 1.7rem;
   font-weight: 300;
   letter-spacing: 0;
   color: var(--oasis-dark);
@@ -693,6 +693,13 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
   margin: 0;
 }
 
+/* In the PSD the script's ink starts exactly where the kicker's ink ends — the
+   two are flush. On screen there was a 40px gap, because the kicker's line box
+   extends below its caps and Brittany's ink sits low in its own box. Measured
+   from the live render: 40px at a 100px script, hence -0.4em, which stays
+   correct through every responsive size step rather than a fixed rem. */
+.oasis-story:not(.oasis-story--tracked) .oasis-story__script { margin-top: -0.4em; }
+
 /* Body — Garet Book 22 */
 .oasis-story__text {
   margin: 1.2rem 0 0;
@@ -841,7 +848,7 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
 .oasis-footer__heading {
   font-family: var(--oasis-font-cond);
   font-weight: 500;
-  font-size: 2rem;
+  font-size: 2.7rem;
   line-height: 1;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -866,9 +873,11 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
 /* Links — Garet Book 22, 36px rhythm */
 .oasis-footer__links { list-style: none; margin: 0; padding: 0; }
 .oasis-footer__links li { line-height: 1.3; }
-.oasis-footer__links li + li { margin-top: 0.7rem; }
+/* Double-spaced: 1.6rem at line-height 1.3 is a 2.08rem line box, so a 2.1rem
+   gap puts a full blank line between each link. */
+.oasis-footer__links li + li { margin-top: 2.1rem; }
 .oasis-footer__links a {
-  font-size: 2.2rem;
+  font-size: 1.6rem;
   font-weight: 300;
   text-decoration: none;
   color: var(--oasis-dark);
@@ -1016,8 +1025,7 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
   .oasis-purpose__icon { width: 104px; }
   .oasis-purpose__icon img { width: 88px; }
   .oasis-purpose__plus { padding-top: 26px; font-size: 3.6rem; }
-  .oasis-footer__heading { font-size: 3.4rem; }
-  .oasis-footer__links a { font-size: 2rem; }
+  .oasis-footer__brand .oasis-footer__heading { font-size: 3.4rem; }
 }
 
 @media screen and (max-width: 989px) {
@@ -1079,7 +1087,7 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
   .oasis-story__kicker { font-size: 3.6rem; }
   .oasis-story__script { font-size: 4.6rem; }
   .oasis-footer__grid { grid-template-columns: 1fr; }
-  .oasis-footer__heading { font-size: 3rem; }
+  .oasis-footer__brand .oasis-footer__heading { font-size: 3rem; }
 }
 
 /* ==========================================================================
