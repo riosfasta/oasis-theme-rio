@@ -697,14 +697,15 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
    its own box, so the two lines' boxes touch while the ink stayed ~40px apart.
    -0.4em closes that (and scales through every size step, unlike a fixed rem).
 
-   Flush is what the PSD has, but it reads too tight on screen, so a couple of
-   pixels of air on top. Measured off the render at -0.4em: 1px above the
-   script's ink and 2px below it, so +1px and +3px land the asked-for 2px and
-   5px. Kept in px because that is what the eye is judging here — the em term
-   does the scaling. */
+   How much to close it was measured against the PSD, comparing the distance
+   from the kicker's ink to the script's SUBSTANTIAL ink — not to the tips of
+   its d/t ascenders, which reach almost to the caps line and make the gap look
+   closed when it isn't. At matched width the PSD has 35px there and -0.4em gave
+   12px, so the pull-up eases to -0.24em (PSD: 0.27em) and the space beneath
+   becomes 0.2em (PSD: 0.25em). Both in em so the lockup holds at every size. */
 .oasis-story:not(.oasis-story--tracked) .oasis-story__script {
-  margin-top: calc(-0.4em + 1px);
-  margin-bottom: 3px;
+  margin-top: -0.24em;
+  margin-bottom: 0.2em;
 }
 
 /* Body — Garet Book 22 */
