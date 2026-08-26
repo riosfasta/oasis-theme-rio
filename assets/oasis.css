@@ -693,12 +693,19 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
   margin: 0;
 }
 
-/* In the PSD the script's ink starts exactly where the kicker's ink ends — the
-   two are flush. On screen there was a 40px gap, because the kicker's line box
-   extends below its caps and Brittany's ink sits low in its own box. Measured
-   from the live render: 40px at a 100px script, hence -0.4em, which stays
-   correct through every responsive size step rather than a fixed rem. */
-.oasis-story:not(.oasis-story--tracked) .oasis-story__script { margin-top: -0.4em; }
+/* The kicker's line box extends below its caps and Brittany's ink sits low in
+   its own box, so the two lines' boxes touch while the ink stayed ~40px apart.
+   -0.4em closes that (and scales through every size step, unlike a fixed rem).
+
+   Flush is what the PSD has, but it reads too tight on screen, so a couple of
+   pixels of air on top. Measured off the render at -0.4em: 1px above the
+   script's ink and 2px below it, so +1px and +3px land the asked-for 2px and
+   5px. Kept in px because that is what the eye is judging here — the em term
+   does the scaling. */
+.oasis-story:not(.oasis-story--tracked) .oasis-story__script {
+  margin-top: calc(-0.4em + 1px);
+  margin-bottom: 3px;
+}
 
 /* Body — Garet Book 22 */
 .oasis-story__text {
