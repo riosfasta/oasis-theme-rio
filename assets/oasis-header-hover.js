@@ -11,6 +11,15 @@
     by a theme-editor re-render need no rebinding.
   - Desktop with a real pointer only. On touch there is no hover, and the mobile
     drawer is a different control entirely.
+
+  It also makes the parent item ("Shop") follow its own link on click. Dawn
+  renders a parent with children as a <summary>, which is a toggle, not a link —
+  so the top-level item was unclickable. Since hover now opens the panel, a
+  mouse click is free to navigate.
+
+  Only a real pointer click navigates: keyboard activation reports
+  event.detail === 0, and those are left alone so Enter still opens the panel.
+  Without that, keyboard users would lose all access to the submenu.
 */
 (() => {
   const DESKTOP = '(hover: hover) and (min-width: 990px)';
@@ -40,6 +49,18 @@
     clearTimeout(timer);
     closeOthers(menu);
     setOpen(menu, true);
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!window.matchMedia(DESKTOP).matches) return;
+    const summary = event.target.closest?.('header-menu > details > summary');
+    if (!summary) return;
+    if (event.detail === 0) return;            // keyboard: let it toggle
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
+    const href = summary.dataset.oasisHref;
+    if (!href || href === '#') return;         // no URL set on the parent
+    event.preventDefault();
+    window.location.href = href;
   });
 
   document.addEventListener('mouseout', (event) => {
