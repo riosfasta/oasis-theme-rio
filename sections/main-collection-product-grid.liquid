@@ -227,7 +227,16 @@
             </ul>
 
             {%- if paginate.pages > 1 -%}
-              {% render 'pagination', paginate: paginate, anchor: '' %}
+              {%- if section.settings.oasis_pagination == 'load_more' -%}
+                {% render 'oasis-load-more',
+                  paginate: paginate,
+                  grid: '#product-grid',
+                  item: 'li',
+                  label: section.settings.oasis_load_more_label
+                %}
+              {%- else -%}
+                {% render 'pagination', paginate: paginate, anchor: '' %}
+              {%- endif -%}
             {%- endif -%}
           </div>
         {%- endif -%}
@@ -273,6 +282,23 @@
   "name": "t:sections.main-collection-product-grid.name",
   "class": "section",
   "settings": [
+    {
+      "type": "select",
+      "id": "oasis_pagination",
+      "label": "Pagination style",
+      "info": "Load more appends the next page in place. It falls back to normal page links if JavaScript fails.",
+      "options": [
+        { "value": "numbered", "label": "Numbered pages" },
+        { "value": "load_more", "label": "Load more button" }
+      ],
+      "default": "load_more"
+    },
+    {
+      "type": "text",
+      "id": "oasis_load_more_label",
+      "label": "Load more button text",
+      "default": "Load more"
+    },
     {
       "type": "range",
       "id": "products_per_page",

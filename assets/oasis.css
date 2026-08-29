@@ -2233,3 +2233,85 @@ body .product-count-vertical,
   .oasis-journey__col { padding-inline: 1.6rem; }
   .oasis-journey__col + .oasis-journey__col { border-left: 0; }
 }
+
+/* ---------- load more --------------------------------------------------- */
+/* Replaces the 1 2 3 pagination. The count and the rule under it give the
+   button something to say — "Showing 12 of 48" is the reason to press it — and
+   the rule fills as batches land, so the reader can see how much is left. */
+
+.oasis-load-more {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+  margin-top: 5.6rem;
+}
+
+.oasis-load-more__count {
+  margin: 0;
+  font-family: var(--oasis-font-body);
+  font-weight: 300;
+  font-size: 1.3rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--oasis-dark);
+}
+
+.oasis-load-more__track {
+  display: block;
+  width: 180px;
+  height: 2px;
+  background: var(--oasis-line);
+  overflow: hidden;
+}
+
+.oasis-load-more__fill {
+  display: block;
+  height: 100%;
+  background: var(--oasis-tan);
+  transition: width 0.4s ease;
+}
+
+.oasis-load-more__button {
+  margin-top: 1.2rem;
+  min-width: 244px;
+}
+
+/* The label is swapped for a spinner rather than sitting beside one, so the
+   button keeps its width and the row below it does not jump. */
+.oasis-load-more[data-loading] .oasis-load-more__button {
+  color: transparent;
+  pointer-events: none;
+  position: relative;
+}
+
+.oasis-load-more[data-loading] .oasis-load-more__button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  border: 2px solid var(--oasis-dark);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: oasis-load-more-spin 0.7s linear infinite;
+}
+
+@keyframes oasis-load-more-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .oasis-load-more__fill { transition: none; }
+  .oasis-load-more[data-loading] .oasis-load-more__button::after { animation-duration: 2s; }
+}
+
+/* Everything is loaded — the tally alone reads as a full stop. */
+.oasis-load-more[data-exhausted] .oasis-load-more__track { opacity: 0.55; }
+
+@media screen and (max-width: 749px) {
+  .oasis-load-more { margin-top: 4rem; }
+  .oasis-load-more__button { min-width: 0; width: 100%; }
+}

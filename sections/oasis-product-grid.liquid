@@ -19,6 +19,13 @@
   assign per_page = section.settings.products_per_page
 -%}
 
+{%- comment -%}
+  The load-more selector is also run against the fetched next page, so it has to
+  be stable across page loads — the section wrapper id is. Captured rather than
+  written inline because Liquid does not interpolate inside a string argument.
+{%- endcomment -%}
+{%- capture oasis_grid_selector -%}#shopify-section-{{ section.id }} .oasis-products{%- endcapture -%}
+
 <div
   class="oasis-row"
   style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;"
@@ -71,7 +78,16 @@
         </div>
 
         {%- if paginate.pages > 1 -%}
-          {% render 'pagination', paginate: paginate, anchor: '' %}
+          {%- if section.settings.oasis_pagination == 'load_more' -%}
+            {% render 'oasis-load-more',
+              paginate: paginate,
+              grid: oasis_grid_selector,
+              item: 'oasis-card',
+              label: section.settings.oasis_load_more_label
+            %}
+          {%- else -%}
+            {% render 'pagination', paginate: paginate, anchor: '' %}
+          {%- endif -%}
         {%- endif -%}
       {%- endpaginate -%}
     {%- else -%}
@@ -102,6 +118,23 @@
       "type": "collection",
       "id": "collection",
       "label": "Collection"
+    },
+    {
+      "type": "select",
+      "id": "oasis_pagination",
+      "label": "Pagination style",
+      "info": "Load more appends the next page in place. It falls back to normal page links if JavaScript fails.",
+      "options": [
+        { "value": "numbered", "label": "Numbered pages" },
+        { "value": "load_more", "label": "Load more button" }
+      ],
+      "default": "load_more"
+    },
+    {
+      "type": "text",
+      "id": "oasis_load_more_label",
+      "label": "Load more button text",
+      "default": "Load more"
     },
     {
       "type": "range",

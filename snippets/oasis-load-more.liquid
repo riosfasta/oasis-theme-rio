@@ -1,0 +1,76 @@
+{%- comment -%}
+  THE OASIS — load more
+
+  Replaces the numbered 1 2 3 pagination with a single button that appends the
+  next page's cards to the grid in place.
+
+  It renders as an <a> pointing at the real ?page=N URL rather than a <button>.
+  With JavaScript off, or if the fetch fails, clicking it still walks the reader
+  through the collection page by page, and crawlers still reach every product —
+  which a button would quietly break.
+
+  Must be used inside a paginate block. (Not written as a tag here: Shopify
+  requires block tags inside a comment to be balanced, so a lone opening one
+  breaks the file.)
+
+  Accepts:
+    - paginate: {Object} required
+    - grid: {String} required. CSS selector for the element the new cards are
+      appended to. It is also run against the *fetched* page, so it has to be an
+      id or a section-scoped selector — something stable across pages — not a
+      selector that depends on position in the document.
+    - item: {String} required. CSS selector matching one card, as a direct child
+      of that grid.
+    - label: {String} button text. Default "Load more".
+{%- endcomment -%}
+
+{%- liquid
+  assign more_label = label | default: 'Load more'
+
+  if paginate.next
+    assign shown_now = paginate.current_offset | plus: paginate.page_size
+  else
+    assign shown_now = paginate.items
+  endif
+-%}
+
+{%- if paginate.pages > 1 -%}
+  <oasis-load-more
+    class="oasis-load-more"
+    data-grid="{{ grid | escape }}"
+    data-item="{{ item | escape }}"
+    data-total="{{ paginate.items }}"
+    data-offset="{{ paginate.current_offset }}"
+    {% unless paginate.next %}
+      data-exhausted
+    {% endunless %}
+  >
+    <p
+      class="oasis-load-more__count"
+      data-count
+      data-template="Showing [shown] of [total] products"
+      aria-live="polite"
+    >
+      Showing {{ shown_now }} of {{ paginate.items }} products
+    </p>
+
+    <span class="oasis-load-more__track" aria-hidden="true">
+      <span
+        class="oasis-load-more__fill"
+        data-fill
+        style="width: {{ shown_now | times: 100 | divided_by: paginate.items }}%;"
+      ></span>
+    </span>
+
+    {%- if paginate.next -%}
+      <a
+        class="oasis-btn oasis-btn--outline oasis-load-more__button"
+        href="{{ paginate.next.url }}"
+        rel="next"
+        data-more
+      >
+        {{ more_label }}
+      </a>
+    {%- endif -%}
+  </oasis-load-more>
+{%- endif -%}
