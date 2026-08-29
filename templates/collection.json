@@ -70,7 +70,7 @@
     "story": {
       "type": "oasis-story-banner",
       "settings": {
-        "image": "shopify://shop_images/Shop_All_Products_Design_footerbg_673f9092-eee6-491a-873b-4275175fcc47.webp",
+        "image": "shopify://shop_images/New_Shop_All_Products_Design_footerbg.webp",
         "fallback_asset": "",
         "content_position": "right",
         "kicker_style": "tracked",
