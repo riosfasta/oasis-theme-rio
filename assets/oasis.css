@@ -112,6 +112,12 @@ a { color: inherit; }
 
 .oasis-leaf { display: block; width: 107px; height: auto; }
 
+/* The leaf had no margin, so the kicker sat straight underneath it. The PSD's
+   story band puts the leaf at y2579-2630 with the kicker starting at 2658 —
+   a 28px gap. Scoped to the story band; the About page's ripple leaf, the CTA
+   block and the purpose band keep their own spacing. */
+.oasis-story .oasis-leaf { margin: 2.4rem 0 2.8rem; }
+
 /* ---------- buttons — Garet Book 20 / +75 tracking / 62px tall ------------ */
 
 .oasis-btn {
