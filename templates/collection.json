@@ -70,7 +70,8 @@
     "story": {
       "type": "oasis-story-banner",
       "settings": {
-        "fallback_asset": "oasis-story-restore-hope.jpg",
+        "image": "shopify://shop_images/Shop_All_Products_Design_footerbg.webp",
+        "fallback_asset": "",
         "content_position": "right",
         "kicker_style": "tracked",
         "text_align": "center",
