@@ -12,7 +12,7 @@
     "banner": {
       "type": "oasis-page-banner",
       "settings": {
-        "image": "shopify://shop_images/journals_banner.webp",
+        "image": "shopify://shop_images/journals_banner2.webp",
         "fallback_asset": "oasis-banner-journals.jpg",
         "content_position": "left",
         "height": 365,
