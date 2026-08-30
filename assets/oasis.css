@@ -1687,7 +1687,13 @@ body .select:has(.facet-filters__sort) .svg-wrapper {
   --grid-mobile-horizontal-spacing: 12px;
   --grid-mobile-vertical-spacing: 32px;
 }
-.oasis-grid .grid__item { max-width: none; }
+/* Dawn caps a grid item with BOTH width and max-width, and leans on max-width
+   to stop flex-grow filling a partial row. Dropping max-width here (so a card
+   can fill its column at every breakpoint) removed that brake: a filtered
+   collection showing one product rendered it 1280px wide on a 1440px screen
+   instead of 308px, and any last row of 2 or 3 stretched too. Refusing to grow
+   is the brake that doesn't depend on the cap. */
+.oasis-grid .grid__item { max-width: none; flex-grow: 0; }
 .oasis-grid oasis-card { height: 100%; }
 
 /* Per-category hooks. The grid carries `oasis-cat--<collection-handle>`, so a
