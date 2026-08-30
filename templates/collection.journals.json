@@ -22,8 +22,8 @@
         "use_page": false,
         "title": "Shop Journals",
         "show_ornament": true,
-        "text": "<p>Hand-stitched journals made to hold your stories, ideas, prayers, and dreams.</p>",
-        "ornament_asset": "oasis-ornament-divider-journals.png"
+        "ornament_asset": "oasis-ornament-divider-journals.png",
+        "text": "<p>Hand-stitched journals made to hold your stories, ideas, prayers, and dreams.</p>"
       }
     },
     "product-grid": {
@@ -43,8 +43,9 @@
         "quick_add": "none",
         "enable_filtering": false,
         "filter_type": "horizontal",
-        "oasis_tabs": "All Journals | /collections/journals-only\nFloral | \nNature | \nFaith | \nTravel & World | \nPatterns & Designs |",
+        "oasis_tabs": "All Journals | /collections/journals-only\nFloral | /collections/florals\nNature | \nFaith | \nTravel & World | \nPatterns & Designs |",
         "oasis_tabs_menu": "",
+        "oasis_tabs_filter": false,
         "oasis_tabs_label": "Journal categories",
         "oasis_price_bands": "Under $10 |  | 10\n$10 – $20 | 10 | 20\n$20 – $30 | 20 | 30\n$30 and above | 30 |",
         "enable_sorting": true,
