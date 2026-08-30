@@ -22,7 +22,8 @@
         "use_page": false,
         "title": "Shop Journals",
         "show_ornament": true,
-        "text": "<p>Hand-stitched journals made to hold your stories, ideas, prayers, and dreams.</p>"
+        "text": "<p>Hand-stitched journals made to hold your stories, ideas, prayers, and dreams.</p>",
+        "ornament_asset": "oasis-ornament-divider-journals.png"
       }
     },
     "product-grid": {

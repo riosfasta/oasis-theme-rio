@@ -26,6 +26,22 @@
   if section.settings.use_page and page != blank and b_title == blank
     assign b_title = page.title
   endif
+
+  comment
+    Each ornament is a different shape and the CSS sets height:auto, so the
+    width/height attributes have to be that file's own intrinsic size — not the
+    278px it displays at — or the banner jumps as the image loads. Keep this
+    case in step with the files in assets/.
+  endcomment
+  assign ornament = section.settings.ornament_asset | default: 'oasis-ornament-divider-banner.png'
+  case ornament
+    when 'oasis-ornament-divider-journals.png'
+      assign ornament_w = 1112
+      assign ornament_h = 150
+    else
+      assign ornament_w = 1112
+      assign ornament_h = 162
+  endcase
 -%}
 
 <div class="oasis-banner oasis-banner--{{ section.settings.content_position }}" id="OasisBanner-{{ section.id }}">
@@ -62,10 +78,10 @@
       {%- if section.settings.show_ornament -%}
         <img
           class="oasis-banner__ornament"
-          src="{{ 'oasis-ornament-divider-banner.png' | asset_url }}"
+          src="{{ ornament | asset_url }}"
           alt=""
-          width="278"
-          height="37"
+          width="{{ ornament_w }}"
+          height="{{ ornament_h }}"
           loading="lazy"
         >
       {%- endif -%}
@@ -176,6 +192,16 @@
       "id": "show_ornament",
       "label": "Show floral divider",
       "default": true
+    },
+    {
+      "type": "select",
+      "id": "ornament_asset",
+      "label": "Which divider",
+      "options": [
+        { "value": "oasis-ornament-divider-banner.png", "label": "Branch" },
+        { "value": "oasis-ornament-divider-journals.png", "label": "Leafy vine" }
+      ],
+      "default": "oasis-ornament-divider-banner.png"
     },
     {
       "type": "richtext",
