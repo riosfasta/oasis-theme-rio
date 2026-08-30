@@ -21,7 +21,7 @@ if (!customElements.get('oasis-tab-filter')) {
     'oasis-tab-filter',
     class OasisTabFilter extends HTMLElement {
       connectedCallback() {
-        this.links = Array.from(this.querySelectorAll('.oasis-tabs__link[data-oasis-tag]'));
+        this.links = Array.from(this.querySelectorAll('.oasis-tabs__link[data-oasis-filter]'));
         if (!this.links.length) return;
 
         this.sync = this.sync.bind(this);
@@ -49,7 +49,7 @@ if (!customElements.get('oasis-tab-filter')) {
       }
 
       onClick(event) {
-        const link = event.target.closest('.oasis-tabs__link[data-oasis-tag]');
+        const link = event.target.closest('.oasis-tabs__link[data-oasis-filter]');
         if (!link) return;
         // Let a modified click open the filtered collection in a tab, as a link should.
         if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
@@ -69,10 +69,19 @@ if (!customElements.get('oasis-tab-filter')) {
       }
 
       sync() {
-        const active = new URLSearchParams(window.location.search).getAll('filter.p.tag');
+        const search = new URLSearchParams(window.location.search);
+        // The "show everything" tab is the one that is on when nothing is filtering.
+        const anyFilter = Array.from(search.keys()).some((key) => key.startsWith('filter.'));
+
         this.links.forEach((link) => {
-          const tag = link.dataset.oasisTag || '';
-          const on = tag ? active.includes(tag) : active.length === 0;
+          const query = link.dataset.oasisFilter || '';
+          let on;
+          if (!query) {
+            on = !anyFilter;
+          } else {
+            const wanted = new URLSearchParams(query);
+            on = Array.from(wanted.entries()).every(([key, value]) => search.getAll(key).includes(value));
+          }
           link.classList.toggle('oasis-tabs__link--active', on);
           if (on) {
             link.setAttribute('aria-current', 'page');

@@ -11,11 +11,18 @@
   design shows on the unfiltered page.
 
   FILTER MODE (filter_tags: true, collection routes only)
-  Each tab becomes a product-tag filter on the collection it already sits in,
-  rather than a link somewhere else. The first row is always the "show
-  everything" tab; every row after it filters by the tag after the pipe, or by
-  its own label when nothing follows the pipe. The row is wrapped in
-  <oasis-tab-filter>, which swaps the grid in place instead of loading a page.
+  Each tab filters the collection it already sits in, rather than linking away.
+  The first row is always the "show everything" tab. After that, the text
+  following the pipe is read as:
+    - a whole filter query when it contains "=", e.g. filter.v.availability=0
+    - otherwise a product tag, e.g. Floral
+  and an empty value means the tag is spelled exactly like the label. The row is
+  wrapped in <oasis-tab-filter>, which swaps the grid in place rather than
+  loading a page.
+
+  A filter only works if Shopify knows about it: a tag tab needs a Product tag
+  filter added in Search & Discovery, or Shopify ignores the parameter and hands
+  back the unfiltered collection.
 
   The links stay real hrefs so that a middle-click still opens the filtered
   collection in a new tab, and so the row works with JavaScript off.
@@ -33,18 +40,17 @@
     assign rows = links | newline_to_br | split: '<br />'
 
     comment
-      Which tag is filtering right now. Shopify only populates a tag filter when
-      one is configured in Search & Discovery, so this stays empty — and every
-      tab stays inactive but the first — until that filter exists.
+      Every filter currently applied, as an encoded "|param=value|" list, so a
+      tab can test for its own query with a single contains. Encoded because
+      that is the form the tabs carry, and the two have to compare like for like.
     endcomment
-    assign active_tag = ''
+    assign active_params = '|'
     if filter_tags and results != blank
       for oasis_filter in results.filters
-        if oasis_filter.param_name == 'filter.p.tag'
-          for oasis_value in oasis_filter.active_values
-            assign active_tag = oasis_value.value
-          endfor
-        endif
+        for oasis_value in oasis_filter.active_values
+          assign oasis_encoded = oasis_value.value | url_encode
+          assign active_params = active_params | append: oasis_filter.param_name | append: '=' | append: oasis_encoded | append: '|'
+        endfor
       endfor
     endif
 
@@ -82,24 +88,37 @@
 
           if filter_tags
             comment
-              The first row clears the filter; the rest carry a tag. An empty
-              value means the tag is spelled exactly like the label, which is
-              how these read in the design.
+              The first row clears every filter; the rest carry a query. A value
+              holding "=" is used as written, so a tab can filter on anything
+              Shopify offers; anything else is treated as a product tag.
             endcomment
             if forloop.first
-              assign row_tag = ''
+              assign row_query = ''
               assign row_href = results_url
             else
-              assign row_tag = row_value | default: row_label
-              assign row_tag_param = row_tag | url_encode
-              assign row_href = results_url | append: '?filter.p.tag=' | append: row_tag_param
+              if row_value contains '='
+                assign row_query = row_value
+              else
+                assign row_tag = row_value | default: row_label
+                assign row_tag_enc = row_tag | url_encode
+                assign row_query = 'filter.p.tag=' | append: row_tag_enc
+              endif
+              assign row_href = results_url | append: '?' | append: row_query
             endif
+
             assign is_active = false
-            if row_tag == active_tag
-              assign is_active = true
+            if row_query == blank
+              if active_params == '|'
+                assign is_active = true
+              endif
+            else
+              assign row_probe = '|' | append: row_query | append: '|'
+              if active_params contains row_probe
+                assign is_active = true
+              endif
             endif
           else
-            assign row_tag = ''
+            assign row_query = ''
             assign row_href = row_value
             assign is_active = false
             if forloop.index == active_index
@@ -114,7 +133,7 @@
                 class="oasis-tabs__link{% if is_active %} oasis-tabs__link--active{% endif %}"
                 href="{{ row_href | escape }}"
                 {% if filter_tags %}
-                  data-oasis-tag="{{ row_tag | escape }}"
+                  data-oasis-filter="{{ row_query | escape }}"
                 {% endif %}
                 {% if is_active %}
                   aria-current="page"
