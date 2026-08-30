@@ -130,6 +130,7 @@
             oasis_tabs: section.settings.oasis_tabs,
             oasis_tabs_menu: section.settings.oasis_tabs_menu,
             oasis_tabs_label: section.settings.oasis_tabs_label,
+            oasis_tabs_filter: section.settings.oasis_tabs_filter,
             oasis_price_bands: section.settings.oasis_price_bands,
             paginate: paginate
           %}
@@ -486,6 +487,13 @@
       "id": "oasis_tabs_menu",
       "label": "Category tabs menu (optional)",
       "info": "Overrides the typed tabs above. Careful: if the menu is ever deleted, the theme editor clears this setting on its next save."
+    },
+    {
+      "type": "checkbox",
+      "id": "oasis_tabs_filter",
+      "label": "Tabs filter this collection",
+      "info": "Each tab filters by a product tag instead of linking away, and the grid swaps in place. The first tab shows everything; the rest use the text after the | as the tag, or their own label if that is empty. Needs the products tagged and a Product tag filter enabled in Search & Discovery.",
+      "default": false
     },
     {
       "type": "text",

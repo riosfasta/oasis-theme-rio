@@ -216,6 +216,11 @@
               id="main-search-filters"
               data-id="{{ section.id }}"
             >
+              {%- comment -%}
+                oasis_tabs_filter is false here: search has no single collection
+                to filter, so the tabs stay plain links. Passed explicitly rather
+                than omitted because render isolates scope.
+              {%- endcomment -%}
               {% render 'facets',
                 results: search,
                 enable_filtering: section.settings.enable_filtering,
@@ -224,6 +229,7 @@
                 oasis_tabs: section.settings.oasis_tabs,
                 oasis_tabs_menu: section.settings.oasis_tabs_menu,
                 oasis_tabs_label: section.settings.oasis_tabs_label,
+                oasis_tabs_filter: false,
                 oasis_price_bands: section.settings.oasis_price_bands,
                 paginate: paginate
               %}

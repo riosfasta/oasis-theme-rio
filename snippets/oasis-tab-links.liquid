@@ -10,16 +10,48 @@
   matches the current URL, the first one is shown as active, which is what the
   design shows on the unfiltered page.
 
+  FILTER MODE (filter_tags: true, collection routes only)
+  Each tab becomes a product-tag filter on the collection it already sits in,
+  rather than a link somewhere else. The first row is always the "show
+  everything" tab; every row after it filters by the tag after the pipe, or by
+  its own label when nothing follows the pipe. The row is wrapped in
+  <oasis-tab-filter>, which swaps the grid in place instead of loading a page.
+
+  The links stay real hrefs so that a middle-click still opens the filtered
+  collection in a new tab, and so the row works with JavaScript off.
+
   Accepts:
     - links: {String} one per line, "Label | /url" (url optional)
     - aria_label: {String}
+    - filter_tags: {Boolean} turn on filter mode
+    - results: {Object} the collection, for reading which tag is active
+    - results_url: {String} the collection's own URL, for the "all" tab
 {%- endcomment -%}
 
 {%- if links != blank -%}
   {%- liquid
     assign rows = links | newline_to_br | split: '<br />'
 
-    # Work out the active tab first, so "no match" can fall back to the first.
+    comment
+      Which tag is filtering right now. Shopify only populates a tag filter when
+      one is configured in Search & Discovery, so this stays empty — and every
+      tab stays inactive but the first — until that filter exists.
+    endcomment
+    assign active_tag = ''
+    if filter_tags and results != blank
+      for oasis_filter in results.filters
+        if oasis_filter.param_name == 'filter.p.tag'
+          for oasis_value in oasis_filter.active_values
+            assign active_tag = oasis_value.value
+          endfor
+        endif
+      endfor
+    endif
+
+    comment
+      Link mode only: work out the active tab first, so "no match" can fall back
+      to the first.
+    endcomment
     assign active_index = 0
     for row in rows
       assign parts = row | split: '|'
@@ -46,10 +78,33 @@
         {%- liquid
           assign parts = row | split: '|'
           assign row_label = parts[0] | strip
-          assign row_href = parts[1] | strip
-          assign is_active = false
-          if forloop.index == active_index
-            assign is_active = true
+          assign row_value = parts[1] | strip
+
+          if filter_tags
+            comment
+              The first row clears the filter; the rest carry a tag. An empty
+              value means the tag is spelled exactly like the label, which is
+              how these read in the design.
+            endcomment
+            if forloop.first
+              assign row_tag = ''
+              assign row_href = results_url
+            else
+              assign row_tag = row_value | default: row_label
+              assign row_tag_param = row_tag | url_encode
+              assign row_href = results_url | append: '?filter.p.tag=' | append: row_tag_param
+            endif
+            assign is_active = false
+            if row_tag == active_tag
+              assign is_active = true
+            endif
+          else
+            assign row_tag = ''
+            assign row_href = row_value
+            assign is_active = false
+            if forloop.index == active_index
+              assign is_active = true
+            endif
           endif
         -%}
         {%- if row_label != blank -%}
@@ -58,6 +113,9 @@
               <a
                 class="oasis-tabs__link{% if is_active %} oasis-tabs__link--active{% endif %}"
                 href="{{ row_href | escape }}"
+                {% if filter_tags %}
+                  data-oasis-tag="{{ row_tag | escape }}"
+                {% endif %}
                 {% if is_active %}
                   aria-current="page"
                 {% endif %}
@@ -75,8 +133,10 @@
   {%- endcapture -%}
 
   {%- if tab_items != blank -%}
-    <nav class="oasis-tabs__nav" aria-label="{{ aria_label | default: 'Product categories' | escape }}">
-      <ul class="oasis-tabs__list">{{ tab_items }}</ul>
-    </nav>
+    {%- if filter_tags -%}<oasis-tab-filter>{%- endif -%}
+      <nav class="oasis-tabs__nav" aria-label="{{ aria_label | default: 'Product categories' | escape }}">
+        <ul class="oasis-tabs__list">{{ tab_items }}</ul>
+      </nav>
+    {%- if filter_tags -%}</oasis-tab-filter>{%- endif -%}
   {%- endif -%}
 {%- endif -%}

@@ -7,6 +7,8 @@
   - enable_sorting: {Boolean} Show sorting when true
   - filter_type: {String} Type of filter
   - oasis_tabs: {String} typed category tabs, "Label | /url" per line
+  - oasis_tabs_filter: {Boolean} tabs filter this collection by product tag,
+    swapping the grid in place, instead of linking elsewhere
   - oasis_tabs_menu: {Object} optional link_list that overrides oasis_tabs
   - oasis_tabs_label: {String} accessible label for the tab row
   - oasis_price_bands: {String} price filter bands, "Label | min | max" per line
@@ -456,7 +458,10 @@
             {%- endcomment -%}
             {% render 'oasis-tab-links',
               links: oasis_tabs,
-              aria_label: oasis_tabs_label
+              aria_label: oasis_tabs_label,
+              filter_tags: oasis_tabs_filter,
+              results: results,
+              results_url: results_url
             %}
           {%- endif -%}
           {% comment %} Sorting and product count are the last elements when filter type is horizontal {% endcomment %}
