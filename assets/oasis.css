@@ -1460,7 +1460,7 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
   line-height: 1.1;
   letter-spacing: 0.02em;
 }
-.oasis-story--tracked .oasis-story__script { font-size: 7rem; line-height: 1.75; }  /* PSD: Brittany 70 */
+.oasis-story--tracked .oasis-story__script { font-size: 7rem; line-height: 1.5; }  /* PSD: Brittany 70 */
 .oasis-story--tracked .oasis-story__text { font-size: 2rem; line-height: 1.4; }
 
 /* ---------- inner-page responsive ---------------------------------------- */
