@@ -12,6 +12,7 @@
     "banner": {
       "type": "oasis-page-banner",
       "settings": {
+        "image": "shopify://shop_images/journals_banner.webp",
         "fallback_asset": "oasis-banner-journals.jpg",
         "content_position": "left",
         "height": 365,
@@ -27,6 +28,8 @@
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
+        "oasis_pagination": "load_more",
+        "oasis_load_more_label": "Load more",
         "products_per_page": 24,
         "columns_desktop": 4,
         "columns_mobile": "2",
@@ -45,6 +48,7 @@
         "oasis_price_bands": "Under $10 |  | 10\n$10 – $20 | 10 | 20\n$20 – $30 | 20 | 30\n$30 and above | 30 |",
         "enable_sorting": true,
         "oasis_card": true,
+        "oasis_secondary_image": true,
         "oasis_swatches": true,
         "oasis_image_ratio": "2 / 3",
         "oasis_media_width": 76,
