@@ -90,7 +90,7 @@
         "step4"
       ],
       "custom_css": [
-        "#OasisJourney-template--27898050216250__journey{background-color: #fdf4e8;}"
+        "#OasisJourney-template--27898050216250__journey {background-color: #fdf4e8;}"
       ],
       "settings": {
         "eyebrow": "It doesn’t end at rescue.",
@@ -105,6 +105,7 @@
     "makers": {
       "type": "oasis-about-band",
       "settings": {
+        "image": "shopify://shop_images/about_us_footer.png",
         "fallback_asset": "oasis-about-makers.jpg",
         "image_loading": "lazy",
         "content_position": "left",
