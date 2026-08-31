@@ -39,7 +39,6 @@
 
 body {
   font-family: var(--oasis-font-body);
-  font-weight: 300;
   background-color: var(--oasis-cream);
   color: var(--oasis-dark);
   -webkit-font-smoothing: antialiased;
