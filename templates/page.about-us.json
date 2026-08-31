@@ -129,6 +129,7 @@
     "ripple": {
       "type": "oasis-about-band",
       "settings": {
+        "image": "shopify://shop_images/ripple_effect_slider_image.png",
         "fallback_asset": "oasis-about-ripple.jpg",
         "image_loading": "lazy",
         "content_position": "right",
