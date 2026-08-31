@@ -16,8 +16,12 @@
         class="oasis-pricing__ornament"
         src="{{ 'oasis-ornament-divider-lg.png' | asset_url }}"
         alt=""
-        width="456"
-        height="61"
+        {%- comment -%}
+          The file's own size, not the 456px it displays at: the CSS sets
+          height:auto, so these reserve the right box while it loads.
+        {%- endcomment -%}
+        width="1368"
+        height="185"
         loading="lazy"
       >
     {%- endif -%}
