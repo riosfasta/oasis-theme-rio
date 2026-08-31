@@ -16,7 +16,7 @@
         "fallback_asset": "oasis-about-hero.jpg",
         "image_loading": "eager",
         "content_position": "left",
-        "text_align": "left",
+        "text_align": "center",
         "height": 800,
         "content_width": 490,
         "scrim_color": "rgba(0,0,0,0)",
