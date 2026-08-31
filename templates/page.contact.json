@@ -12,7 +12,8 @@
         "use_page": false,
         "show_ornament": true,
         "title": "Contact us",
-        "text": "<p>Have a question or want to learn more? Don't hesitate to reach out. We would love to hear from you!</p>"
+        "text": "<p>Have a question or want to learn more? Don't hesitate to reach out. We would love to hear from you!</p>",
+        "ornament_asset": "oasis-ornament-divider-journals.png"
       }
     },
     "form": {
