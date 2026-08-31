@@ -108,7 +108,7 @@
         "fallback_asset": "oasis-about-makers.jpg",
         "image_loading": "lazy",
         "content_position": "left",
-        "text_align": "left",
+        "text_align": "center",
         "height": 830,
         "content_width": 530,
         "scrim_color": "rgba(0,0,0,0)",
