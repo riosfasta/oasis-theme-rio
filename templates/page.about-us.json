@@ -89,6 +89,9 @@
         "step3",
         "step4"
       ],
+      "custom_css": [
+        "#OasisJourney-template--27898050216250__journey{background-color: #fdf4e8;}"
+      ],
       "settings": {
         "eyebrow": "It doesn’t end at rescue.",
         "heading": "We are committed to the journey of restoration.",
