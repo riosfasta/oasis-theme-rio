@@ -1212,6 +1212,13 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
 }
 .oasis-cols__col:first-child { border-left: 0; }
 
+/* .oasis-cols__col > * caps every child at 320px and centres it with
+   margin-inline: auto — but the three text rules below each set `margin` as a
+   shorthand, and a shorthand writes all four sides, so `auto` was being reset to
+   0. Their 320px boxes then hugged the left edge of the 356px content box, 18px
+   left of centre, while the ornament (whose own rule says auto) sat correctly on
+   the column centre. That is what read as an off-centre ornament. Keep `auto`
+   horizontally in each shorthand. */
 /* First line — Barlow Condensed, +75 tracking.
    The PSD layer is scaled down, so its nominal 62px renders at ~37px. */
 .oasis-cols__kicker {
@@ -1222,7 +1229,7 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
   letter-spacing: 0.075em;
   text-transform: uppercase;
   color: var(--oasis-dark);
-  margin: 0;
+  margin: 0 auto;
 }
 
 /* Second line — script, measured to match the rendered design width */
@@ -1231,13 +1238,13 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
   font-size: 4rem;
   line-height: 1.6;
   color: var(--oasis-dark);
-  margin: 0;
+  margin: 0 auto;
 }
 
 .oasis-cols__ornament { margin: 1.6rem auto 0; width: 148px; height: auto; }
 
 .oasis-cols__text {
-  margin: 1.8rem 0 0;
+  margin: 1.8rem auto 0;
   font-size: 2.4rem;
   font-weight: 300;
   line-height: 1.25;
