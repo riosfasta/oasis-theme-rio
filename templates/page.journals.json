@@ -55,7 +55,7 @@
         "height": 585,
         "content_width": 620,
         "scrim_color": "#fbf7f4",
-        "show_leaf": false,
+        "show_leaf": true,
         "kicker": "More than a",
         "script": "just a journal",
         "show_rule": true,
