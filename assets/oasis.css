@@ -2149,7 +2149,6 @@ body .product-count-vertical,
 .oasis-prose__flourish { display: block; width: 446px; max-width: 100%; height: auto; margin: 1.6rem 0 3.2rem; }
 .oasis-prose__text {
   font-family: var(--oasis-font-body);
-  font-weight: 300;
   font-size: 2rem;
   line-height: 1.3;
   color: var(--oasis-dark);
