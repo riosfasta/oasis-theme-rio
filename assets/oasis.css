@@ -2152,7 +2152,7 @@ body .product-count-vertical,
   font-family: var(--oasis-font-body);
   font-weight: 300;
   font-size: 2rem;
-  line-height: 1.85;
+  line-height: 1.3;
   color: var(--oasis-dark);
 }
 .oasis-prose__text p + p { margin-top: 2rem; }
