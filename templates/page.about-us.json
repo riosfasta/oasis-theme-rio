@@ -12,6 +12,7 @@
     "hero": {
       "type": "oasis-about-band",
       "settings": {
+        "image": "shopify://shop_images/about_us_banner.png",
         "fallback_asset": "oasis-about-hero.jpg",
         "image_loading": "eager",
         "content_position": "left",
@@ -27,7 +28,9 @@
         "display": "Here.",
         "display_style": "large",
         "rule_style": "flourish",
-        "text": "<p>The Oasis walks alongside women and children from exploitation toward freedom—creating space for healing, growth, and hope</p>"
+        "text": "<p>The Oasis walks alongside women and children from exploitation toward freedom—creating space for healing, growth, and hope</p>",
+        "button_label": "",
+        "button_link": ""
       }
     },
     "prose": {
@@ -114,7 +117,9 @@
         "display": "",
         "display_style": "small",
         "rule_style": "plain",
-        "text": "<p>Each of our journals is hand-embroidered and lovingly crafted by women in our training program—survivors rebuilding their lives with courage, dignity, and purpose.</p><p>When you hold one of our products, you’re holding more than paper and thread. You’re holding a piece of her journey—a story of healing, transformation, and hope.</p><p>Many have gone from believing, “My life is sorrow,” to asking, “Why is my life so beautiful?”</p><p>Every stitch carries a story of courage, healing, and new beginnings.</p>"
+        "text": "<p>Each of our journals is hand-embroidered and lovingly crafted by women in our training program—survivors rebuilding their lives with courage, dignity, and purpose.</p><p>When you hold one of our products, you’re holding more than paper and thread. You’re holding a piece of her journey—a story of healing, transformation, and hope.</p><p>Many have gone from believing, “My life is sorrow,” to asking, “Why is my life so beautiful?”</p><p>Every stitch carries a story of courage, healing, and new beginnings.</p>",
+        "button_label": "",
+        "button_link": ""
       }
     },
     "ripple": {
@@ -135,7 +140,9 @@
         "display": "Now restored. Now reaching others.",
         "display_style": "small",
         "rule_style": "none",
-        "text": "<p>In Bangladesh, thousands of girls and women are trapped in modern-day slavery. Once trafficked, many are left with few options and little hope. The Oasis steps into that darkness with light, walking alongside women through the long journey of healing and restoration.</p><p>But restoration has a ripple effect. Women who were once enslaved are now becoming outreach workers, returning to those same places to reach others still trapped. They carry a message they know firsthand: “There’s hope. Come with me.”</p><p>The women we serve are not defined by what happened to them. They are survivors. Fighters. Artists. Leaders. And now, they are creators of beauty—beauty that you can hold in your hands.</p><p>One story inspires another.</p>"
+        "text": "<p>In Bangladesh, thousands of girls and women are trapped in modern-day slavery. Once trafficked, many are left with few options and little hope. The Oasis steps into that darkness with light, walking alongside women through the long journey of healing and restoration.</p><p>But restoration has a ripple effect. Women who were once enslaved are now becoming outreach workers, returning to those same places to reach others still trapped. They carry a message they know firsthand: “There’s hope. Come with me.”</p><p>The women we serve are not defined by what happened to them. They are survivors. Fighters. Artists. Leaders. And now, they are creators of beauty—beauty that you can hold in your hands.</p><p>One story inspires another.</p>",
+        "button_label": "",
+        "button_link": ""
       }
     }
   },
