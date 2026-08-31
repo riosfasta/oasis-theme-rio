@@ -1260,9 +1260,22 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
   display: grid;
   gap: 64px;
   margin-top: 5rem;
+  /* PSD: the two charts span x159-1273 of the 1440 canvas — 525px cards with a
+     64px gap, 1114px total. They do not stretch to the full 1264 container. */
+  max-width: 1114px;
+  margin-inline: auto;
 }
 
-.oasis-pricing__card { overflow: hidden; }
+/* The card is an outlined panel, not a filled block: the body is the page
+   ground, with a 1px dark rule around it, a coloured column-head strip and a
+   tinted footnote strip. Measured off the reference by integrating each edge's
+   colour deficit over its antialiased span, which gives one design pixel of
+   #351D07 on all four sides, and a 6px corner arc. */
+.oasis-pricing__card {
+  overflow: hidden;
+  border-radius: 6px;
+  border: 1px solid var(--oasis-pricing-border, var(--oasis-dark));
+}
 
 .oasis-pricing__head { text-align: center; padding: 3.2rem 2rem 2rem; }
 
@@ -1294,6 +1307,8 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
   font-size: 1.8rem;
   font-weight: 300;
   letter-spacing: 0.02em;
+  /* PSD sets these as QUANTITY / PRICE PER JOURNAL. */
+  text-transform: uppercase;
 }
 
 .oasis-pricing__row {
@@ -1301,7 +1316,9 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
   grid-template-columns: 1fr 1fr;
   align-items: center;
   min-height: 60px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  /* Was a white alpha, which only worked on a dark card. The reference's rules
+     integrate to #D1C8C1, so it is a real colour and a setting. */
+  border-bottom: 1px solid var(--oasis-pricing-rule, var(--oasis-line));
   position: relative;
 }
 .oasis-pricing__row::after {
@@ -1311,9 +1328,10 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
   bottom: 0;
   left: 50%;
   width: 1px;
-  background: rgba(255, 255, 255, 0.22);
+  background: var(--oasis-pricing-rule, var(--oasis-line));
 }
-.oasis-pricing__row:last-child { border-bottom: 1px solid rgba(255, 255, 255, 0.22); }
+/* This rule doubles as the top edge of the footnote strip. */
+.oasis-pricing__row:last-child { border-bottom: 1px solid var(--oasis-pricing-rule, var(--oasis-line)); }
 
 /* Quantity — Garet Book 20 ; Price — Garet Heavy 20 */
 .oasis-pricing__qty,
@@ -1333,7 +1351,7 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
   font-size: 1.6rem;
   font-weight: 300;
   line-height: 1.35;
-  opacity: 0.92;
+  background: var(--oasis-pricing-footer, transparent);
 }
 
 /* ---------- CTA block ---------------------------------------------------- */

@@ -78,7 +78,12 @@
 </div>
 
 <style>
-  #OasisPricing-{{ section.id }} .oasis-pricing__card { background: {{ section.settings.card_color }}; }
+  #OasisPricing-{{ section.id }} .oasis-pricing__card {
+    background: {{ section.settings.card_color }};
+    --oasis-pricing-border: {{ section.settings.border_color }};
+    --oasis-pricing-rule: {{ section.settings.rule_color }};
+    --oasis-pricing-footer: {{ section.settings.footer_color }};
+  }
   #OasisPricing-{{ section.id }} .oasis-pricing__card,
   #OasisPricing-{{ section.id }} .oasis-pricing__card .oasis-pricing__qty,
   #OasisPricing-{{ section.id }} .oasis-pricing__card .oasis-pricing__price,
@@ -111,13 +116,31 @@
       "type": "color",
       "id": "card_color",
       "label": "Card background",
-      "default": "#A1836F"
+      "default": "#FBF7F4"
     },
     {
       "type": "color",
       "id": "card_text_color",
       "label": "Card text",
-      "default": "#FFFFFF"
+      "default": "#351D07"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Card outline",
+      "default": "#351D07"
+    },
+    {
+      "type": "color",
+      "id": "rule_color",
+      "label": "Row dividers",
+      "default": "#D1C8C1"
+    },
+    {
+      "type": "color",
+      "id": "footer_color",
+      "label": "Footnote strip",
+      "default": "#F1EEE8"
     },
     {
       "type": "range",
