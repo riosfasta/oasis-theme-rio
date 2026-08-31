@@ -2114,7 +2114,7 @@ body .product-count-vertical,
   font-family: var(--oasis-font-body);
   font-weight: 300;
   font-size: 2rem;
-  line-height: 1.7;
+  line-height: 1.3;
   color: var(--oasis-dark);
 }
 .oasis-band__text p + p { margin-top: 1.6rem; }
