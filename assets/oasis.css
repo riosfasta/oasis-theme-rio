@@ -1408,7 +1408,7 @@ oasis-card:has(.oasis-card__swatch:hover) .oasis-card__media img { transform: no
 /* ---------- contact form ------------------------------------------------- */
 
 .oasis-contact__inner { margin: 0 auto; text-align: center; }
-.oasis-contact__ornament { margin: 1.8rem auto 0; width: 148px; height: auto; }
+.oasis-contact__ornament { margin: 1.8rem auto 0; width: 178px; height: auto; }
 
 .oasis-contact__tagline {
   font-family: var(--oasis-font-cond);
