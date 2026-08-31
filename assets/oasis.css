@@ -2098,6 +2098,8 @@ body .product-count-vertical,
   font-weight: 400;
   line-height: 1.45;          /* swash clearance, from the PSD ink height */
   color: var(--oasis-dark);
+  margin-bottom: 30px;
+  margin-top: -10px;
 }
 .oasis-band__display {
   margin: 0;
