@@ -12,7 +12,7 @@
     "hero": {
       "type": "oasis-about-band",
       "settings": {
-        "image": "shopify://shop_images/about_us_banner.png",
+        "image": "shopify://shop_images/about_us_banner.webp",
         "fallback_asset": "oasis-about-hero.jpg",
         "image_loading": "eager",
         "content_position": "left",
