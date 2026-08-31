@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "banner": {
@@ -10,8 +19,9 @@
         "scrim_color": "#f1e4d4",
         "use_collection": false,
         "use_page": false,
-        "show_ornament": true,
         "title": "Bulk ordering",
+        "show_ornament": true,
+        "ornament_asset": "oasis-ornament-divider-banner.png",
         "text": "<p>Ordering more than one? Whether it's for a group, event, shop, or just because you love them, we make it easy.</p>"
       }
     },
@@ -49,10 +59,10 @@
         "c3"
       ],
       "settings": {
+        "intro": "<p>Whether you're purchasing gifts for an event, ordering for your organization, stocking your shop, or sharing with your community, we offer special pricing for larger quantities.</p><p>And the more you order, the more you save.</p>",
         "show_ornament": true,
         "padding_top": 70,
-        "padding_bottom": 60,
-        "intro": "<p>Whether you're purchasing gifts for an event, ordering for your organization, stocking your shop, or sharing with your community, we offer special pricing for larger quantities.</p><p>And the more you order, the more you save.</p>"
+        "padding_bottom": 60
       }
     },
     "pricing": {
@@ -94,11 +104,11 @@
         "heading": "Bulk pricing",
         "card_color": "#fbf7f4",
         "card_text_color": "#351d07",
-        "padding_top": 60,
-        "padding_bottom": 70,
         "border_color": "#351d07",
         "rule_color": "#d1c8c1",
-        "footer_color": "#f1eee8"
+        "footer_color": "#f1eee8",
+        "padding_top": 60,
+        "padding_bottom": 70
       }
     },
     "wholesale": {
@@ -120,6 +130,7 @@
     "story": {
       "type": "oasis-story-banner",
       "settings": {
+        "image": "shopify://shop_images/bulk_ordering_footer.png",
         "fallback_asset": "oasis-story-change-a-story.jpg",
         "content_position": "right",
         "kicker_style": "tracked",
@@ -128,9 +139,9 @@
         "content_width": 620,
         "scrim_color": "#fbf7f4",
         "show_leaf": true,
-        "show_rule": true,
         "kicker": "Shop. Share.",
         "script": "Change a story.",
+        "show_rule": true,
         "text": "<p>When you choose to purchase The Oasis in bulk, you're doing more than sharing beautiful, handcrafted products. You're creating opportunities for women rebuilding their lives after trafficking to find dignified work, develop new skills, and build a hopeful future—while helping their children thrive.</p>",
         "button_label": "Learn more about The Oasis",
         "button_link": "/pages/about-us"
