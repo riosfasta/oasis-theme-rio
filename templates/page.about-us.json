@@ -17,7 +17,7 @@
         "image_loading": "eager",
         "content_position": "left",
         "text_align": "center",
-        "height": 800,
+        "height": 650,
         "content_width": 490,
         "scrim_color": "rgba(0,0,0,0)",
         "show_leaf": false,
