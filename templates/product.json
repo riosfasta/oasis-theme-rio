@@ -117,7 +117,7 @@
         "content_position": "right",
         "kicker_style": "tracked",
         "text_align": "center",
-        "height": 585,
+        "height": 650,
         "content_width": 660,
         "scrim_color": "#fbf7f4",
         "show_leaf": true,
