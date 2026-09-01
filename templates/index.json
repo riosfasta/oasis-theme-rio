@@ -43,6 +43,7 @@
           "type": "tile",
           "settings": {
             "collection": "journals-only",
+            "image": "shopify://shop_images/Group_of_Journals_2.png",
             "title": "Journals",
             "link": "/collections/journals-only",
             "cta_label": "Explore",
