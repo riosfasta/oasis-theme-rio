@@ -54,6 +54,7 @@
           "type": "tile",
           "settings": {
             "collection": "cards",
+            "image": "shopify://shop_images/homepage_card_selection.png",
             "title": "Cards",
             "link": "/collections/cards",
             "cta_label": "Explore",
