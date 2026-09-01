@@ -2346,3 +2346,40 @@ body .product-count-vertical,
   .oasis-load-more { margin-top: 4rem; }
   .oasis-load-more__button { min-width: 0; width: 100%; }
 }
+
+/* ---------- SEOAnt trust badges (app block) ------------------------------ */
+/* Not our markup: this panel on the product page is injected by the SEOAnt
+   Trust Badges app (its classes are all `giraffly-*`), so the alignment belongs
+   in that app's own settings if it offers one. This override is here because it
+   does not.
+
+   !important throughout, deliberately. The app centres these three ways at once
+   and each needs beating on its own terms:
+     - .giraffly-right-Bar-Preview-Example gets text-align:center from the app's
+       stylesheet on its CDN, which loads after oasis.css, so equal specificity
+       loses on order;
+     - .trust-custom-badge carries justify-content:center as an INLINE style;
+     - .trust-icon-container (margin:auto) and .trust-text-container
+       (align-items/text-align:center) are inline too.
+
+   Verified against the live page: heading, logo, URL, and each badge's icon and
+   labels all move to their container's left edge, and the badge grid keeps its
+   column layout (do NOT add justify-items:start — that shrinks the tracks from
+   208px to 114px and reflows the row). If the app ever renames these classes
+   this simply stops applying, which is the safe failure. */
+
+.giraffly-trust-badge,
+.giraffly-trust-badge .giraffly-right-Bar-Preview-Example,
+.giraffly-trust-badge .giraffly-right-Bar-Preview-width-credit,
+.giraffly-trust-badge .giraffly-right-Bar-Preview-width-custom {
+  text-align: left !important;
+}
+.giraffly-trust-badge .trust-custom-badge { justify-content: start !important; }
+.giraffly-trust-badge .trust-icon-container {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+.giraffly-trust-badge .trust-text-container {
+  align-items: flex-start !important;
+  text-align: left !important;
+}
