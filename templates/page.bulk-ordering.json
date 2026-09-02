@@ -107,7 +107,7 @@
         "border_color": "#351d07",
         "rule_color": "#d1c8c1",
         "footer_color": "#f1eee8",
-        "padding_top": 60,
+        "padding_top": 6,
         "padding_bottom": 70
       }
     },

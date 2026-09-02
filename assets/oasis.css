@@ -1259,7 +1259,24 @@ position: absolute;
 
 /* ---------- pricing tables ----------------------------------------------- */
 
-.oasis-pricing__ornament { margin: 0 auto 2.4rem; width: 456px; height: auto; }
+/* display:block matters: an <img> is inline by default, so `margin-inline: auto`
+   did nothing and the ornament sat at the left edge of .oasis-container (which,
+   unlike .oasis-cols__col, is not text-align:center — that is why the section
+   heading below it looked centred and this did not).
+
+   The vertical margin balances the ornament between the paragraphs above and
+   BULK PRICING below. Measured off the live render: the gap above was 129px
+   (the two section paddings, 60+60, plus ~9px of line leading) against 40px
+   below (2.4rem plus ~16px of leading over the heading's cap). The PSD puts it
+   at 82 above / 65 below, so the target is ~74 each: 5.8rem here, and the
+   section's own padding-top trimmed to 6px since the section above already
+   supplies 60. */
+.oasis-pricing__ornament {
+  display: block;
+  margin: 0 auto 5.8rem;
+  width: 456px;
+  height: auto;
+}
 
 .oasis-pricing__grid {
   display: grid;
