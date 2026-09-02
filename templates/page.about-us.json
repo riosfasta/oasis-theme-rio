@@ -11,6 +11,9 @@
   "sections": {
     "hero": {
       "type": "oasis-about-band",
+      "custom_css": [
+        ".oasis-band__flourish {display: block; width: 278px; max-width: 100%; height: auto; margin: 4rem 0 2.2rem 0 !important;}"
+      ],
       "settings": {
         "image": "shopify://shop_images/about_us_banner.webp",
         "fallback_asset": "oasis-about-hero.jpg",
