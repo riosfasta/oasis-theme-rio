@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "banner": {
@@ -10,10 +19,10 @@
         "scrim_color": "#f7efe7",
         "use_collection": false,
         "use_page": false,
-        "show_ornament": true,
         "title": "Contact us",
-        "text": "<p>Have a question or want to learn more? Don't hesitate to reach out. We would love to hear from you!</p>",
-        "ornament_asset": "oasis-ornament-divider-journals.png"
+        "show_ornament": true,
+        "ornament_asset": "oasis-ornament-divider-journals.png",
+        "text": "<p>Have a question or want to learn more? Don't hesitate to reach out. We would love to hear from you!</p>"
       }
     },
     "form": {
@@ -37,6 +46,7 @@
     "story": {
       "type": "oasis-story-banner",
       "settings": {
+        "image": "shopify://shop_images/contact_footer.png",
         "fallback_asset": "oasis-story-new-chapter.jpg",
         "content_position": "right",
         "kicker_style": "tracked",
@@ -45,9 +55,9 @@
         "content_width": 620,
         "scrim_color": "#f7efe7",
         "show_leaf": true,
-        "show_rule": true,
         "kicker": "Give her story a",
         "script": "new chapter.",
+        "show_rule": true,
         "text": "<p>Behind every product is a woman rebuilding her life. Your support helps provide the dignity, skills, healing, and opportunity she needs to begin a new chapter.</p>",
         "button_label": "Learn more about The Oasis",
         "button_link": "/pages/about-us"
