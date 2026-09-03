@@ -11,6 +11,9 @@
   "sections": {
     "banner": {
       "type": "oasis-page-banner",
+      "custom_css": [
+        ".oasis-banner__bg {position: absolute; top: 0; right: auto; bottom: 0; left: 0; width: 100%; height: 100%; object-fit: cover;}"
+      ],
       "settings": {
         "fallback_asset": "oasis-banner-cards.jpg",
         "content_position": "left",
@@ -21,6 +24,7 @@
         "use_page": false,
         "title": "Shop Cards",
         "show_ornament": true,
+        "ornament_asset": "oasis-ornament-divider-banner.png",
         "text": "<p>Hand-stitched cards for the moments that matter. Celebrate, encourage, and connect with a story of hope behind every stitch.</p>"
       }
     },
@@ -28,6 +32,7 @@
       "type": "oasis-promo-strip",
       "settings": {
         "text": "Choose any 5 hand-stitched cards for $20.",
+        "link": "",
         "background": "#a2846f",
         "text_color": "#ffffff",
         "height": 80
@@ -36,6 +41,8 @@
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
+        "oasis_pagination": "load_more",
+        "oasis_load_more_label": "Load more",
         "products_per_page": 24,
         "columns_desktop": 4,
         "columns_mobile": "2",
@@ -48,10 +55,14 @@
         "quick_add": "none",
         "enable_filtering": false,
         "filter_type": "horizontal",
+        "oasis_tabs": "All Cards | /collections/cards\nBirthday | \nThank You | \nThinking of You | \nChristmas | \nSeasonal | \nFloral Collection |",
         "oasis_tabs_menu": "",
+        "oasis_tabs_filter": false,
         "oasis_tabs_label": "Card categories",
+        "oasis_price_bands": "Under $10 |  | 10\n$10 – $20 | 10 | 20\n$20 – $30 | 20 | 30\n$30 and above | 30 |",
         "enable_sorting": true,
         "oasis_card": true,
+        "oasis_secondary_image": true,
         "oasis_swatches": false,
         "oasis_image_ratio": "2 / 3",
         "oasis_media_width": 76,
@@ -59,8 +70,7 @@
         "oasis_media_background": "none",
         "oasis_swatch_limit": 6,
         "padding_top": 0,
-        "padding_bottom": 72,
-        "oasis_tabs": "All Cards | /collections/cards\nBirthday | \nThank You | \nThinking of You | \nChristmas | \nSeasonal | \nFloral Collection | "
+        "padding_bottom": 72
       }
     },
     "story": {
