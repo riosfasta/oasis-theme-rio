@@ -66,7 +66,7 @@
         "oasis_swatches": false,
         "oasis_image_ratio": "2 / 3",
         "oasis_media_width": 76,
-        "oasis_media_inset": 15,
+        "oasis_media_inset": 7,
         "oasis_media_background": "none",
         "oasis_swatch_limit": 6,
         "padding_top": 0,
