@@ -86,16 +86,47 @@
 
     {%- if show_swatches and card_product.variants.size > 1 -%}
       {%- liquid
-        assign seen_media = ''
+        comment
+          Two passes, because the row has to keep its width: when there are more
+          variant images than fit, the last slot becomes a "+N" chip instead of a
+          thumbnail, and that decision needs the total before rendering starts.
+
+          Keys are wrapped in commas on BOTH sides. With a trailing comma only,
+          a seen list of "1234," would match the key "234," and silently drop a
+          real variant.
+        endcomment
+        assign seen_total = ','
+        assign swatch_total = 0
+        for variant in card_product.variants
+          if variant.image != blank
+            assign media_key = variant.image.id | prepend: ',' | append: ','
+            unless seen_total contains media_key
+              assign seen_total = seen_total | append: variant.image.id | append: ','
+              assign swatch_total = swatch_total | plus: 1
+            endunless
+          endif
+        endfor
+
+        assign swatch_show = max_swatches
+        assign swatch_more = 0
+        if swatch_total > max_swatches
+          assign swatch_show = max_swatches | minus: 1
+          if swatch_show < 1
+            assign swatch_show = 1
+          endif
+          assign swatch_more = swatch_total | minus: swatch_show
+        endif
+
+        assign seen_media = ','
         assign swatch_count = 0
       -%}
       {%- capture swatch_markup -%}
         {%- for variant in card_product.variants -%}
-          {%- if variant.image != blank and swatch_count < max_swatches -%}
-            {%- assign media_key = variant.image.id | append: ',' -%}
+          {%- if variant.image != blank and swatch_count < swatch_show -%}
+            {%- assign media_key = variant.image.id | prepend: ',' | append: ',' -%}
             {%- unless seen_media contains media_key -%}
               {%- liquid
-                assign seen_media = seen_media | append: media_key
+                assign seen_media = seen_media | append: variant.image.id | append: ','
                 assign swatch_count = swatch_count | plus: 1
               -%}
               {%- capture v_srcset -%}
@@ -123,8 +154,26 @@
         {%- endfor -%}
       {%- endcapture -%}
 
-      {%- if swatch_count > 1 -%}
-        <div class="oasis-card__swatches">{{ swatch_markup }}</div>
+      {%- if swatch_total > 1 -%}
+        <div class="oasis-card__swatches">
+          {{ swatch_markup }}
+          {%- if swatch_more > 0 -%}
+            {%- comment -%}
+              Deliberately not a slider or an expander: this is a grid card, and
+              a second scrollable thing inside it competes with the card's own
+              link. The chip says how many are left and goes to the product,
+              where every variant is shown. It carries no data-variant-src, so
+              oasis-card.js ignores it and it never swaps the card image.
+            {%- endcomment -%}
+            <a
+              class="oasis-card__swatch oasis-card__swatch--more"
+              href="{{ card_product.url }}"
+              aria-label="See all {{ swatch_total }} options of {{ card_product.title | escape }}"
+            >
+              <span aria-hidden="true">+{{ swatch_more }}</span>
+            </a>
+          {%- endif -%}
+        </div>
       {%- endif -%}
     {%- endif -%}
   </oasis-card>
