@@ -22,6 +22,7 @@
         "use_page": false,
         "title": "",
         "show_ornament": true,
+        "ornament_asset": "oasis-ornament-divider-banner.png",
         "text": "<p>Beautiful, hand-stitched products carrying stories of courage, hope, and new beginnings.</p>"
       }
     },
@@ -38,6 +39,8 @@
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
+        "oasis_pagination": "load_more",
+        "oasis_load_more_label": "Load more",
         "products_per_page": 24,
         "columns_desktop": 3,
         "columns_mobile": "2",
@@ -52,6 +55,7 @@
         "filter_type": "vertical",
         "oasis_tabs": "All Journals | /collections/journals-only\nFloral | \nNature | \nFaith | \nTravel & World | \nPatterns & Designs |",
         "oasis_tabs_menu": "",
+        "oasis_tabs_filter": false,
         "oasis_tabs_label": "Product categories",
         "oasis_price_bands": "Under $10 |  | 10\n$10 – $20 | 10 | 20\n$20 – $30 | 20 | 30\n$30 and above | 30 |",
         "enable_sorting": true,
@@ -75,7 +79,7 @@
         "content_position": "right",
         "kicker_style": "tracked",
         "text_align": "center",
-        "height": 680,
+        "height": 600,
         "content_width": 620,
         "scrim_color": "#fbf7f4",
         "show_leaf": true,
