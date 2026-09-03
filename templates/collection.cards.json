@@ -55,7 +55,7 @@
         "quick_add": "none",
         "enable_filtering": false,
         "filter_type": "horizontal",
-        "oasis_tabs": "All Cards | /collections/cards\nBirthday | \nThank You | \nThinking of You | \nChristmas | \nSeasonal | \nFloral Collection |",
+        "oasis_tabs": "All Cards | /collections/cards\nBirthday | Brithday\nThank You | Thankyou\nThinking of You | Thinking of you\nChristmas | Christmas\nSeasonal | Seasonal\nFloral Collection | Floral Collection",
         "oasis_tabs_menu": "",
         "oasis_tabs_filter": false,
         "oasis_tabs_label": "Card categories",
