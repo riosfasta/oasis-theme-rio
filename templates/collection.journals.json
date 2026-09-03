@@ -11,6 +11,9 @@
   "sections": {
     "banner": {
       "type": "oasis-page-banner",
+      "custom_css": [
+        ".oasis-banner__bg {position: absolute; top: -180px; right: auto; bottom: -100px; left: -30vw; width: 130vw; height: 150%; object-fit: cover;}"
+      ],
       "settings": {
         "image": "shopify://shop_images/journals_banner2.webp",
         "fallback_asset": "oasis-banner-journals.jpg",
