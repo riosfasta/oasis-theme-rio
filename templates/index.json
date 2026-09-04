@@ -78,7 +78,7 @@
       "type": "oasis-product-row",
       "settings": {
         "heading": "New arrivals",
-        "collection": "all-products",
+        "collection": "new-designs",
         "products_to_show": 8,
         "columns_desktop": 4,
         "enable_slider": true,
@@ -126,7 +126,7 @@
       "type": "oasis-product-row",
       "settings": {
         "heading": "Best sellers",
-        "collection": "all-products",
+        "collection": "best-sellers",
         "products_to_show": 8,
         "columns_desktop": 4,
         "enable_slider": true,
