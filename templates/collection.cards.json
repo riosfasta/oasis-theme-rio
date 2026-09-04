@@ -15,6 +15,7 @@
         ".oasis-banner__bg {position: absolute; top: 0; right: auto; bottom: 0; left: 0; width: 100%; height: 100%; object-fit: cover;}"
       ],
       "settings": {
+        "image": "shopify://shop_images/oasis-banner-cards_wide.webp",
         "fallback_asset": "oasis-banner-cards.jpg",
         "content_position": "left",
         "height": 365,
@@ -31,7 +32,7 @@
     "promo": {
       "type": "oasis-promo-strip",
       "settings": {
-        "text": "Choose any 5 hand-stitched cards for $20.",
+        "text": "Choose any 5 hand-stitched cards for $25.",
         "link": "",
         "background": "#a2846f",
         "text_color": "#ffffff",
