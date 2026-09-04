@@ -46,7 +46,7 @@
         "quick_add": "none",
         "enable_filtering": true,
         "filter_type": "horizontal",
-        "oasis_tabs": "All Journals | /collections/journals-only\nFloral | floral\nNature | Nature\nFaith | \nTravel & World | \nPatterns & Designs |",
+        "oasis_tabs": "All Journals | /collections/journals-only\nFloral | Floral\nNature & World | Nature-World\nFaith | Faith\nPatterns & Designs | Kantha\nChristmas | Christmas",
         "oasis_tabs_menu": "",
         "oasis_tabs_filter": true,
         "oasis_tabs_label": "Journal categories",
