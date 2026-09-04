@@ -12,13 +12,13 @@
     "banner": {
       "type": "oasis-page-banner",
       "custom_css": [
-        ".oasis-banner__bg {position: absolute; top: 0; right: auto; bottom: 0; left: 0; width: 100%; height: 100%; object-fit: cover;}"
+        ".oasis-banner__bg {position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; object-fit: contain;}"
       ],
       "settings": {
         "image": "shopify://shop_images/oasis-banner-cards_wide.webp",
         "fallback_asset": "oasis-banner-cards.jpg",
         "content_position": "left",
-        "height": 365,
+        "height": 310,
         "content_width": 600,
         "scrim_color": "#f1e4d4",
         "use_collection": false,
