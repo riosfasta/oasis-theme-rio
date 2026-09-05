@@ -2470,3 +2470,40 @@ body .product-count-vertical,
   align-items: flex-start !important;
   text-align: left !important;
 }
+
+/* ---------- "Shop by" sidebar group ------------------------------------- */
+/* Collection links dressed to sit among the filter groups. The group reuses
+   Dawn's disclosure classes, so the heading, hairline and spacing come for
+   free — only the row needs styling, because a facet row is a <label> with a
+   checkbox and these are bare <a>s.
+
+   Measured against a live facet group: heading Garet 16/300 uppercase, rows
+   Garet 17/300, hairline rgba(53,29,7,0.1). Rows sit flush at the heading's
+   left edge (63px) rather than the checkbox rows' 65px — there is no checkbox
+   to allow for.
+
+   The list selector carries two classes on purpose: `.facets__list` sets
+   `padding: 5px 20px` in component-facets.css, which Dawn loads AFTER
+   oasis.css, so a single class loses on source order and the rows indent. */
+.oasis-shop-by .oasis-shop-by__list { padding-left: 0; }
+
+.oasis-shop-by__link {
+  display: block;
+  padding: 10px 20px 10px 0;
+  font-family: var(--oasis-font-body);
+  font-size: 1.7rem;
+  font-weight: 300;
+  line-height: 1.3;
+  color: var(--oasis-dark);
+  text-decoration: none;
+}
+.oasis-shop-by__link:hover {
+  color: var(--oasis-tan-dark);
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+.oasis-shop-by__link--current {
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+  text-decoration-thickness: 1px;
+}

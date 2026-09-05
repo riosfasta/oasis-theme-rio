@@ -131,6 +131,8 @@
             oasis_tabs_menu: section.settings.oasis_tabs_menu,
             oasis_tabs_label: section.settings.oasis_tabs_label,
             oasis_tabs_filter: section.settings.oasis_tabs_filter,
+            oasis_shop_by: section.settings.oasis_shop_by,
+            oasis_shop_by_heading: section.settings.oasis_shop_by_heading,
             oasis_price_bands: section.settings.oasis_price_bands,
             paginate: paginate
           %}
@@ -474,6 +476,19 @@
       ],
       "default": "horizontal",
       "label": "t:sections.main-collection-product-grid.settings.filter_type.label"
+    },
+    {
+      "type": "text",
+      "id": "oasis_shop_by_heading",
+      "label": "Shop by heading",
+      "default": "Shop by"
+    },
+    {
+      "type": "textarea",
+      "id": "oasis_shop_by",
+      "label": "Shop by links",
+      "info": "One per line, as Label | /url. Links to other collections, not filters: clicking one leaves this collection and clears any price or availability chosen. Vertical filter layout only. Empty for no group.",
+      "default": "Journals | /collections/journals-only\nCards | /collections/cards\nNew Arrivals | /collections/new-designs"
     },
     {
       "type": "textarea",

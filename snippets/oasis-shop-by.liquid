@@ -1,0 +1,75 @@
+{%- comment -%}
+  THE OASIS — "Shop by" links in the facet sidebar
+
+  A group of collection links styled to sit alongside Shopify's filter groups.
+
+  These are NOT filters, and cannot be: Shopify's storefront filtering reads
+  product data only — tags, type, vendor, price, availability, metafields — and
+  has no notion of "products in another collection". So Best Sellers and New
+  Arrivals can only be reached by navigating to their collection.
+
+  The practical consequence, worth knowing before adding entries: clicking one
+  leaves the current collection, which drops any price or availability the
+  shopper had ticked. That is why each entry is a plain link rather than
+  something dressed up as a checkbox — it should not look like it will combine
+  with the filters above it.
+
+  Deliberately carries no `.js-filter` class and no id, so Dawn's
+  FacetFiltersForm.renderFilters() — which only replaces `.js-filter` elements
+  and removes DOM ones absent from the fetch — leaves it alone entirely when a
+  filter is applied.
+
+  Accepts:
+    - links: {String} one per line, "Label | /url"
+    - heading: {String} group heading
+{%- endcomment -%}
+
+{%- if links != blank -%}
+  {%- assign rows = links | newline_to_br | split: '<br />' -%}
+
+  {%- capture shop_by_items -%}
+    {%- for row in rows -%}
+      {%- liquid
+        assign parts = row | split: '|'
+        assign row_label = parts[0] | strip
+        assign row_href = parts[1] | strip
+        assign is_here = false
+        if row_href != blank
+          assign row_path = row_href | split: '?' | first
+          if row_path == request.path
+            assign is_here = true
+          endif
+        endif
+      -%}
+      {%- if row_label != blank and row_href != blank -%}
+        <li class="facets__item oasis-shop-by__item">
+          <a
+            class="oasis-shop-by__link{% if is_here %} oasis-shop-by__link--current{% endif %}"
+            href="{{ row_href | escape }}"
+            {% if is_here %}
+              aria-current="page"
+            {% endif %}
+          >
+            {{- row_label | escape -}}
+          </a>
+        </li>
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+
+  {%- if shop_by_items != blank -%}
+    <details class="disclosure-has-popup facets__disclosure facets__disclosure-vertical oasis-shop-by" open>
+      <summary class="facets__summary caption-large focus-offset">
+        <div>
+          <span>{{ heading | default: 'Shop by' | escape }}</span>
+          {{- 'icon-caret.svg' | inline_asset_content -}}
+        </div>
+      </summary>
+      <div class="facets__display-vertical">
+        <ul class="facets__list list-unstyled oasis-shop-by__list" role="list">
+          {{ shop_by_items }}
+        </ul>
+      </div>
+    </details>
+  {%- endif -%}
+{%- endif -%}

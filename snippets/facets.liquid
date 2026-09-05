@@ -7,6 +7,9 @@
   - enable_sorting: {Boolean} Show sorting when true
   - filter_type: {String} Type of filter
   - oasis_tabs: {String} typed category tabs, "Label | /url" per line
+  - oasis_shop_by: {String} collection links for the sidebar, "Label | /url"
+    per line; vertical filter layout only
+  - oasis_shop_by_heading: {String} heading for that group
   - oasis_tabs_filter: {Boolean} tabs filter this collection by product tag,
     swapping the grid in place, instead of linking elsewhere
   - oasis_tabs_menu: {Object} optional link_list that overrides oasis_tabs
@@ -388,6 +391,19 @@
                   </details>
               {% endcase %}
             {%- endfor -%}
+
+            {%- comment -%}
+              Collection links, not filters — see snippets/oasis-shop-by.liquid
+              for why Shopify cannot express these as facets. Vertical layout
+              only: the horizontal row is a single line and has no room for a
+              group like this.
+            {%- endcomment -%}
+            {%- if filter_type == 'vertical' -%}
+              {% render 'oasis-shop-by',
+                links: oasis_shop_by,
+                heading: oasis_shop_by_heading
+              %}
+            {%- endif -%}
           </div>
           {% comment %} Pills after filtes on filter type horizontal {% endcomment %}
           {%- if filter_type == 'horizontal' and oasis_active_filters > 0 -%}
