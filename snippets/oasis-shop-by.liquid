@@ -58,7 +58,15 @@
   {%- endcapture -%}
 
   {%- if shop_by_items != blank -%}
-    <details class="disclosure-has-popup facets__disclosure facets__disclosure-vertical oasis-shop-by" open>
+    {%- comment -%}
+      Only `facets__disclosure-vertical`, matching Dawn's own vertical branch.
+      NOT `disclosure-has-popup`: that class draws a full-screen click-catcher
+      via `[open] > summary::before` (position: fixed, inset 0, z-index 2) to
+      dismiss floating popups. Dawn applies it in the horizontal layout only.
+      On an always-open inline group it covers the viewport permanently and eats
+      every click on the page.
+    {%- endcomment -%}
+    <details class="facets__disclosure-vertical oasis-shop-by" open>
       <summary class="facets__summary caption-large focus-offset">
         <div>
           <span>{{ heading | default: 'Shop by' | escape }}</span>
