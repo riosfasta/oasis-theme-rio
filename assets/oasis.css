@@ -247,6 +247,20 @@ button.shopify-payment-button__button--unbranded {
   padding: 1.2rem 2rem;
 }
 .header__menu-item:hover span { text-decoration-thickness: 1px; text-underline-offset: 0.4rem; }
+
+/* Breathing room between a dropdown label and its caret.
+
+   No margin will do it: base.css positions the header caret absolutely
+   (`summary .icon-caret { position: absolute }`, pinned to `right: 0.8rem` for
+   the header), so it is out of flow. The visible gap is the summary's right
+   padding minus that offset, less the caret's own 10px width — 20 - 8 - 10 = 2px
+   as it stood. Growing the padding to 25px makes it 7px, measured in the browser.
+
+   Scoped to summary because only the dropdown triggers have a caret; the plain
+   links would otherwise just drift right. The element part of the selector is
+   load-bearing too: the padding above comes from `.header__menu-item.list-menu__item`
+   (two classes), which this has to outrank. */
+summary.header__menu-item.list-menu__item { padding-right: 2.5rem; }
 .header__active-menu-item { text-decoration: none; }
 
 .header__icons { padding-right: 0; gap: 0.6rem; }
