@@ -19,7 +19,7 @@
           "settings": {
             "heading": "Shop",
             "menu": "",
-            "links": "New Arrivals | /collections/all-products?sort_by=created-descending\nBest Sellers | /collections/best-sellers\nJournals | /collections/journals-only\nCards | /collections/cards\nBulk Ordering | /pages/bulk-ordering"
+            "links": "New Arrivals | /collections/new-designs\nBest Sellers | /collections/best-sellers\nJournals | /collections/journals-only\nCards | /collections/cards\nBulk Ordering | /pages/bulk-ordering"
           }
         },
         "care": {
