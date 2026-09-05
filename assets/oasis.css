@@ -261,6 +261,35 @@ button.shopify-payment-button__button--unbranded {
    load-bearing too: the padding above comes from `.header__menu-item.list-menu__item`
    (two classes), which this has to outrank. */
 summary.header__menu-item.list-menu__item { padding-right: 2.5rem; }
+
+/* Header submenu — dropped 10px below its trigger, on white.
+
+   `.list-menu` is in the selector for specificity, not decoration: something
+   later in the cascade zeroes this list's top margin, and `.header__submenu`
+   alone (one class) loses to it. Two classes wins — measured, the gap goes from
+   0 to 10px.
+
+   `background` rather than `background-color`: the panel carries Dawn's
+   `.gradient` class, whose shorthand also sets a background-image, which would
+   otherwise paint straight over a colour-only override.
+
+   The ::before is a transparent bridge across the new gap. Without it the
+   pointer leaves <header-menu> on its way from the label down to the panel,
+   which fires the mouseout in oasis-header-hover.js and starts the close timer
+   — the menu would flicker shut on a slow diagonal. Verified with
+   elementFromPoint: the midpoint of the gap resolves to the submenu. */
+.header__submenu.list-menu {
+  margin-top: 10px;
+  background: #fff;
+}
+.header__submenu.list-menu::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -10px;
+  height: 10px;
+}
 .header__active-menu-item { text-decoration: none; }
 
 .header__icons { padding-right: 0; gap: 0.6rem; }
