@@ -7,6 +7,8 @@
   - enable_sorting: {Boolean} Show sorting when true
   - filter_type: {String} Type of filter
   - oasis_tabs: {String} typed category tabs, "Label | /url" per line
+  - oasis_hide_filter_values: {String} comma-separated facet value labels to
+    leave out of the filter lists
   - oasis_shop_by: {String} collection links for the sidebar, "Label | /url"
     per line; vertical filter layout only
   - oasis_shop_by_heading: {String} heading for that group
@@ -64,6 +66,29 @@
   assign oasis_has_tabs = false
   if oasis_tabs_menu != blank or oasis_tabs != blank
     assign oasis_has_tabs = true
+  endif
+
+  comment
+    Facet values to leave out of the lists. Shopify's Search & Discovery can add
+    or remove a whole filter but not individual values, and deleting the tags
+    themselves is not safe — a smart collection may be built on one. So they are
+    dropped here at render time.
+
+    Values are compared comma-wrapped and case-insensitively, so "Journal" never
+    matches "Journals" and the merchant's capitalisation does not matter.
+
+    A hidden value that is somehow active still appears as a removable pill
+    above the filters, so an old link carrying one is never a dead end.
+  endcomment
+  assign oasis_hidden_values = ','
+  if oasis_hide_filter_values != blank
+    assign oasis_hide_parts = oasis_hide_filter_values | split: ','
+    for oasis_part in oasis_hide_parts
+      assign oasis_part_key = oasis_part | strip | downcase
+      if oasis_part_key != blank
+        assign oasis_hidden_values = oasis_hidden_values | append: oasis_part_key | append: ','
+      endif
+    endfor
   endif
 
   assign oasis_show_filters = enable_filtering
@@ -237,6 +262,13 @@
                           role="list"
                         >
                           {%- for value in sorted_values -%}
+                            {%- liquid
+                            assign oasis_value_key = value.label | strip | downcase
+                            assign oasis_value_probe = ',' | append: oasis_value_key | append: ','
+                            if oasis_hidden_values contains oasis_value_probe
+                            continue
+                            endif
+                            -%}
                             {% liquid
                               assign input_id = 'Filter-' | append: filter.param_name | escape | append: '-' | append: forloop.index
                               assign is_disabled = false
@@ -657,6 +689,13 @@
                               endif
                             -%}
                             {%- for value in sorted_values -%}
+                              {%- liquid
+                              assign oasis_value_key = value.label | strip | downcase
+                              assign oasis_value_probe = ',' | append: oasis_value_key | append: ','
+                              if oasis_hidden_values contains oasis_value_probe
+                              continue
+                              endif
+                              -%}
                               {% liquid
                                 assign input_id = 'Filter-' | append: filter.param_name | escape | append: '-mobile-' | append: forloop.index
                                 assign is_disabled = false

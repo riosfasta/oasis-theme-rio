@@ -131,6 +131,7 @@
             oasis_tabs_menu: section.settings.oasis_tabs_menu,
             oasis_tabs_label: section.settings.oasis_tabs_label,
             oasis_tabs_filter: section.settings.oasis_tabs_filter,
+            oasis_hide_filter_values: section.settings.oasis_hide_filter_values,
             oasis_shop_by: section.settings.oasis_shop_by,
             oasis_shop_by_heading: section.settings.oasis_shop_by_heading,
             oasis_price_bands: section.settings.oasis_price_bands,
@@ -476,6 +477,13 @@
       ],
       "default": "horizontal",
       "label": "t:sections.main-collection-product-grid.settings.filter_type.label"
+    },
+    {
+      "type": "text",
+      "id": "oasis_hide_filter_values",
+      "label": "Hide these filter values",
+      "info": "Comma-separated, matched on the value's label and case-insensitively. Use it for values covered elsewhere \u2014 Card and Journal duplicate the Category group and the Shop by links. A hidden value that is somehow active still shows as a removable pill.",
+      "default": "Card, Journal"
     },
     {
       "type": "text",
