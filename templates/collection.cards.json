@@ -41,6 +41,9 @@
     },
     "product-grid": {
       "type": "main-collection-product-grid",
+      "custom_css": [
+        ".collection{padding-top:0px !important;}"
+      ],
       "settings": {
         "oasis_pagination": "load_more",
         "oasis_load_more_label": "Load more",
