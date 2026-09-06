@@ -2455,18 +2455,22 @@ body .product-count-vertical,
    208px to 114px and reflows the row). If the app ever renames these classes
    this simply stops applying, which is the safe failure. */
 
-.giraffly-trust-badge,
-.giraffly-trust-badge .giraffly-right-Bar-Preview-Example,
-.giraffly-trust-badge .giraffly-right-Bar-Preview-width-credit,
-.giraffly-trust-badge .giraffly-right-Bar-Preview-width-custom {
+/* NOT scoped under .giraffly-trust-badge. The app renders that wrapper on some
+   pages and not others — it is absent on the product page — so scoping to it
+   made every one of these rules dead exactly where they were wanted. The
+   `trust-*` and `giraffly-*` class names are the app's own and collide with
+   nothing else here. */
+.giraffly-right-Bar-Preview-Example,
+.giraffly-right-Bar-Preview-width-credit,
+.giraffly-right-Bar-Preview-width-custom {
   text-align: left !important;
 }
-.giraffly-trust-badge .trust-custom-badge { justify-content: start !important; }
-.giraffly-trust-badge .trust-icon-container {
+.trust-custom-badge { justify-content: start !important; }
+.trust-icon-container {
   margin-left: 0 !important;
   margin-right: auto !important;
 }
-.giraffly-trust-badge .trust-text-container {
+.trust-text-container {
   align-items: flex-start !important;
   text-align: left !important;
 }
