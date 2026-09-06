@@ -31,6 +31,9 @@
     },
     "product-grid": {
       "type": "main-collection-product-grid",
+      "custom_css": [
+        ".collection {padding-top: 0px;}"
+      ],
       "settings": {
         "oasis_pagination": "load_more",
         "oasis_load_more_label": "Load more",
@@ -46,6 +49,9 @@
         "quick_add": "none",
         "enable_filtering": true,
         "filter_type": "horizontal",
+        "oasis_hide_filter_values": "Card, Journal",
+        "oasis_shop_by_heading": "Shop by",
+        "oasis_shop_by": "Journals | /collections/journals-only\nCards | /collections/cards\nBest Sellers | /collections/best-sellers\nNew Arrivals | /collections/new-designs",
         "oasis_tabs": "All Journals | /collections/journals-only\nFloral | Floral\nNature & World | Nature-World\nFaith | Faith\nPatterns & Designs | Kantha\nChristmas | Christmas",
         "oasis_tabs_menu": "",
         "oasis_tabs_filter": true,
