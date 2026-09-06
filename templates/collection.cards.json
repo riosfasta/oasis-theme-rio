@@ -12,7 +12,7 @@
     "banner": {
       "type": "oasis-page-banner",
       "custom_css": [
-        ".oasis-banner__bg {position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; object-fit: contain;}"
+        ".oasis-banner__bg {position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; object-fit: cover;}"
       ],
       "settings": {
         "image": "shopify://shop_images/oasis-banner-cards_wide.webp",
@@ -56,6 +56,8 @@
         "quick_add": "none",
         "enable_filtering": true,
         "filter_type": "horizontal",
+        "oasis_shop_by_heading": "Shop by",
+        "oasis_shop_by": "Journals | /collections/journals-only\nCards | /collections/cards\nBest Sellers | /collections/best-sellers\nNew Arrivals | /collections/new-designs",
         "oasis_tabs": "All Cards | /collections/cards\nFloral | Floral\nOccasions | Occasions\nNature & World | Nature-World\nFaith | Faith\nGratitude & Appreciation | Gratitude-Appreciation\nChristmas | Christmas",
         "oasis_tabs_menu": "",
         "oasis_tabs_filter": true,
