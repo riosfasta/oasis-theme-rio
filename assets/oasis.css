@@ -2471,6 +2471,36 @@ body .product-count-vertical,
   text-align: left !important;
 }
 
+/* Layout, once assets/oasis-trust-badge.js has moved the panel to the bottom of
+   the product information. The app stacks credit-then-custom; the design wants
+   the shipping and returns badges first, then the alliance credit as a
+   footer-style lockup — logo left, text right, matching .oasis-footer__badge
+   (flex, align-items center, 2.4rem gap). */
+.giraffly-right-Bar-Preview-Example {
+  display: flex !important;
+  flex-direction: column;
+  gap: 2.8rem;
+}
+.giraffly-right-Bar-Preview-width-custom { order: 1; }
+.giraffly-right-Bar-Preview-width-credit {
+  order: 2;
+  display: flex !important;
+  align-items: center;
+  gap: 2.4rem;
+}
+/* The app centres its logo with margin:auto; the lockup needs it hard left. */
+.giraffly-right-Bar-Preview-div-svg-credit {
+  flex: 0 0 auto;
+  margin: 0 !important;
+}
+.oasis-fba__text h3 {
+  margin: 0 0 4px !important;
+}
+.oasis-fba__text h3:last-child {
+  margin: 0 !important;
+  font-weight: 300;
+}
+
 /* ---------- "Shop by" sidebar group ------------------------------------- */
 /* Collection links dressed to sit among the filter groups. The group reuses
    Dawn's disclosure classes, so the heading, hairline and spacing come for
