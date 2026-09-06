@@ -68,10 +68,25 @@ if (!customElements.get('oasis-load-more')) {
             this.grid.appendChild(document.importNode(item, true));
           });
 
-          // The fetched page carries its own button, whose href is page N+1.
-          const nextButton = doc.querySelector('oasis-load-more [data-more]');
-          if (nextButton && nextButton.getAttribute('href')) {
-            this.button.setAttribute('href', nextButton.getAttribute('href'));
+          /*
+            The fetched page carries its own button, whose href is page N+1.
+            Match it by grid selector rather than taking the first
+            <oasis-load-more> in the document: a template with two paginated
+            grids would otherwise hand this one the other grid's href.
+
+            A href equal to the one just fetched means the pagination is not
+            advancing, and following it would append the same page again — the
+            signature behind a report of "showing 90 of 69" on a 24-per-page
+            collection of 69 (24 + 24 + 21 + 21). Treat it as the end.
+          */
+          const nextLoadMore = Array.from(doc.querySelectorAll('oasis-load-more')).find(
+            (el) => el.dataset.grid === this.gridSelector
+          );
+          const nextMore = nextLoadMore && nextLoadMore.querySelector('[data-more]');
+          const nextHref = nextMore && nextMore.getAttribute('href');
+
+          if (nextHref && nextHref !== url) {
+            this.button.setAttribute('href', nextHref);
           } else {
             this.exhaust();
           }
@@ -108,17 +123,33 @@ if (!customElements.get('oasis-load-more')) {
           rather than 12 of 48.
         */
         const offset = Number(this.dataset.offset) || 0;
-        const shown = offset + this.grid.querySelectorAll(this.childSelector).length;
-        const total = Number(this.dataset.total) || shown;
+        const inGrid = this.grid.querySelectorAll(this.childSelector).length;
+        const total = Number(this.dataset.total);
+        const hasTotal = Number.isFinite(total) && total > 0;
+
+        // raw can exceed the total if a page was ever appended twice; the
+        // displayed figure is clamped so it can never read more than exists.
+        const raw = offset + inGrid;
+        const shown = hasTotal ? Math.min(raw, total) : raw;
 
         if (this.counter && this.counter.dataset.template) {
           this.counter.textContent = this.counter.dataset.template
             .replace('[shown]', shown)
-            .replace('[total]', total);
+            .replace('[total]', hasTotal ? total : shown);
         }
 
         const fill = this.querySelector('[data-fill]');
-        if (fill) fill.style.width = `${Math.min(100, (shown / total) * 100)}%`;
+        if (fill) fill.style.width = `${hasTotal ? Math.min(100, (shown / total) * 100) : 100}%`;
+
+        /*
+          The totals decide when to stop — not the fetched markup. Exhaustion
+          used to be inferred only from whether the fetched page rendered a
+          button, with nothing cross-checking it, so any state where that href
+          kept advancing left the button up and the tally climbing past the
+          total. Deriving it from the counts makes that impossible whatever the
+          markup says.
+        */
+        if (hasTotal && raw >= total) this.exhaust();
       }
 
       /*
