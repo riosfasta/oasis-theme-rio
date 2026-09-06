@@ -35,6 +35,7 @@ if (!customElements.get('oasis-load-more')) {
       }
 
       async load() {
+        if (this.hasAttribute('data-exhausted')) return;
         const url = this.button && this.button.getAttribute('href');
         if (!url || this.loading) return;
 
@@ -112,7 +113,20 @@ if (!customElements.get('oasis-load-more')) {
 
       exhaust() {
         this.setAttribute('data-exhausted', '');
-        if (this.button) this.button.hidden = true;
+        if (!this.button) return;
+
+        this.button.hidden = true;
+        /*
+          `hidden` alone is not enough to make it unclickable — it is a
+          user-agent rule that any author `display` beats, and .oasis-btn sets
+          one (see the [hidden] rule in oasis.css). An <a> cannot be disabled
+          either. With no next page the href means nothing, so drop it: that
+          takes the element out of the tab order and makes a click inert even if
+          a stylesheet ever wins over [hidden] again.
+        */
+        this.button.removeAttribute('href');
+        this.button.setAttribute('aria-hidden', 'true');
+        this.button.setAttribute('tabindex', '-1');
       }
 
       updateCount() {

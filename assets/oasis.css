@@ -2395,6 +2395,13 @@ body .product-count-vertical,
   min-width: 244px;
 }
 
+/* The HTML `hidden` attribute is only a user-agent rule, so ANY author rule
+   that sets display outranks it — and .oasis-btn sets one. Without this the
+   script's `button.hidden = true` sets the attribute while the button carries
+   on rendering at full size and stays clickable. Two classes, so it also beats
+   .oasis-btn on specificity rather than relying on source order. */
+.oasis-load-more .oasis-load-more__button[hidden] { display: none; }
+
 /* The label is swapped for a spinner rather than sitting beside one, so the
    button keeps its width and the row below it does not jump. */
 .oasis-load-more[data-loading] .oasis-load-more__button {
