@@ -1,0 +1,30 @@
+{%- comment -%}
+  THE OASIS — Freedom Business Alliance lockup
+
+  The same badge the footer shows: mark on the left, "MEMBER OF THE" over
+  "FREEDOM BUSINESS ALLIANCE" on the right.
+
+  Rendered as a <template> because its destination is not in the theme's markup.
+  The SEOAnt app injects its own credit block on the product page, and
+  assets/oasis-trust-badge.js swaps this in for it — so the wording, the logo
+  asset and the alt text stay here in Liquid rather than being built by hand in
+  JavaScript.
+{%- endcomment -%}
+
+<template id="OasisFbaLockup">
+  <div class="oasis-fba">
+    <img
+      class="oasis-fba__mark"
+      src="{{ 'oasis-fba-logo.png' | asset_url }}"
+      alt="Member of the Freedom Business Alliance"
+      {%- comment -%} the file's own size; the CSS paints it at 98px {%- endcomment -%}
+      width="392"
+      height="392"
+      loading="lazy"
+    >
+    <div class="oasis-fba__lines">
+      <span>Member of the</span>
+      <strong>Freedom Business Alliance</strong>
+    </div>
+  </div>
+</template>

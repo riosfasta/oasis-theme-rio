@@ -136,8 +136,12 @@
           <img
             src="{{ 'oasis-fba-logo.png' | asset_url }}"
             alt="{{ section.settings.badge_line_2 | escape }}"
-            width="98"
-            height="98"
+            {%- comment -%}
+              The file's own size, not the 98px the CSS paints it at. The asset
+              was 98x98 — exactly its display size — so it upscaled on retina.
+            {%- endcomment -%}
+            width="392"
+            height="392"
             loading="lazy"
           >
         {%- endif -%}

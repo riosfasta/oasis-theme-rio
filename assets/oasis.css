@@ -2486,23 +2486,46 @@ body .product-count-vertical,
   gap: 2.8rem;
 }
 .giraffly-right-Bar-Preview-width-custom { order: 1; }
-.giraffly-right-Bar-Preview-width-credit {
-  order: 2;
-  display: flex !important;
+.giraffly-right-Bar-Preview-width-credit { order: 2; }
+/* The alliance lockup, swapped in for the app's credit block. Same proportions
+   as .oasis-footer__badge — 98px mark, 2.4rem gap, two 2rem lines — so the
+   product page and the footer read as one badge. */
+.oasis-fba {
+  display: flex;
   align-items: center;
   gap: 2.4rem;
 }
-/* The app centres its logo with margin:auto; the lockup needs it hard left. */
-.giraffly-right-Bar-Preview-div-svg-credit {
+.oasis-fba__mark {
   flex: 0 0 auto;
-  margin: 0 !important;
+  width: 98px;
+  height: 98px;
 }
-.oasis-fba__text h3 {
-  margin: 0 0 4px !important;
+.oasis-fba__lines { line-height: 1.25; }
+.oasis-fba__lines span,
+.oasis-fba__lines strong {
+  display: block;
+  font-family: var(--oasis-font-body);
+  font-size: 2rem;
+  text-transform: uppercase;
+  color: var(--oasis-dark);
 }
-.oasis-fba__text h3:last-child {
-  margin: 0 !important;
+.oasis-fba__lines span {
   font-weight: 300;
+  letter-spacing: 0.02em;
+}
+.oasis-fba__lines strong {
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+/* The app's URL heading is replaced by the lockup's wording, so it goes. */
+.giraffly-right-Bar-Preview-width-custom > h3 { display: none !important; }
+
+@media screen and (max-width: 749px) {
+  .oasis-fba { gap: 1.6rem; }
+  .oasis-fba__mark { width: 78px; height: 78px; }
+  .oasis-fba__lines span,
+  .oasis-fba__lines strong { font-size: 1.7rem; }
 }
 
 /* ---------- "Shop by" sidebar group ------------------------------------- */

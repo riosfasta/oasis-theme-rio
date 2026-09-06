@@ -33,21 +33,20 @@
     // 1. Move it to the bottom of the product information.
     info.appendChild(panel);
 
-    // 2. Gather the credit heading and the URL into one block, so the lockup is
-    //    logo | text rather than three stacked lines in two separate groups.
+    /*
+      2. Swap the app's alliance credit for the theme's own lockup — the same
+         one the footer shows. The app renders it as a sentence-case heading, a
+         low-resolution logo from its CDN and a bare URL on three wrapped lines;
+         the brand mark is "MEMBER OF THE / FREEDOM BUSINESS ALLIANCE" beside
+         the mark. That is content, not styling, so no amount of CSS gets there.
+
+         The markup comes from snippets/oasis-fba-lockup.liquid via a <template>,
+         so the wording and the asset stay in Liquid.
+    */
     const credit = panel.querySelector('.giraffly-right-Bar-Preview-width-credit');
-    const custom = panel.querySelector('.giraffly-right-Bar-Preview-width-custom');
-    if (credit && !credit.querySelector('.oasis-fba__text')) {
-      const text = document.createElement('div');
-      text.className = 'oasis-fba__text';
-
-      const heading = credit.querySelector('h3');
-      if (heading) text.appendChild(heading);
-      const url = custom && custom.querySelector('h3');
-      if (url) text.appendChild(url);
-
-      // Appended last, so it follows the logo the app already rendered.
-      if (text.childElementCount) credit.appendChild(text);
+    const lockup = document.getElementById('OasisFbaLockup');
+    if (credit && lockup && !credit.querySelector('.oasis-fba')) {
+      credit.replaceChildren(lockup.content.cloneNode(true));
     }
 
     panel.dataset.oasisPlaced = '1';
