@@ -542,6 +542,18 @@ oasis-card:has(.oasis-card__swatch[data-variant-src]:hover) .oasis-card__media i
   object-position: center;
 }
 
+/* Which edge of the photo survives the crop, per slide. object-fit: cover
+   always fills the slide and throws away the overflow; object-position picks
+   which part goes. Two classes, so it outranks the object-position above
+   whatever the source order. Vertical stays centred — these are wide crops, so
+   the horizontal axis is the one that loses pixels.
+
+   Applies on mobile too: the band there is shorter and still `cover`, so the
+   same choice keeps the subject in frame. */
+.oasis-hero__slide--img-left .oasis-hero__bg { object-position: left center; }
+.oasis-hero__slide--img-center .oasis-hero__bg { object-position: center center; }
+.oasis-hero__slide--img-right .oasis-hero__bg { object-position: right center; }
+
 .oasis-hero__scrim {
   position: absolute;
   inset: 0;
@@ -1113,6 +1125,8 @@ oasis-card:has(.oasis-card__swatch[data-variant-src]:hover) .oasis-card__media i
 @media screen and (max-width: 989px) {
 
   .oasis-hero__slide { min-height: 0; flex-direction: column; }
+  /* Fallback only: the section's own <style> sets this from the Mobile image
+     height setting with an id selector, which always wins. */
   .oasis-hero__bg { position: relative; height: 340px; }
   .oasis-hero__scrim,
   .oasis-hero__slide--right .oasis-hero__scrim,

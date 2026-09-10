@@ -7,7 +7,6 @@
 <div
   class="oasis-hero"
   id="OasisHero-{{ section.id }}"
-  style="--oasis-hero-height: {{ section.settings.height }}px;"
 >
   <oasis-hero-slider
     class="oasis-hero__viewport"
@@ -17,7 +16,11 @@
     <div class="oasis-hero__track" data-track>
       {%- for block in section.blocks -%}
         <div
-          class="oasis-hero__slide oasis-hero__slide--{{ block.settings.content_position }}"
+          class="
+            oasis-hero__slide
+            oasis-hero__slide--{{ block.settings.content_position }}
+            oasis-hero__slide--img-{{ block.settings.image_position | default: 'center' }}
+          "
           data-slide
           {{ block.shopify_attributes }}
         >
@@ -120,8 +123,14 @@
   #OasisHero-{{ section.id }} .oasis-hero__arrow--prev svg { transform: rotate(90deg); }
   #OasisHero-{{ section.id }} .oasis-hero__arrow--next svg { transform: rotate(-90deg); }
   @media screen and (max-width: 989px) {
+    {%- comment -%}
+      The mobile image band used to be derived as half the desktop height, which
+      is why there was no control for it. It is its own setting now: below 989px
+      the slide stacks into image-over-copy, so the two heights are not really
+      the same measurement and a ratio was never going to suit every photo.
+    {%- endcomment -%}
     #OasisHero-{{ section.id }} .oasis-hero__slide { min-height: 0; }
-    #OasisHero-{{ section.id }} .oasis-hero__bg { height: {{ section.settings.height | times: 0.5 | round }}px; }
+    #OasisHero-{{ section.id }} .oasis-hero__bg { height: {{ section.settings.height_mobile }}px; }
   }
 </style>
 
@@ -219,6 +228,17 @@
       "default": 675
     },
     {
+      "type": "range",
+      "id": "height_mobile",
+      "min": 200,
+      "max": 700,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile image height",
+      "info": "Below 989px the slide stacks: the image sits above the copy, and this is that image's height.",
+      "default": 340
+    },
+    {
       "type": "checkbox",
       "id": "autoplay",
       "label": "Auto-rotate slides",
@@ -263,11 +283,41 @@
           "id": "content_position",
           "label": "Text position",
           "options": [
-            { "value": "left", "label": "Left" },
-            { "value": "center", "label": "Centre" },
-            { "value": "right", "label": "Right" }
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Centre"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
           ],
           "default": "left"
+        },
+        {
+          "type": "select",
+          "id": "image_position",
+          "label": "Image focus",
+          "info": "Which part of the photo to keep in frame when it is cropped.",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Centre"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "center"
         },
         {
           "type": "text",
@@ -309,7 +359,17 @@
   "presets": [
     {
       "name": "Oasis hero slider",
-      "blocks": [{ "type": "slide" }, { "type": "slide" }, { "type": "slide" }]
+      "blocks": [
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        }
+      ]
     }
   ]
 }
