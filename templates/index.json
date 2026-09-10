@@ -17,6 +17,7 @@
           "settings": {
             "image": "shopify://shop_images/Homepage_Slider_Final.jpg",
             "content_position": "left",
+            "image_position": "center",
             "heading": "Every story finds hope.",
             "text": "<p>Behind every beautiful product is a story of courage and resilience.</p><p>Your purchase helps carry her story forward.</p>",
             "button_label_1": "Shop journals",
@@ -31,6 +32,7 @@
       ],
       "settings": {
         "height": 675,
+        "height_mobile": 200,
         "autoplay": false,
         "autoplay_speed": 6,
         "show_dots": false,
