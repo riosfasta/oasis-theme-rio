@@ -822,6 +822,9 @@ oasis-card:has(.oasis-card__swatch[data-variant-src]:hover) .oasis-card__media i
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* The design photo puts its subject on the left because the right half lives
+     under the text scrim. Overridden per section by the "Image focus" setting. */
+  object-position: left center;
 }
 .oasis-purpose__scrim {
   position: absolute;
@@ -1154,6 +1157,8 @@ oasis-card:has(.oasis-card__swatch[data-variant-src]:hover) .oasis-card__media i
   .oasis-story__text { font-size: 1.8rem; line-height: 1.4; }
 
   .oasis-purpose { flex-direction: column; min-height: 0 !important; }
+  /* 340px is a fallback only: the section's own id-selector rule carries the
+     "Mobile image height" setting and always wins. */
   .oasis-purpose__bg { position: relative; height: 340px; }
   .oasis-purpose__scrim { background: none !important; }
   .oasis-purpose__inner { justify-content: center !important; padding-block: 4.6rem; }

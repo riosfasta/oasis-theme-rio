@@ -116,6 +116,18 @@
 <style>
   #OasisPurpose-{{ section.id }} { min-height: {{ section.settings.height }}px; }
   #OasisPurpose-{{ section.id }} .oasis-purpose__content { max-width: {{ section.settings.content_width }}px; }
+
+  /*
+    Which part of the photo survives the crop. It matters most on a phone, where
+    the scrim is dropped and the image becomes a standalone banner: the design
+    photo keeps its subject hard left because on desktop the right half sits
+    under the text, so a centred crop lands on the empty wall that was only ever
+    meant to be covered. It also applies on narrow desktop widths, where the
+    container is taller in proportion than the image and the sides get trimmed.
+  */
+  #OasisPurpose-{{ section.id }} .oasis-purpose__bg {
+    object-position: {{ section.settings.image_position | default: 'left' }} center;
+  }
   #OasisPurpose-{{ section.id }} .oasis-purpose__inner {
     justify-content: {% if section.settings.content_position == 'left' %}flex-start{% else %}flex-end{% endif %};
   }
@@ -128,6 +140,9 @@
   @media screen and (max-width: 989px) {
     #OasisPurpose-{{ section.id }} { min-height: 0; }
     #OasisPurpose-{{ section.id }} .oasis-purpose__scrim { background: none; }
+    /* Stacked layout, so the photo is a band of its own and needs its own
+       height. oasis.css carries 340px as a fallback; this id rule always wins. */
+    #OasisPurpose-{{ section.id }} .oasis-purpose__bg { height: {{ section.settings.height_mobile }}px; }
     #OasisPurpose-{{ section.id }} .oasis-purpose__inner {
       justify-content: center !important;
       background: {{ section.settings.scrim_color }};
@@ -149,6 +164,18 @@
     },
     {
       "type": "select",
+      "id": "image_position",
+      "label": "Image focus",
+      "info": "Which side of the photo to keep when it is cropped. Matters most on mobile, where the photo becomes a band of its own.",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centre" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
       "id": "content_position",
       "label": "Text side",
       "options": [
@@ -166,6 +193,16 @@
       "unit": "px",
       "label": "Desktop height",
       "default": 845
+    },
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "min": 200,
+      "max": 700,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile image height",
+      "default": 340
     },
     {
       "type": "range",
