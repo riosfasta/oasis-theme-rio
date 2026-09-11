@@ -1191,8 +1191,21 @@ oasis-card:has(.oasis-card__swatch[data-variant-src]:hover) .oasis-card__media i
   .oasis-purpose__plus { font-size: 1.8rem; padding-top: 14px; }
   .oasis-story__kicker { font-size: 3.6rem; }
   .oasis-story__script { font-size: 4.6rem; }
-  .oasis-footer__grid { grid-template-columns: 1fr; }
+  /* minmax(0, 1fr), not 1fr. A bare `1fr` is `minmax(auto, 1fr)`, and that
+     `auto` floor is the column's min-content width — so one stubborn child sets
+     a minimum the track cannot go below and the whole page grows past the
+     screen. Here that child is the newsletter field: an <input> carries an
+     intrinsic width of 20 characters, which with the 3.2rem padding either side
+     came to 336px, plus a 90px submit button — a 427px floor on a 328px column,
+     pushing every footer row 75px off the right of a phone. The two-column rule
+     above already guards this the same way. */
+  .oasis-footer__grid { grid-template-columns: minmax(0, 1fr); }
   .oasis-footer__brand .oasis-footer__heading { font-size: 3rem; }
+
+  /* Now that the field has to fit, give the text somewhere to live: the desktop
+     padding spends 128px of a 328px row on whitespace and the arrow button. */
+  .oasis-newsletter__field input[type='email'] { padding: 0 2rem; font-size: 1.8rem; }
+  .oasis-newsletter__submit { padding: 0 2rem; }
 }
 
 /* ==========================================================================
