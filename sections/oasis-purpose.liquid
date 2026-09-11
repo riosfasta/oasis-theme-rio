@@ -5,27 +5,33 @@
 {%- endcomment -%}
 
 <div class="oasis-purpose" id="OasisPurpose-{{ section.id }}">
+  {%- comment -%}
+    Wrapped so a phone-specific file can replace it below 990px. See the snippet.
+  {%- endcomment -%}
+  {%- capture oasis_bg_desktop -%}
   {%- if section.settings.image != blank -%}
-    {{
-      section.settings.image
-      | image_url: width: 2880
-      | image_tag:
-        class: 'oasis-purpose__bg',
-        widths: '750, 1100, 1440, 1900, 2880',
-        sizes: '100vw',
-        loading: 'lazy',
-        alt: section.settings.image.alt
-    }}
-  {%- else -%}
-    <img
-      class="oasis-purpose__bg"
-      src="{{ 'oasis-purpose-bg.jpg' | asset_url }}"
-      alt=""
-      width="1440"
-      height="846"
-      loading="lazy"
-    >
-  {%- endif -%}
+      {{
+        section.settings.image
+        | image_url: width: 2880
+        | image_tag:
+          class: 'oasis-purpose__bg',
+          widths: '750, 1100, 1440, 1900, 2880',
+          sizes: '100vw',
+          loading: 'lazy',
+          alt: section.settings.image.alt
+      }}
+    {%- else -%}
+      <img
+        class="oasis-purpose__bg"
+        src="{{ 'oasis-purpose-bg.jpg' | asset_url }}"
+        alt=""
+        width="1440"
+        height="846"
+        loading="lazy"
+      >
+    {%- endif -%}
+  {%- endcapture -%}
+  {%- render 'oasis-bg-picture', image_mobile: section.settings.image_mobile, desktop: oasis_bg_desktop -%}
 
   <div class="oasis-purpose__scrim" aria-hidden="true"></div>
 
@@ -113,6 +119,19 @@
   </div>
 </div>
 
+{%- liquid
+  comment
+    A phone photograph is the one the band actually shows below 990px, so its
+    proportions are the ones to size the band by. Giving the band that shape
+    means the uploaded file is shown whole, which is the point of uploading one
+    cut for phones in the first place. Without one, the fixed height stands.
+  endcomment
+  assign purpose_ratio = ''
+  if section.settings.image_mobile != blank
+    assign purpose_ratio = section.settings.image_mobile.aspect_ratio
+  endif
+-%}
+
 <style>
   #OasisPurpose-{{ section.id }} { min-height: {{ section.settings.height }}px; }
   #OasisPurpose-{{ section.id }} .oasis-purpose__content { max-width: {{ section.settings.content_width }}px; }
@@ -142,7 +161,14 @@
     #OasisPurpose-{{ section.id }} .oasis-purpose__scrim { background: none; }
     /* Stacked layout, so the photo is a band of its own and needs its own
        height. oasis.css carries 340px as a fallback; this id rule always wins. */
-    #OasisPurpose-{{ section.id }} .oasis-purpose__bg { height: {{ section.settings.height_mobile }}px; }
+    #OasisPurpose-{{ section.id }} .oasis-purpose__bg {
+      {%- if purpose_ratio != blank %}
+      height: auto;
+      aspect-ratio: {{ purpose_ratio }};
+      {%- else %}
+      height: {{ section.settings.height_mobile }}px;
+      {%- endif %}
+    }
     #OasisPurpose-{{ section.id }} .oasis-purpose__inner {
       justify-content: center !important;
       background: {{ section.settings.scrim_color }};
@@ -193,6 +219,12 @@
       "unit": "px",
       "label": "Desktop height",
       "default": 845
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Background image (mobile)",
+      "info": "Optional. Shown instead of the main image on phones, and only downloaded there. The band takes this photo's own shape, so nothing is cropped."
     },
     {
       "type": "range",

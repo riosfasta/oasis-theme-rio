@@ -8,45 +8,11 @@
   class="oasis-story oasis-story--{{ section.settings.content_position }} oasis-story--{{ section.settings.kicker_style }}"
   id="OasisStory-{{ section.id }}"
 >
-  {%- if section.settings.image != blank -%}
-    {%- comment -%}
-      A separate phone photo goes in a <picture>, so the browser fetches one
-      file or the other rather than both — which is the whole point of doing it
-      here instead of hiding a second <img> with CSS.
-
-      <picture> is display: contents (see oasis.css), so the <img> stays the
-      direct flex child of the section and every rule that positions, orders and
-      crops `.oasis-story__bg` keeps working untouched.
-
-      The media query matches the 989px breakpoint the stacked layout uses, so
-      the phone photo appears exactly when the band appears.
-    {%- endcomment -%}
-    {%- if section.settings.image_mobile != blank -%}
-      <picture class="oasis-story__picture">
-        <source
-          media="(max-width: 989px)"
-          srcset="
-            {{ section.settings.image_mobile | image_url: width: 600 }} 600w,
-            {{ section.settings.image_mobile | image_url: width: 900 }} 900w,
-            {{ section.settings.image_mobile | image_url: width: 1200 }} 1200w,
-            {{ section.settings.image_mobile | image_url: width: 1600 }} 1600w
-          "
-          sizes="100vw"
-          width="{{ section.settings.image_mobile.width }}"
-          height="{{ section.settings.image_mobile.height }}"
-        >
-        {{
-          section.settings.image
-          | image_url: width: 2880
-          | image_tag:
-            class: 'oasis-story__bg',
-            widths: '750, 1100, 1440, 1900, 2880',
-            sizes: '100vw',
-            loading: 'lazy',
-            alt: section.settings.image.alt
-        }}
-      </picture>
-    {%- else -%}
+  {%- comment -%}
+    Wrapped so a phone-specific file can replace it below 990px. See the snippet.
+  {%- endcomment -%}
+  {%- capture oasis_bg_desktop -%}
+    {%- if section.settings.image != blank -%}
       {{
         section.settings.image
         | image_url: width: 2880
@@ -57,17 +23,18 @@
           loading: 'lazy',
           alt: section.settings.image.alt
       }}
+    {%- elsif section.settings.fallback_asset != blank -%}
+      <img
+        class="oasis-story__bg"
+        src="{{ section.settings.fallback_asset | asset_url }}"
+        alt="{{ section.settings.kicker | escape }}"
+        width="1440"
+        height="668"
+        loading="lazy"
+      >
     {%- endif -%}
-  {%- elsif section.settings.fallback_asset != blank -%}
-    <img
-      class="oasis-story__bg"
-      src="{{ section.settings.fallback_asset | asset_url }}"
-      alt="{{ section.settings.kicker | escape }}"
-      width="1440"
-      height="668"
-      loading="lazy"
-    >
-  {%- endif -%}
+  {%- endcapture -%}
+  {%- render 'oasis-bg-picture', image_mobile: section.settings.image_mobile, desktop: oasis_bg_desktop -%}
 
   <div class="oasis-story__scrim" aria-hidden="true"></div>
 

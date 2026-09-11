@@ -19,27 +19,33 @@
   class="oasis-band oasis-band--{{ section.settings.content_position }}"
   id="OasisBand-{{ section.id }}"
 >
+  {%- comment -%}
+    Wrapped so a phone-specific file can replace it below 990px. See the snippet.
+  {%- endcomment -%}
+  {%- capture oasis_bg_desktop -%}
   {%- if section.settings.image != blank -%}
-    {{
-      section.settings.image
-      | image_url: width: 2880
-      | image_tag:
-        class: 'oasis-band__bg',
-        widths: '750, 1100, 1440, 1900, 2880',
-        sizes: '100vw',
-        loading: section.settings.image_loading,
-        alt: section.settings.image.alt
-    }}
-  {%- elsif section.settings.fallback_asset != blank -%}
-    <img
-      class="oasis-band__bg"
-      src="{{ section.settings.fallback_asset | asset_url }}"
-      alt=""
-      width="1440"
-      height="{{ section.settings.height }}"
-      loading="{{ section.settings.image_loading }}"
-    >
-  {%- endif -%}
+      {{
+        section.settings.image
+        | image_url: width: 2880
+        | image_tag:
+          class: 'oasis-band__bg',
+          widths: '750, 1100, 1440, 1900, 2880',
+          sizes: '100vw',
+          loading: section.settings.image_loading,
+          alt: section.settings.image.alt
+      }}
+    {%- elsif section.settings.fallback_asset != blank -%}
+      <img
+        class="oasis-band__bg"
+        src="{{ section.settings.fallback_asset | asset_url }}"
+        alt=""
+        width="1440"
+        height="{{ section.settings.height }}"
+        loading="{{ section.settings.image_loading }}"
+      >
+    {%- endif -%}
+  {%- endcapture -%}
+  {%- render 'oasis-bg-picture', image_mobile: section.settings.image_mobile, desktop: oasis_bg_desktop -%}
 
   {%- if section.settings.scrim_color != 'rgba(0,0,0,0)' and section.settings.scrim_color != blank -%}
     <div class="oasis-band__scrim" aria-hidden="true"></div>
@@ -144,6 +150,19 @@
   endif
 -%}
 
+{%- liquid
+  comment
+    A phone photograph is the one the band actually shows below 990px, so its
+    proportions are the ones to size the band by. Giving the band that shape
+    means the uploaded file is shown whole, which is the point of uploading one
+    cut for phones in the first place. Without one, the fixed height stands.
+  endcomment
+  assign band_ratio = ''
+  if section.settings.image_mobile != blank
+    assign band_ratio = section.settings.image_mobile.aspect_ratio
+  endif
+-%}
+
 <style>
   #OasisBand-{{ section.id }} { min-height: {{ section.settings.height }}px; }
   #OasisBand-{{ section.id }} .oasis-band__content { max-width: {{ section.settings.content_width }}px; }
@@ -179,7 +198,12 @@
       position: relative;
       inset: auto;
       width: 100%;
+      {%- if band_ratio != blank %}
+      height: auto;
+      aspect-ratio: {{ band_ratio }};
+      {%- else %}
       height: {{ section.settings.height_mobile }}px;
+      {%- endif %}
       object-fit: cover;
       object-position: {{ band_focus }} center;
       order: {{ band_bg_order }};
@@ -244,6 +268,12 @@
     {
       "type": "header",
       "content": "Mobile"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Photo",
+      "info": "Optional. Shown instead of the main photo on phones, and only downloaded there. The band takes this photo's own shape, so nothing is cropped \u2014 upload a squarer or upright version of the same scene."
     },
     {
       "type": "select",

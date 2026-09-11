@@ -1,0 +1,45 @@
+{%- comment -%}
+  THE OASIS — optional phone-specific file for a full-bleed background image
+
+  Wide photographs rarely have an upright crop that works, so every full-bleed
+  section can carry a second file shown only on phones.
+
+  <picture> rather than a second <img> hidden with CSS: the browser picks one
+  source and downloads that one alone, so a phone never pays for the desktop
+  photograph as well.
+
+  The wrapper is `.oasis-bg-picture`, which oasis.css sets to `display: contents`
+  so its own box disappears. The <img> therefore stays a direct child of the
+  section, and every rule that positions, orders, sizes and crops that section's
+  background applies exactly as it does without the wrapper — no parallel set of
+  rules per section.
+
+  The media query matches the 989px breakpoint every one of these sections uses
+  to stack, so the phone photograph appears exactly when the stacked band does.
+
+  Accepts:
+    - image_mobile:   {Image}  optional; when blank this renders `desktop` alone
+    - desktop:        {String} the already-rendered <img> for wide screens, so
+                               each section keeps its own widths, loading and
+                               fetchpriority rather than having them genericised
+{%- endcomment -%}
+
+{%- if image_mobile != blank -%}
+  <picture class="oasis-bg-picture">
+    <source
+      media="(max-width: 989px)"
+      srcset="
+        {{ image_mobile | image_url: width: 600 }} 600w,
+        {{ image_mobile | image_url: width: 900 }} 900w,
+        {{ image_mobile | image_url: width: 1200 }} 1200w,
+        {{ image_mobile | image_url: width: 1600 }} 1600w
+      "
+      sizes="100vw"
+      width="{{ image_mobile.width }}"
+      height="{{ image_mobile.height }}"
+    >
+    {{ desktop }}
+  </picture>
+{%- else -%}
+  {{ desktop }}
+{%- endif -%}

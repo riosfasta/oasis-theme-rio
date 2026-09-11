@@ -738,11 +738,12 @@ oasis-card:has(.oasis-card__swatch[data-variant-src]:hover) .oasis-card__media i
     width: auto;
     height: 100%;
 }
-/* A <picture> only appears when a separate phone photo is set. `display:
-   contents` removes its own box, so the <img> inside stays a direct child of
-   the section and every rule that positions, orders and crops
-   `.oasis-story__bg` applies exactly as it does without the wrapper. */
-.oasis-story__picture { display: contents; }
+/* A <picture> only appears when a section has a separate phone photo set.
+   `display: contents` removes its own box, so the <img> inside stays a direct
+   child of the section and every rule that positions, orders, sizes and crops
+   that section's background applies exactly as it does without the wrapper.
+   Shared by every full-bleed section — see snippets/oasis-bg-picture.liquid. */
+.oasis-bg-picture { display: contents; }
 
 .oasis-story__scrim {
   position: absolute;

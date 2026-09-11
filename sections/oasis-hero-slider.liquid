@@ -33,28 +33,34 @@
               assign img_priority = 'auto'
             endif
           -%}
+          {%- comment -%}
+            Wrapped so a phone-specific file can replace it below 990px. See the snippet.
+          {%- endcomment -%}
+          {%- capture oasis_bg_desktop -%}
           {%- if block.settings.image != blank -%}
-            {{
-              block.settings.image
-              | image_url: width: 2880
-              | image_tag:
-                class: 'oasis-hero__bg',
-                widths: '750, 1100, 1440, 1900, 2880',
-                sizes: '100vw',
-                loading: img_loading,
-                fetchpriority: img_priority,
-                alt: block.settings.image.alt
-            }}
-          {%- else -%}
-            <img
-              class="oasis-hero__bg"
-              src="{{ 'oasis-hero-slide-1.jpg' | asset_url }}"
-              alt="{{ block.settings.heading | escape }}"
-              width="1440"
-              height="675"
-              {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %}
-            >
-          {%- endif -%}
+                      {{
+                        block.settings.image
+                        | image_url: width: 2880
+                        | image_tag:
+                          class: 'oasis-hero__bg',
+                          widths: '750, 1100, 1440, 1900, 2880',
+                          sizes: '100vw',
+                          loading: img_loading,
+                          fetchpriority: img_priority,
+                          alt: block.settings.image.alt
+                      }}
+                    {%- else -%}
+                      <img
+                        class="oasis-hero__bg"
+                        src="{{ 'oasis-hero-slide-1.jpg' | asset_url }}"
+                        alt="{{ block.settings.heading | escape }}"
+                        width="1440"
+                        height="675"
+                        {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %}
+                      >
+                    {%- endif -%}
+          {%- endcapture -%}
+          {%- render 'oasis-bg-picture', image_mobile: block.settings.image_mobile, desktop: oasis_bg_desktop -%}
 
           <div class="oasis-hero__scrim" aria-hidden="true"></div>
 
@@ -277,6 +283,12 @@
           "id": "image",
           "label": "Image",
           "info": "Recommended 2880 × 1540px. Leave empty to use the packaged design image."
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Image (mobile)",
+          "info": "Optional. Shown instead of the main image on phones, and only downloaded there. Slides keep the mobile height so they stay the same size as one another."
         },
         {
           "type": "select",

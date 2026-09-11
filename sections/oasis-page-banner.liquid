@@ -45,27 +45,33 @@
 -%}
 
 <div class="oasis-banner oasis-banner--{{ section.settings.content_position }}" id="OasisBanner-{{ section.id }}">
+  {%- comment -%}
+    Wrapped so a phone-specific file can replace it below 990px. See the snippet.
+  {%- endcomment -%}
+  {%- capture oasis_bg_desktop -%}
   {%- if b_image != blank -%}
-    {{
-      b_image
-      | image_url: width: 2880
-      | image_tag:
-        class: 'oasis-banner__bg',
-        widths: '750, 1100, 1440, 1900, 2880',
-        sizes: '100vw',
-        fetchpriority: 'high',
-        alt: b_image.alt
-    }}
-  {%- elsif section.settings.fallback_asset != blank -%}
-    <img
-      class="oasis-banner__bg"
-      src="{{ section.settings.fallback_asset | asset_url }}"
-      alt=""
-      width="1440"
-      height="363"
-      fetchpriority="high"
-    >
-  {%- endif -%}
+      {{
+        b_image
+        | image_url: width: 2880
+        | image_tag:
+          class: 'oasis-banner__bg',
+          widths: '750, 1100, 1440, 1900, 2880',
+          sizes: '100vw',
+          fetchpriority: 'high',
+          alt: b_image.alt
+      }}
+    {%- elsif section.settings.fallback_asset != blank -%}
+      <img
+        class="oasis-banner__bg"
+        src="{{ section.settings.fallback_asset | asset_url }}"
+        alt=""
+        width="1440"
+        height="363"
+        fetchpriority="high"
+      >
+    {%- endif -%}
+  {%- endcapture -%}
+  {%- render 'oasis-bg-picture', image_mobile: section.settings.image_mobile, desktop: oasis_bg_desktop -%}
 
   <div class="oasis-banner__scrim" aria-hidden="true"></div>
 
@@ -117,6 +123,19 @@
   endif
 -%}
 
+{%- liquid
+  comment
+    A phone photograph is the one the band actually shows below 990px, so its
+    proportions are the ones to size the band by. Giving the band that shape
+    means the uploaded file is shown whole, which is the point of uploading one
+    cut for phones in the first place. Without one, the fixed height stands.
+  endcomment
+  assign banner_ratio = ''
+  if section.settings.image_mobile != blank
+    assign banner_ratio = section.settings.image_mobile.aspect_ratio
+  endif
+-%}
+
 <style>
   #OasisBanner-{{ section.id }} { min-height: {{ section.settings.height }}px; }
   #OasisBanner-{{ section.id }} .oasis-banner__content { max-width: {{ section.settings.content_width }}px; }
@@ -147,7 +166,12 @@
       position: relative;
       inset: auto;
       width: 100%;
+      {%- if banner_ratio != blank %}
+      height: auto;
+      aspect-ratio: {{ banner_ratio }};
+      {%- else %}
       height: {{ section.settings.height_mobile }}px;
+      {%- endif %}
       object-fit: cover;
       object-position: {{ banner_focus }} center;
     }
@@ -211,6 +235,12 @@
     {
       "type": "header",
       "content": "Mobile"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Photo",
+      "info": "Optional. Shown instead of the main photo on phones, and only downloaded there. The band takes this photo's own shape, so nothing is cropped \u2014 upload a squarer or upright version of the same scene."
     },
     {
       "type": "range",
