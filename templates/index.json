@@ -199,6 +199,7 @@
         "image_position": "left",
         "content_position": "right",
         "height": 845,
+        "image_mobile": "shopify://shop_images/home_mobile_banner_2.jpg",
         "height_mobile": 340,
         "content_width": 600,
         "scrim_color": "#fbf7f4",
