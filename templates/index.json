@@ -115,6 +115,11 @@
         "height": 670,
         "content_width": 580,
         "scrim_color": "#e9dacb",
+        "image_mobile": "shopify://shop_images/mobile_view_home_page_1.jpg",
+        "image_order_mobile": "below",
+        "fit_mobile": "whole",
+        "height_mobile": 320,
+        "image_focus_mobile": "auto",
         "show_leaf": false,
         "kicker": "Be a part of her",
         "script": "freedom story",
@@ -191,8 +196,10 @@
         "i5"
       ],
       "settings": {
+        "image_position": "left",
         "content_position": "right",
         "height": 845,
+        "height_mobile": 340,
         "content_width": 600,
         "scrim_color": "#fbf7f4",
         "show_leaf": true,
