@@ -15,7 +15,7 @@
         ".oasis-banner__bg {position: absolute; top: -180px; right: auto; bottom: -100px; left: -30vw; width: 130vw; height: 150%; object-fit: cover;}"
       ],
       "settings": {
-        "image": "shopify://shop_images/journals_banner2.webp",
+        "image": "shopify://shop_images/oasis-banner-fixed.jpg",
         "fallback_asset": "oasis-banner-journals.jpg",
         "content_position": "left",
         "height": 365,
@@ -80,6 +80,9 @@
         "height": 585,
         "content_width": 620,
         "scrim_color": "#fbf7f4",
+        "image_order_mobile": "below",
+        "height_mobile": 320,
+        "image_focus_mobile": "auto",
         "show_leaf": true,
         "kicker": "More than",
         "script": "just a journal",
