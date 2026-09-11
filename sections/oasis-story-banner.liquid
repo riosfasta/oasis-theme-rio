@@ -100,6 +100,24 @@
     assign story_bg_order = 2
     assign story_inner_order = 1
   endif
+
+  comment
+    How tall the band is on a phone, which is really a question about how much
+    of the photo survives. A fixed height crops the sides, and the taller it is
+    the more it crops: at 320px the homepage photo shows 66% of its width, at
+    240px 88%. Giving the band the photo's own shape instead crops nothing.
+
+    That needs the photo's true proportions, which are only knowable for an
+    uploaded image — `aspect_ratio` comes from Shopify. A packaged theme asset
+    is rendered with hardcoded width/height attributes that do not always match
+    the file, so rather than crop to a number that might be wrong, those banners
+    keep the fixed height.
+  endcomment
+  assign story_ratio = ''
+  if section.settings.image != blank
+    assign story_ratio = section.settings.image.aspect_ratio
+  endif
+  assign story_fit = section.settings.fit_mobile | default: 'whole'
 -%}
 
 <style>
@@ -147,7 +165,12 @@
       position: relative;
       inset: auto;
       width: 100%;
+      {%- if story_fit == 'whole' and story_ratio != blank %}
+      height: auto;
+      aspect-ratio: {{ story_ratio }};
+      {%- else %}
       height: {{ section.settings.height_mobile }}px;
+      {%- endif %}
       object-fit: cover;
       object-position: {{ story_focus }} center;
       order: {{ story_bg_order }};
@@ -245,6 +268,17 @@
       "default": "below"
     },
     {
+      "type": "select",
+      "id": "fit_mobile",
+      "label": "Photo size",
+      "info": "Whole photo shows the full frame with nothing cropped. Fixed height crops the sides to fill a set band — the taller the band, the more it crops.",
+      "options": [
+        { "value": "whole", "label": "Whole photo" },
+        { "value": "crop", "label": "Fixed height" }
+      ],
+      "default": "whole"
+    },
+    {
       "type": "range",
       "id": "height_mobile",
       "min": 200,
@@ -252,6 +286,7 @@
       "step": 10,
       "unit": "px",
       "label": "Photo height",
+      "info": "Used with Fixed height, and for banners using a packaged theme image, whose proportions the theme cannot read.",
       "default": 320
     },
     {
