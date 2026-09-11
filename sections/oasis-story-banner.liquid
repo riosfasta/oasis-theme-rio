@@ -73,6 +73,35 @@
   </div>
 </div>
 
+{%- liquid
+  comment
+    Which part of the photo to keep when it is cropped on a phone. These photos
+    are composed with the subject on the side the desktop scrim does NOT cover,
+    so "auto" simply means the opposite side from the text — which is right for
+    every banner on the site without anyone having to set it.
+  endcomment
+  assign story_focus = section.settings.image_focus_mobile | default: 'auto'
+  if story_focus == 'auto'
+    if section.settings.content_position == 'right'
+      assign story_focus = 'left'
+    else
+      assign story_focus = 'right'
+    endif
+  endif
+
+  comment
+    Flex `order` on the two items. The scrim is absolutely positioned, so it is
+    not a flex item and is unaffected either way.
+  endcomment
+  if section.settings.image_order_mobile == 'above'
+    assign story_bg_order = 1
+    assign story_inner_order = 2
+  else
+    assign story_bg_order = 2
+    assign story_inner_order = 1
+  endif
+-%}
+
 <style>
   #OasisStory-{{ section.id }} { min-height: {{ section.settings.height }}px; }
   #OasisStory-{{ section.id }} .oasis-story__content { max-width: {{ section.settings.content_width }}px; }
@@ -90,7 +119,26 @@
   @media screen and (max-width: 989px) {
     #OasisStory-{{ section.id }} { min-height: 0; }
     #OasisStory-{{ section.id }} .oasis-story__scrim { background: none; }
-    #OasisStory-{{ section.id }} .oasis-story__inner { background: {{ section.settings.scrim_color }}; }
+    #OasisStory-{{ section.id }} .oasis-story__inner {
+      background: {{ section.settings.scrim_color }};
+      order: {{ story_inner_order }};
+    }
+    /*
+      Stacked layout, so the photo is a band of its own.
+
+      `width: auto` is what the desktop rule uses, and at a fixed height that
+      makes the photo its full intrinsic width — about 690px for a 320px-tall
+      band — which the section then clips at the viewport edge. On these photos
+      the subject stands in the half that gets clipped, so she disappears.
+      Cropping instead of overflowing, with the focus on her side, keeps her.
+    */
+    #OasisStory-{{ section.id }} .oasis-story__bg {
+      width: 100%;
+      height: {{ section.settings.height_mobile }}px;
+      object-fit: cover;
+      object-position: {{ story_focus }} center;
+      order: {{ story_bg_order }};
+    }
   }
 </style>
 
@@ -167,6 +215,44 @@
       "id": "scrim_color",
       "label": "Overlay colour",
       "default": "#E9DACB"
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "select",
+      "id": "image_order_mobile",
+      "label": "Photo position",
+      "info": "Where the photo sits once the section stacks on a phone.",
+      "options": [
+        { "value": "below", "label": "Under the text" },
+        { "value": "above", "label": "Above the text" }
+      ],
+      "default": "below"
+    },
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "min": 200,
+      "max": 700,
+      "step": 10,
+      "unit": "px",
+      "label": "Photo height",
+      "default": 320
+    },
+    {
+      "type": "select",
+      "id": "image_focus_mobile",
+      "label": "Photo focus",
+      "info": "Which part of the photo to keep when it is cropped. Automatic uses the side opposite the text, which is where these photos put their subject.",
+      "options": [
+        { "value": "auto", "label": "Automatic" },
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centre" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "auto"
     },
     {
       "type": "header",

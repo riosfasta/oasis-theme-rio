@@ -1148,7 +1148,11 @@ oasis-card:has(.oasis-card__swatch[data-variant-src]:hover) .oasis-card__media i
   .oasis-tile__title { font-size: 5rem; }
 
   .oasis-story { flex-direction: column; min-height: 0 !important; }
-  .oasis-story__bg { position: relative; height: 320px; }
+  /* Crop rather than overflow: the desktop rule sizes the photo by its own
+     aspect ratio, which at a fixed height makes it far wider than the phone and
+     clips whichever half the section cannot fit. The section's own id rule
+     carries the height, the focus and the stacking order on top of this. */
+  .oasis-story__bg { position: relative; height: 320px; width: 100%; object-fit: cover; }
   .oasis-story__scrim { background: none !important; }
   .oasis-story__inner { justify-content: center !important; padding-block: 4.4rem; }
   .oasis-story__content { text-align: center; max-width: 520px; }
