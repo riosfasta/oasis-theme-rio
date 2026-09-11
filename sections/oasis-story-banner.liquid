@@ -119,20 +119,33 @@
   @media screen and (max-width: 989px) {
     #OasisStory-{{ section.id }} { min-height: 0; }
     #OasisStory-{{ section.id }} .oasis-story__scrim { background: none; }
-    #OasisStory-{{ section.id }} .oasis-story__inner {
+    #OasisStory-{{ section.id }}.oasis-story .oasis-story__inner {
       background: {{ section.settings.scrim_color }};
       order: {{ story_inner_order }};
     }
     /*
       Stacked layout, so the photo is a band of its own.
 
-      `width: auto` is what the desktop rule uses, and at a fixed height that
-      makes the photo its full intrinsic width — about 690px for a 320px-tall
-      band — which the section then clips at the viewport edge. On these photos
-      the subject stands in the half that gets clipped, so she disappears.
-      Cropping instead of overflowing, with the focus on her side, keeps her.
+      Two things have to be undone here, and the id is doubled up with the
+      class deliberately so that both survive.
+
+      `position` — on desktop the photo is an absolutely positioned backdrop.
+      Left that way it is out of the flow, so `order` cannot place it and the
+      text block, which has an opaque background on mobile, simply paints over
+      it. It has to come back into the column as a real flex item.
+
+      `width`/`height` — the desktop rule sizes the photo by its own aspect
+      ratio, so at a fixed height it is far wider than a phone and the section
+      clips whichever half will not fit. On these photos the subject stands in
+      the clipped half. Cropping instead, focused on her side, keeps her.
+
+      The extra class also outranks anything Shopify's per-section Custom CSS
+      box emits, which is scoped to `#shopify-section-<id>` — one id and one
+      class — and is printed after this block, so at equal weight it would win.
     */
-    #OasisStory-{{ section.id }} .oasis-story__bg {
+    #OasisStory-{{ section.id }}.oasis-story .oasis-story__bg {
+      position: relative;
+      inset: auto;
       width: 100%;
       height: {{ section.settings.height_mobile }}px;
       object-fit: cover;
