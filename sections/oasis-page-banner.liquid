@@ -93,6 +93,30 @@
   </div>
 </div>
 
+{%- liquid
+  comment
+    Which part of the photograph to keep when it is cropped on a phone. These
+    banner photographs are composed with everything on the side the text column
+    does not cover, so "auto" means the opposite side from the text. Measured on
+    the bulk-ordering banner: the left two thirds carry no detail at all (edge
+    energy 0.0 and 1.3) against 11.8 in the right third, where the subject is,
+    and the text sits left.
+
+    A centred banner has nothing to sit opposite, so it keeps the middle.
+  endcomment
+  assign banner_focus = section.settings.image_focus_mobile | default: 'auto'
+  if banner_focus == 'auto'
+    case section.settings.content_position
+      when 'right'
+        assign banner_focus = 'left'
+      when 'center'
+        assign banner_focus = 'center'
+      else
+        assign banner_focus = 'right'
+    endcase
+  endif
+-%}
+
 <style>
   #OasisBanner-{{ section.id }} { min-height: {{ section.settings.height }}px; }
   #OasisBanner-{{ section.id }} .oasis-banner__content { max-width: {{ section.settings.content_width }}px; }
@@ -108,6 +132,25 @@
   @media screen and (max-width: 989px) {
     #OasisBanner-{{ section.id }} { min-height: 0; }
     #OasisBanner-{{ section.id }} .oasis-banner__scrim { background: none; }
+    /*
+      Stacked layout, so the photograph is a band of its own.
+
+      On desktop it is an oversized backdrop — 130vw wide, pulled 30vw to the
+      left — so that it bleeds well past the text column. Those two values have
+      to be undone here or they carry into the phone, where 130vw is 489px and
+      -30vw is -113px: the photo starts off the left edge and stops 57px short
+      of the right one, leaving a bare strip of the banner's own sand colour.
+      Cropping to the phone's width instead, focused away from the text, fills
+      the band and keeps the subject.
+    */
+    #OasisBanner-{{ section.id }}.oasis-banner .oasis-banner__bg {
+      position: relative;
+      inset: auto;
+      width: 100%;
+      height: {{ section.settings.height_mobile }}px;
+      object-fit: cover;
+      object-position: {{ banner_focus }} center;
+    }
   }
 </style>
 
@@ -164,6 +207,34 @@
       "id": "scrim_color",
       "label": "Overlay colour",
       "default": "#F1E4D4"
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "min": 140,
+      "max": 600,
+      "step": 10,
+      "unit": "px",
+      "label": "Photo height",
+      "info": "A shorter band shows more of the photo's width, because the crop fills the height first.",
+      "default": 220
+    },
+    {
+      "type": "select",
+      "id": "image_focus_mobile",
+      "label": "Photo focus",
+      "info": "Which part of the photo to keep when it is cropped. Automatic uses the side opposite the text, where these photos put their subject.",
+      "options": [
+        { "value": "auto", "label": "Automatic" },
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centre" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "auto"
     },
     {
       "type": "header",

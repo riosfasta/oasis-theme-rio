@@ -1623,7 +1623,11 @@ position: absolute;
 
 @media screen and (max-width: 989px) {
   .oasis-banner { min-height: 0 !important; flex-direction: column; }
-  .oasis-banner__bg { position: relative; height: 220px; }
+  /* `inset` and `width` both have to be undone, not just `position`: the desktop
+     rule is an oversized backdrop (130vw wide, pulled -30vw left) and at phone
+     width that leaves the photo starting off-screen and stopping short of the
+     right edge. The section's own id rule carries the height and the focus. */
+  .oasis-banner__bg { position: relative; inset: auto; width: 100%; height: 220px; }
   .oasis-banner__scrim { background: none !important; }
   .oasis-banner__inner { justify-content: center !important; padding-block: 3.6rem; }
   .oasis-banner__content { max-width: 100% !important; }
