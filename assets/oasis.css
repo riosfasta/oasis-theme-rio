@@ -2520,6 +2520,20 @@ body .product-count-vertical,
   text-align: left !important;
 }
 .trust-custom-badge { justify-content: start !important; }
+
+/* On a phone the badge grid collapses to a single column narrower than the
+   product column — 237px of content in 326px — and packed to the start it left
+   a bare 89px gutter down one side. Centring the track puts that space either
+   side instead. This moves the pair as a unit; the wording inside each badge
+   stays left of its icon, which is what the left-alignment above is for.
+
+   Below 990px only. At wider widths the grid is two tracks that already fill
+   the container (223px + 223px in 454px), so justify-content has nothing to
+   distribute and this would be inert anyway — scoping it just guarantees the
+   desktop alignment can never drift if the app changes its column sizing. */
+@media screen and (max-width: 989px) {
+  .trust-custom-badge { justify-content: center !important; }
+}
 .trust-icon-container {
   margin-left: 0 !important;
   margin-right: auto !important;
