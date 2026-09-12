@@ -2521,24 +2521,35 @@ body .product-count-vertical,
 }
 .trust-custom-badge { justify-content: start !important; }
 
-/* On a phone the badge grid collapses to a single column narrower than the
-   product column — 237px of content in 326px — and packed to the start it left
-   a bare 89px gutter down one side. Centring the track puts that space either
-   side instead. This moves the pair as a unit; the wording inside each badge
-   stays left of its icon, which is what the left-alignment above is for.
+.trust-icon-container {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+.trust-text-container {
+  align-items: flex-start !important;
+  text-align: left !important;
+}
 
-   Below 990px only. At wider widths the grid is two tracks that already fill
-   the container (223px + 223px in 454px), so justify-content has nothing to
-   distribute and this would be inert anyway — scoping it just guarantees the
-   desktop alignment can never drift if the app changes its column sizing.
+/* Phone layout: the stacked badges centre, contents and all.
 
-   Inside each badge the icon and the two lines centre as well, so a stacked
-   badge reads as one centred unit rather than a centred block of left-aligned
-   text. Three separate overrides again, because the app sets each inline: the
-   icon container is positioned by its margins, the text container by
-   align-items (it is a flex column, so its lines shrink to their content and
-   text-align alone would not move them) and by text-align for anything that
-   wraps onto a second line. Desktop keeps the left-aligned two-column row. */
+   MUST stay below the three rules above. Every selector here is the same one
+   class, and every declaration on both sides is !important, so specificity is a
+   tie and source order is the only thing separating them — put this block first
+   and the left-alignment rules silently win, which is exactly what happened the
+   first time. (.trust-custom-badge appeared to work only because its base rule
+   sits further up the file.)
+
+   Why centring needs all three: the badge grid collapses to a single column
+   narrower than the product column — 237px of content in 326px — and packed to
+   the start it leaves a bare 89px gutter down one side, so justify-content
+   centres the track. Within a badge the icon container is placed by its
+   margins, and the text container is a flex column whose lines shrink to their
+   own content, so align-items is what moves them; text-align only handles a
+   line that wraps.
+
+   Below 990px only, and desktop is genuinely unaffected: there the grid is two
+   tracks already filling the container (223px + 223px in 454px) and the badges
+   read better left-aligned beside each other. */
 @media screen and (max-width: 989px) {
   .trust-custom-badge { justify-content: center !important; }
   .trust-icon-container {
@@ -2549,14 +2560,6 @@ body .product-count-vertical,
     align-items: center !important;
     text-align: center !important;
   }
-}
-.trust-icon-container {
-  margin-left: 0 !important;
-  margin-right: auto !important;
-}
-.trust-text-container {
-  align-items: flex-start !important;
-  text-align: left !important;
 }
 
 /* Layout, once assets/oasis-trust-badge.js has moved the panel to the bottom of
