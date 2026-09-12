@@ -139,7 +139,7 @@
         "text_align": "center",
         "height": 670,
         "content_width": 620,
-        "scrim_color": "#fbf7f4",
+        "scrim_color": "#F7EFE7",
         "image_mobile": "shopify://shop_images/bulk_ordering_mobile_1.jpg",
         "image_order_mobile": "below",
         "fit_mobile": "whole",
