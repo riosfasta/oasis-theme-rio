@@ -2530,9 +2530,25 @@ body .product-count-vertical,
    Below 990px only. At wider widths the grid is two tracks that already fill
    the container (223px + 223px in 454px), so justify-content has nothing to
    distribute and this would be inert anyway — scoping it just guarantees the
-   desktop alignment can never drift if the app changes its column sizing. */
+   desktop alignment can never drift if the app changes its column sizing.
+
+   Inside each badge the icon and the two lines centre as well, so a stacked
+   badge reads as one centred unit rather than a centred block of left-aligned
+   text. Three separate overrides again, because the app sets each inline: the
+   icon container is positioned by its margins, the text container by
+   align-items (it is a flex column, so its lines shrink to their content and
+   text-align alone would not move them) and by text-align for anything that
+   wraps onto a second line. Desktop keeps the left-aligned two-column row. */
 @media screen and (max-width: 989px) {
   .trust-custom-badge { justify-content: center !important; }
+  .trust-icon-container {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  .trust-text-container {
+    align-items: center !important;
+    text-align: center !important;
+  }
 }
 .trust-icon-container {
   margin-left: 0 !important;
