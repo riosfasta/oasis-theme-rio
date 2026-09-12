@@ -12,7 +12,8 @@
     "banner": {
       "type": "oasis-page-banner",
       "custom_css": [
-        ".oasis-banner__bg {position: absolute; top: 0; right: 0; bottom: 0; left: auto; width: auto; height: 100%; object-fit: cover;}"
+        ".oasis-banner__bg {position: absolute; top: 0; right: 0; bottom: 0; left: auto; width: auto; height: 100%; object-fit: cover;}",
+        "@media screen and (max-width: 989px) {#OasisBanner-template--27899808448826__banner.oasis-banner .oasis-banner__bg {display: none; }}"
       ],
       "settings": {
         "image": "shopify://shop_images/oasis-banner-cards_wide.webp",
@@ -20,7 +21,9 @@
         "content_position": "left",
         "height": 365,
         "content_width": 600,
-        "scrim_color": "#f1e4d4",
+        "scrim_color": "#e9dacb",
+        "height_mobile": 220,
+        "image_focus_mobile": "auto",
         "use_collection": false,
         "use_page": false,
         "title": "Shop Cards",
@@ -42,7 +45,7 @@
     "product-grid": {
       "type": "main-collection-product-grid",
       "custom_css": [
-        ".collection{padding-top:0px !important;}"
+        ".collection {padding-top: 0px !important;}"
       ],
       "settings": {
         "oasis_pagination": "load_more",
@@ -89,7 +92,11 @@
         "text_align": "center",
         "height": 590,
         "content_width": 620,
-        "scrim_color": "#fbf7f4",
+        "scrim_color": "#E9DACB",
+        "image_order_mobile": "below",
+        "fit_mobile": "whole",
+        "height_mobile": 320,
+        "image_focus_mobile": "auto",
         "show_leaf": true,
         "kicker": "A little card.",
         "script": "a bigger story.",

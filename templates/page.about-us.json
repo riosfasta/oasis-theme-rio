@@ -12,7 +12,8 @@
     "hero": {
       "type": "oasis-about-band",
       "custom_css": [
-        ".oasis-band__flourish {display: block; width: 278px; max-width: 100%; height: auto; margin: 4rem 0 2.2rem 0 !important;}"
+        ".oasis-band__flourish {display: block; width: 278px; max-width: 100%; height: auto; margin: 4rem 0 2.2rem 0 !important;}",
+        "@media screen and (max-width: 989px) {#OasisBand-template--27898050216250__hero.oasis-band .oasis-band__inner {order: 2; background-color: #e9dacb; }}"
       ],
       "settings": {
         "image": "shopify://shop_images/about_us_banner.webp",
@@ -21,6 +22,9 @@
         "content_position": "left",
         "text_align": "center",
         "height": 570,
+        "image_order_mobile": "above",
+        "height_mobile": 320,
+        "image_focus_mobile": "auto",
         "content_width": 490,
         "scrim_color": "rgba(0,0,0,0)",
         "show_leaf": false,
@@ -114,6 +118,9 @@
         "content_position": "left",
         "text_align": "center",
         "height": 830,
+        "image_order_mobile": "above",
+        "height_mobile": 320,
+        "image_focus_mobile": "auto",
         "content_width": 530,
         "scrim_color": "rgba(0,0,0,0)",
         "show_leaf": false,
@@ -132,7 +139,8 @@
     "ripple": {
       "type": "oasis-about-band",
       "custom_css": [
-        "#OasisBand-template--27898050216250__ripple .oasis-band__script {font-size: 70px; margin-top: -19px;}"
+        "#OasisBand-template--27898050216250__ripple .oasis-band__script {font-size: 70px; margin-top: -19px;}",
+        "@media screen and (max-width: 989px) {#OasisBand-template--27898050216250__ripple.oasis-band .oasis-band__inner {order: 2; background-color: #e9dacb; }}"
       ],
       "settings": {
         "image": "shopify://shop_images/ripple_effect_slider_image.png",
@@ -141,6 +149,10 @@
         "content_position": "right",
         "text_align": "center",
         "height": 850,
+        "image_mobile": "shopify://shop_images/about_us_mobile_banner_1.jpg",
+        "image_order_mobile": "above",
+        "height_mobile": 320,
+        "image_focus_mobile": "auto",
         "content_width": 690,
         "scrim_color": "rgba(0,0,0,0)",
         "show_leaf": true,
