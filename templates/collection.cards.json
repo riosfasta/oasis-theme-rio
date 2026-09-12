@@ -20,7 +20,9 @@
         "content_position": "left",
         "height": 365,
         "content_width": 600,
-        "scrim_color": "#f1e4d4",
+        "scrim_color": "#E9DACB",
+        "height_mobile": 220,
+        "image_focus_mobile": "auto",
         "use_collection": false,
         "use_page": false,
         "title": "Shop Cards",
@@ -42,7 +44,7 @@
     "product-grid": {
       "type": "main-collection-product-grid",
       "custom_css": [
-        ".collection{padding-top:0px !important;}"
+        ".collection {padding-top: 0px !important;}"
       ],
       "settings": {
         "oasis_pagination": "load_more",
@@ -90,6 +92,10 @@
         "height": 590,
         "content_width": 620,
         "scrim_color": "#fbf7f4",
+        "image_order_mobile": "below",
+        "fit_mobile": "whole",
+        "height_mobile": 320,
+        "image_focus_mobile": "auto",
         "show_leaf": true,
         "kicker": "A little card.",
         "script": "a bigger story.",
