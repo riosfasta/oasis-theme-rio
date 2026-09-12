@@ -30,6 +30,9 @@
       "block_order": [
         "slide_6f3Xhk"
       ],
+      "custom_css": [
+        "@media screen and (max-width: 989px) {.oasis-hero__inner {background-color: #e9dacb; }}"
+      ],
       "settings": {
         "height": 675,
         "height_mobile": 200,
@@ -202,7 +205,7 @@
         "image_mobile": "shopify://shop_images/home_mobile_banner_2.jpg",
         "height_mobile": 340,
         "content_width": 600,
-        "scrim_color": "#E9DACB",
+        "scrim_color": "#e9dacb",
         "show_leaf": true,
         "heading": "Shop with purpose",
         "show_rule": true,
