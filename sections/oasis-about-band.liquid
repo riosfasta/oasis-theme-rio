@@ -184,6 +184,23 @@
     #OasisBand-{{ section.id }} { min-height: 0; }
     #OasisBand-{{ section.id }} .oasis-band__content { max-width: none; }
     #OasisBand-{{ section.id }}.oasis-band .oasis-band__inner { order: {{ band_inner_order }}; }
+    {%- if section.settings.script_size_mobile > 0 %}
+    /*
+      A smaller script line for phones. Two ids AND two classes deliberately:
+      Shopify's per-section Custom CSS box emits `#shopify-section-<id> ...`,
+      which is two ids and one class, and prints after this block — matching it
+      would lose on source order, so this has to outrank it outright.
+
+      `min()` treats the setting as a ceiling. A size chosen on a 390px phone
+      still overflows a 320px one, and the script face is wide, so the value
+      eases down with the viewport rather than holding a figure that only fits
+      the screen it was picked on. 15vw is that same size expressed as a share
+      of the width it was chosen at.
+    */
+    #shopify-section-{{ section.id }} #OasisBand-{{ section.id }}.oasis-band .oasis-band__script {
+      font-size: min({{ section.settings.script_size_mobile }}px, 15vw);
+    }
+    {%- endif %}
     /*
       Stacked layout, so the photograph is a band of its own rather than a
       backdrop, and it is cropped to the phone's width instead of the section's.
@@ -351,6 +368,17 @@
       "unit": "px",
       "label": "Script size",
       "default": 56
+    },
+    {
+      "type": "range",
+      "id": "script_size_mobile",
+      "min": 0,
+      "max": 88,
+      "step": 2,
+      "unit": "px",
+      "label": "Script size on mobile",
+      "info": "0 keeps the size above. Set a smaller one when the script line wraps badly on a phone \u2014 it is treated as a maximum and eases down further on narrow screens.",
+      "default": 0
     },
     { "type": "text", "id": "display", "label": "Display line (under the script)" },
     {

@@ -160,6 +160,7 @@
         "eyebrow_style": "garet-lg",
         "script": "One story inspires another",
         "script_size": 70,
+        "script_size_mobile": 56,
         "display": "Now restored. Now reaching others.",
         "display_style": "small",
         "rule_style": "none",
