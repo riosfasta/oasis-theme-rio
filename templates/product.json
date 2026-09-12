@@ -68,7 +68,7 @@
       ],
       "custom_css": [
         "div.trust-badge-692730714070b-91214498-751764175985 div.giraffly-right-Bar-Preview-Example {text-align: left !important;}",
-        "@media screen and (max-width: 989px) {.trust-custom-badge {justify-content: center !important; } .trust-icon-blockSpecificity: (0,1,0) {display: grid; justify-content: center !important;}}"
+        "@media screen and (max-width: 989px) {.trust-custom-badge {justify-content: center !important; } .trust-icon-block {display: grid; justify-content: center !important; }}"
       ],
       "settings": {
         "enable_sticky_info": true,
