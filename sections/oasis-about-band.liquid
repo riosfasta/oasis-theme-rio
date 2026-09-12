@@ -157,6 +157,8 @@
     means the uploaded file is shown whole, which is the point of uploading one
     cut for phones in the first place. Without one, the fixed height stands.
   endcomment
+  assign band_script_vw = section.settings.script_size_mobile | times: 1.0 | divided_by: 3.75 | round: 2
+
   assign band_ratio = ''
   if section.settings.image_mobile != blank
     assign band_ratio = section.settings.image_mobile.aspect_ratio
@@ -191,14 +193,17 @@
       which is two ids and one class, and prints after this block — matching it
       would lose on source order, so this has to outrank it outright.
 
-      `min()` treats the setting as a ceiling. A size chosen on a 390px phone
-      still overflows a 320px one, and the script face is wide, so the value
-      eases down with the viewport rather than holding a figure that only fits
-      the screen it was picked on. 15vw is that same size expressed as a share
-      of the width it was chosen at.
+      `min()` treats the setting as a ceiling rather than a fixed size. A value
+      picked while looking at a 375px phone still overflows a 320px one, and
+      this face is wide enough that the difference is a whole extra line, so it
+      eases down on anything narrower. The vw figure is the same size expressed
+      as a share of 375px — so the setting lands exactly on a 375px screen, is
+      held at that value on anything wider, and scales below it. Derived from
+      the setting rather than hardcoded, because each band's wording breaks at
+      its own size and one constant cannot serve them all.
     */
     #shopify-section-{{ section.id }} #OasisBand-{{ section.id }}.oasis-band .oasis-band__script {
-      font-size: min({{ section.settings.script_size_mobile }}px, 15vw);
+      font-size: min({{ section.settings.script_size_mobile }}px, {{ band_script_vw }}vw);
     }
     {%- endif %}
     /*
