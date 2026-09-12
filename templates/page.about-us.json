@@ -139,7 +139,8 @@
     "ripple": {
       "type": "oasis-about-band",
       "custom_css": [
-        "#OasisBand-template--27898050216250__ripple .oasis-band__script {font-size: 70px; margin-top: -19px;}"
+        "#OasisBand-template--27898050216250__ripple .oasis-band__script {font-size: 70px; margin-top: -19px;}",
+        "@media screen and (max-width: 989px) {#OasisBand-template--27898050216250__ripple.oasis-band .oasis-band__inner {order: 2; background-color: #e9dacb; }}"
       ],
       "settings": {
         "image": "shopify://shop_images/ripple_effect_slider_image.png",
