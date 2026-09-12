@@ -50,6 +50,32 @@
                             {{ link.title | escape }}
                           </button>
                           <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                            {%- comment -%}
+                              A parent with children renders as a <summary>, which opens the submenu
+                              instead of navigating, so on a touch screen the parent's own page is
+                              unreachable — "Shop" points at /collections/all-products and nothing in the
+                              drawer went there. Desktop has no such gap: a pointer hovers to open the
+                              submenu and clicks the parent to follow it.
+                            
+                              Making the row itself navigate is not the fix, because then nothing opens
+                              the submenu. The destination goes in as the first entry instead — hence a
+                              generic label rather than repeating the parent title the back button above
+                              already shows.
+                            {%- endcomment -%}
+                            {%- if link.url != blank and link.url != '#' -%}
+                              <li>
+                                <a
+                                  id="HeaderDrawer-{{ link.handle }}-view-all"
+                                  href="{{ link.url }}"
+                                  class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if link.current %} menu-drawer__menu-item--active{% endif %}"
+                                  {% if link.current %}
+                                    aria-current="page"
+                                  {% endif %}
+                                >
+                                  {{ 'general.menu.view_all' | t }}
+                                </a>
+                              </li>
+                            {%- endif -%}
                             {%- for childlink in link.links -%}
                               <li>
                                 {%- if childlink.links == blank -%}
@@ -95,6 +121,21 @@
                                         role="list"
                                         tabindex="-1"
                                       >
+                                        {%- comment -%} The same gap, one level down. {%- endcomment -%}
+                                        {%- if childlink.url != blank and childlink.url != '#' -%}
+                                          <li>
+                                            <a
+                                              id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}-view-all"
+                                              href="{{ childlink.url }}"
+                                              class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                              {% if childlink.current %}
+                                                aria-current="page"
+                                              {% endif %}
+                                            >
+                                              {{ 'general.menu.view_all' | t }}
+                                            </a>
+                                          </li>
+                                        {%- endif -%}
                                         {%- for grandchildlink in childlink.links -%}
                                           <li>
                                             <a

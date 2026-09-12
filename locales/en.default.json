@@ -53,6 +53,9 @@
       "view_empty_cart": "View cart",
       "item_added": "Item added to your cart"
     },
+    "menu": {
+      "view_all": "View all"
+    },
     "share": {
       "close": "Close share",
       "copy_to_clipboard": "Copy link",
