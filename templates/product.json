@@ -67,7 +67,8 @@
         "share"
       ],
       "custom_css": [
-        "div.trust-badge-692730714070b-91214498-751764175985 div.giraffly-right-Bar-Preview-Example {text-align: left !important;}"
+        "div.trust-badge-692730714070b-91214498-751764175985 div.giraffly-right-Bar-Preview-Example {text-align: left !important;}",
+        "@media screen and (max-width: 989px) {.trust-custom-badge {justify-content: center;}}"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -123,6 +124,10 @@
         "height": 600,
         "content_width": 660,
         "scrim_color": "#fbf7f4",
+        "image_order_mobile": "below",
+        "fit_mobile": "whole",
+        "height_mobile": 320,
+        "image_focus_mobile": "auto",
         "show_leaf": true,
         "kicker": "Be a part of her",
         "script": "freedom story",
