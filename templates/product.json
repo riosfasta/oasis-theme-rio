@@ -67,8 +67,7 @@
         "share"
       ],
       "custom_css": [
-        "div.trust-badge-692730714070b-91214498-751764175985 div.giraffly-right-Bar-Preview-Example {text-align: left !important;}",
-        "@media screen and (max-width: 989px) {.trust-custom-badge {justify-content: center !important; }}"
+        "div.trust-badge-692730714070b-91214498-751764175985 div.giraffly-right-Bar-Preview-Example {text-align: left !important;}"
       ],
       "settings": {
         "enable_sticky_info": true,
