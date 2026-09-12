@@ -31,7 +31,7 @@
         "slide_6f3Xhk"
       ],
       "custom_css": [
-        "@media screen and (max-width: 989px) {.oasis-hero__inner {justify-content: center !important; padding-block: 4rem; background-color: #e9dacb; }}"
+        "@media screen and (max-width: 989px) {.oasis-hero__inner {background-color: #e9dacb; }}"
       ],
       "settings": {
         "height": 675,
