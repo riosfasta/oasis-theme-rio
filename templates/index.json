@@ -198,6 +198,9 @@
         "i4",
         "i5"
       ],
+      "custom_css": [
+        "@media screen and (max-width: 989px) {.oasis-purpose {flex-direction: column-reverse; min-height: 0 !important; }}"
+      ],
       "settings": {
         "image_position": "left",
         "content_position": "right",
