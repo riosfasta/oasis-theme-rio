@@ -13,7 +13,7 @@
       "type": "oasis-page-banner",
       "custom_css": [
         ".oasis-banner__bg {position: absolute; top: 0; right: 0; bottom: 0; left: auto; width: auto; height: 100%; object-fit: cover;}",
-        "@media screen and (max-width: 989px) {#OasisBanner-template--27899808448826__banner.oasis-banner .oasis-banner__bg {display: none; }}"
+        "@media screen and (max-width: 989px) {}"
       ],
       "settings": {
         "image": "shopify://shop_images/oasis-banner-cards_wide.webp",
