@@ -2615,6 +2615,24 @@ body .product-count-vertical,
   .oasis-fba__lines strong { font-size: 1.7rem; }
 }
 
+/* Stacked on a phone: mark centred above the wording, wording centred under it,
+   matching the shipping and returns badges directly above, which centre at this
+   same 990px point. Only the direction and the alignment change — the mark keeps
+   whatever size the rules above give it, and the existing gaps become the
+   vertical spacing, so nothing here is left overriding them.
+
+   `align-items: center` is already on the base rule and does the horizontal
+   centring once the direction is column. `text-align` has to be set here rather
+   than relied on from a parent: the app's credit wrapper two levels up carries
+   `text-align: left !important`, and children inherit that — a declaration on
+   the lockup itself is what beats an inherited value. */
+@media screen and (max-width: 989px) {
+  .oasis-fba {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
 /* ---------- "Shop by" sidebar group ------------------------------------- */
 /* Collection links dressed to sit among the filter groups. The group reuses
    Dawn's disclosure classes, so the heading, hairline and spacing come for
