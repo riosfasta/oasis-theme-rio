@@ -122,7 +122,7 @@
         "text_align": "center",
         "height": 600,
         "content_width": 660,
-        "scrim_color": "#fbf7f4",
+        "scrim_color": "#F5EFE7",
         "image_order_mobile": "below",
         "fit_mobile": "whole",
         "height_mobile": 320,
