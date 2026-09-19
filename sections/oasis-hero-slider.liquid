@@ -67,7 +67,21 @@
           <div class="oasis-hero__inner">
             <div class="oasis-hero__content">
               {%- if block.settings.heading != blank -%}
-                <h2 class="oasis-hero__heading">{{ block.settings.heading }}</h2>
+                {%- comment -%}
+                  The script line is its own element rather than markup inside the
+                  heading, because `heading` is a text setting and Shopify escapes
+                  it — a <span> typed in there would render as visible characters.
+
+                  Both lines stay inside the same <h2> so the heading remains one
+                  heading to a screen reader and to search engines, rather than two
+                  unrelated ones. The script line is a <span> on its own row.
+                {%- endcomment -%}
+                <h2 class="oasis-hero__heading">
+                  {{- block.settings.heading -}}
+                  {%- if block.settings.heading_script != blank -%}
+                    <span class="oasis-hero__script">{{ block.settings.heading_script }}</span>
+                  {%- endif -%}
+                </h2>
               {%- endif -%}
               {%- if block.settings.text != blank -%}
                 <div class="oasis-hero__text rte">{{ block.settings.text }}</div>
@@ -336,6 +350,12 @@
           "id": "heading",
           "label": "Heading",
           "default": "Every story finds hope."
+        },
+        {
+          "type": "text",
+          "id": "heading_script",
+          "label": "Script line",
+          "info": "Optional. Set in Brittany Signature on its own line under the heading \u2014 put the part you want in the script face here rather than in the heading."
         },
         {
           "type": "richtext",

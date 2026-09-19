@@ -595,6 +595,25 @@ oasis-card:has(.oasis-card__swatch[data-variant-src]:hover) .oasis-card__media i
   margin: 0;
 }
 
+/* The optional second line of a hero heading, in the script face — the same
+   condensed-caps-over-script pairing the story banner and the About bands use.
+
+   It sits inside the <h2>, so three of the heading's own properties have to be
+   undone: `text-transform: uppercase` would set the script in capitals, which
+   this face is not drawn for; `letter-spacing` tracked for caps pulls the joins
+   apart; and the heading's line-height crops the long descenders. The size is
+   given as an em so it tracks the heading at every breakpoint rather than
+   needing its own set of media queries. */
+.oasis-hero__script {
+  display: block;
+  font-family: var(--oasis-font-script);
+  font-size: 1.15em;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
 /* Body — Garet Book 20 */
 .oasis-hero__text {
   margin: 2.4rem 0 0;
