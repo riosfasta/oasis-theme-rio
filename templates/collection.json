@@ -31,7 +31,7 @@
     "promo": {
       "type": "oasis-promo-strip",
       "settings": {
-        "text": "Choose any 5 hand-stitched cards for $25.",
+        "text": "Buy 5+ cards and get them for just $5 each!",
         "link": "",
         "background": "#a2846f",
         "text_color": "#ffffff",
@@ -86,7 +86,7 @@
         "text_align": "center",
         "height": 600,
         "content_width": 620,
-        "scrim_color": "#F5EFE7",
+        "scrim_color": "#f5efe7",
         "image_mobile": "shopify://shop_images/Shop_with_Purpose_banner.webp",
         "image_order_mobile": "below",
         "fit_mobile": "whole",
