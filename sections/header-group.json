@@ -20,18 +20,10 @@
             "text": "Choose any 5 hand-stitched cards for $25.",
             "link": ""
           }
-        },
-        "a2": {
-          "type": "announcement",
-          "settings": {
-            "text": "Free shipping with purchase of $35 or more",
-            "link": ""
-          }
         }
       },
       "block_order": [
-        "a1",
-        "a2"
+        "a1"
       ],
       "settings": {
         "auto_rotate": true,
