@@ -442,6 +442,28 @@ oasis-row-slider[data-fits] .oasis-row__arrow { display: none; }
 }
 .oasis-card:hover .oasis-card__media img { transform: scale(1.04); }
 oasis-card { display: block; }
+
+/* Sold out: the product box turns tan and carries a label. The label sits above
+   both stacked images (z-index) and does not zoom with them on hover. */
+.oasis-card--sold-out .oasis-card__media { background: var(--oasis-tan, #a2846f); }
+.oasis-card__badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  padding: 6px 12px;
+  background: var(--oasis-cream, #fbf7f4);
+  color: var(--oasis-dark, #351d07);
+  font-family: var(--oasis-font-body);
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+@media screen and (max-width: 749px) {
+  .oasis-card__badge { top: 8px; left: 8px; padding: 5px 9px; font-size: 10px; }
+}
 /* Don't zoom while a variant is being previewed — the swap reads better flat */
 oasis-card:has(.oasis-card__swatch[data-variant-src]:hover) .oasis-card__media img { transform: none; }
 

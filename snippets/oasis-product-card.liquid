@@ -38,8 +38,16 @@
 {%- endcapture -%}
 
 {%- if card_product and card_product != empty -%}
-  <oasis-card class="oasis-card" style="{{ card_vars | strip_newlines | strip }}">
+  {%- comment -%}
+    Sold out = no variant can be bought (product.available is false). The
+    modifier class tints the media box (#a2846f, see oasis.css) and the label
+    sits over the image, inside the link, so the whole card stays clickable.
+  {%- endcomment -%}
+  <oasis-card class="oasis-card{% unless card_product.available %} oasis-card--sold-out{% endunless %}" style="{{ card_vars | strip_newlines | strip }}">
     <a class="oasis-card__media" href="{{ card_product.url }}">
+      {%- unless card_product.available -%}
+        <span class="oasis-card__badge">{{ 'products.product.sold_out' | t }}</span>
+      {%- endunless -%}
       {%- if card_product.featured_media -%}
         {{
           card_product.featured_media
